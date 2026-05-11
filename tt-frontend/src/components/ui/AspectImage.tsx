@@ -8,6 +8,7 @@ interface AspectImageProps {
   className?: string
   priority?: boolean
   objectFit?: 'cover' | 'contain'
+  objectPosition?: string
   label?: string
 }
 
@@ -42,6 +43,7 @@ export function AspectImage({
   className,
   priority,
   objectFit = 'cover',
+  objectPosition,
   label,
 }: AspectImageProps) {
   const ratioClass = ratioMap[ratio]
@@ -75,6 +77,7 @@ export function AspectImage({
           'absolute inset-0 w-full h-full',
           objectFit === 'cover' ? 'object-cover' : 'object-contain',
         )}
+        style={objectPosition ? { objectPosition } : undefined}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding={priority ? 'sync' : 'async'}

@@ -46,7 +46,7 @@ export function ServiceCard({ service, delay = 0 }: { service: ServiceSummary; d
           {service.title}
         </h3>
         {service.short_desc && (
-          <p className="text-xs italic text-tt-ink-light leading-relaxed font-light line-clamp-2">
+          <p className="tt-body text-[0.9rem] leading-relaxed line-clamp-2">
             {service.short_desc}
           </p>
         )}

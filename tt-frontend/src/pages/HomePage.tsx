@@ -1,7 +1,7 @@
 import { useHome } from '@/hooks/useHome'
 import { useBootstrap } from '@/hooks/useBootstrap'
 import { PageSEO } from '@/components/seo/PageSEO'
-import { LoadingState } from '@/components/ui/LoadingState'
+import { HomeSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { SelectedWorksSection } from '@/components/sections/SelectedWorksSection'
@@ -13,7 +13,7 @@ export function HomePage() {
   const { data, isLoading, isError, error, refetch } = useHome()
   const { data: bootstrap } = useBootstrap()
 
-  if (isLoading) return <LoadingState variant="hero" />
+  if (isLoading) return <HomeSkeleton />
   if (isError || !data) {
     return (
       <ErrorState

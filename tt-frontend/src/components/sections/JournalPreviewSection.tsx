@@ -11,12 +11,19 @@ interface JournalPreviewProps {
 
 export function JournalPreviewSection({ section }: JournalPreviewProps) {
   return (
-    <section className="tt-section" aria-label="Journal preview">
+    <section className="tt-section-tight" aria-label="Journal preview">
       <div className="tt-wide">
-        <div className="flex items-end justify-between mb-12">
-          <RevealText as="h2" className="tt-heading-xl tt-serif text-tt-ink">
-            {section.heading}
-          </RevealText>
+        <div className="mb-12 tt-rule" />
+        <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-10 bg-tt-accent" />
+              <p className="tt-caption text-tt-accent-dark">03 / Journal</p>
+            </div>
+            <RevealText as="h2" className="tt-heading-xl text-tt-ink">
+              {section.heading}
+            </RevealText>
+          </div>
           <Link to="/journal" className="tt-link hidden sm:inline-flex" aria-label="Read all posts">
             {section.link_label}
             <ArrowRight size={12} strokeWidth={2} />

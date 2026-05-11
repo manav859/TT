@@ -40,13 +40,13 @@ export function JournalCard({ post, delay = 0 }: { post: JournalSummary; delay?:
 
       <div className="mt-4 space-y-2">
         {post.category && <p className="tt-caption">{post.category}</p>}
-        <h3 className="text-sm font-medium text-tt-ink group-hover:opacity-60 transition-opacity duration-200 leading-snug tracking-wide">
+        <h3 className="tt-heading-md text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
           {post.title}
         </h3>
         {post.excerpt && (
-          <p className="tt-body text-sm leading-relaxed line-clamp-2">{post.excerpt}</p>
+          <p className="tt-body text-[0.94rem] leading-relaxed line-clamp-3">{post.excerpt}</p>
         )}
-        <div className="flex items-center gap-3 pt-1">
+        <div className="flex items-center gap-3 pt-2">
           {post.date && <span className="tt-caption">{formatDate(post.date)}</span>}
           {post.reading_time && <span className="tt-caption">{post.reading_time} min read</span>}
         </div>

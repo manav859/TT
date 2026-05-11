@@ -12,8 +12,16 @@ export function HeroSection({ hero }: { hero: HomeData['hero'] }) {
   return (
     <section className="w-full" aria-label="Hero">
       {/* Brand text */}
-      <div className="tt-wide pt-20 pb-14 text-center">
-        <div className="overflow-hidden mb-3">
+      <div className="tt-wide pt-[4.5rem] pb-12 text-center md:pt-24 md:pb-16">
+        <motion.p
+          className="tt-caption mb-5 tracking-[0.24em] text-tt-accent-dark"
+          initial={reduced ? { opacity: 0 } : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduced ? 0.3 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Creative Studio
+        </motion.p>
+        <div className="overflow-hidden mb-4">
           <motion.h1
             className="tt-display tt-serif text-tt-ink"
             initial={reduced ? { opacity: 0 } : { y: '105%' }}
@@ -25,7 +33,7 @@ export function HeroSection({ hero }: { hero: HomeData['hero'] }) {
         </div>
         <div className="overflow-hidden">
           <motion.p
-            className="tt-caption tracking-[0.3em] text-tt-ink-light"
+            className="tt-caption tracking-[0.24em] text-tt-ink-light"
             initial={reduced ? { opacity: 0 } : { y: '100%' }}
             animate={reduced ? { opacity: 1 } : { y: 0 }}
             transition={{ duration: reduced ? 0.25 : 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
@@ -52,6 +60,13 @@ export function HeroSection({ hero }: { hero: HomeData['hero'] }) {
           )}
         </div>
       </MaskImage>
+
+      <div className="tt-wide py-8 md:py-10">
+        <div className="flex items-center justify-between gap-4">
+          <div className="tt-rule" />
+          <p className="tt-caption shrink-0 text-tt-ink-light">01 / Purpose in every frame</p>
+        </div>
+      </div>
     </section>
   )
 }

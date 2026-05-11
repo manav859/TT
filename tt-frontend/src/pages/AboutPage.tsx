@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getAbout, getContact } from '@/lib/api/endpoints'
 import { PageSEO } from '@/components/seo/PageSEO'
-import { LoadingState } from '@/components/ui/LoadingState'
+import { AboutSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { MaskImage } from '@/lib/animations/MaskImage'
 import { RevealText } from '@/lib/animations/RevealText'
@@ -21,7 +21,7 @@ export function AboutPage() {
     staleTime: 1000 * 60 * 10,
   })
 
-  if (isLoading) return <LoadingState />
+  if (isLoading) return <AboutSkeleton />
   if (isError || !data) {
     return <ErrorState message={(error as Error)?.message} onRetry={() => refetch()} />
   }
@@ -30,95 +30,99 @@ export function AboutPage() {
     <>
       <PageSEO seo={data.seo} pageTitle={data.heading} />
 
-      {/* Heading + intro */}
-      <div className="tt-section pb-0">
-        <div className="tt-wide">
-          <RevealText as="h1" className="tt-display tt-serif text-tt-ink mb-14">
+      <div className="tt-wide tt-page-shell">
+        <div className="mb-10 tt-rule" />
+
+        <div className="mb-14 space-y-5 md:mb-16">
+          <div className="flex items-center gap-4">
+            <span className="h-px w-10 bg-tt-accent" />
+            <p className="tt-caption text-tt-accent-dark">About</p>
+          </div>
+          <RevealText as="h1" className="tt-display text-tt-ink">
             {data.heading}
           </RevealText>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
-            <RevealText as="p" className="tt-body-lead text-tt-ink font-medium leading-relaxed" delay={0.1}>
-              {data.intro}
-            </RevealText>
-            {data.body && (
-              <div className="tt-prose" dangerouslySetInnerHTML={{ __html: data.body }} />
-            )}
-          </div>
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+          <RevealText as="p" className="tt-body-lead text-tt-ink" delay={0.08}>
+            {data.intro}
+          </RevealText>
+          {data.body && (
+            <div className="tt-prose" dangerouslySetInnerHTML={{ __html: data.body }} />
+          )}
         </div>
       </div>
 
-      {/* Wide editorial image */}
-      <div className="mt-16">
-        <MaskImage delay={0.15} className="w-full">
-          <div className="relative w-full overflow-hidden aspect-16/7">
+      <div className="tt-wide mt-14 md:mt-[4.5rem]">
+        <MaskImage className="w-full">
+          <div className="tt-editorial-frame relative aspect-16/7 overflow-hidden">
             {data.main_image?.url ? (
               <img
                 src={data.main_image.url}
                 alt={data.main_image.alt || 'About Tusk Tales'}
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             ) : (
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(160deg, #c5b8a8 0%, #b0a290 25%, #9e8f7e 55%, #7d6e5f 80%, #5a4e42 100%)' }}
-              />
+              <div className="tt-placeholder-editorial absolute inset-0" />
             )}
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(35,29,24,0.18)_100%)]" />
           </div>
         </MaskImage>
       </div>
 
-      {/* Values */}
       {data.values && data.values.length > 0 && (
-        <div className="tt-section">
-          <div className="tt-wide">
-            <p className="tt-caption mb-12">Approach</p>
-            <StaggerGrid
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10"
-              staggerDelay={0.08}
-            >
-              {data.values.map((v) => (
-                <StaggerItem key={v.heading}>
-                  <div className="space-y-3">
-                    <h3 className="tt-label text-tt-ink">{v.heading}</h3>
-                    <div className="w-8 h-px bg-tt-border" />
-                    <p className="tt-body text-sm leading-relaxed">{v.text}</p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerGrid>
+        <div className="tt-wide tt-section-tight">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="h-px w-10 bg-tt-accent" />
+            <p className="tt-caption text-tt-accent-dark">Approach</p>
           </div>
+          <StaggerGrid
+            className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4"
+            staggerDelay={0.08}
+          >
+            {data.values.map((value) => (
+              <StaggerItem key={value.heading}>
+                <div className="tt-panel h-full p-6 md:p-7">
+                  <div className="space-y-4">
+                    <p className="tt-label text-tt-ink">{value.heading}</p>
+                    <div className="h-px w-8 bg-tt-border-strong" />
+                    <p className="tt-body">{value.text}</p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerGrid>
         </div>
       )}
 
-      {/* CTA text */}
       {data.cta_text && (
-        <div className="tt-wide pb-16">
-          <div className="border-t border-tt-border pt-14">
-            <RevealText as="p" className="tt-heading-xl tt-serif text-tt-ink max-w-2xl">
+        <div className="tt-wide pb-10 md:pb-14">
+          <div className="tt-panel p-7 md:p-10">
+            <RevealText as="p" className="tt-heading-xl max-w-3xl text-tt-ink">
               {data.cta_text}
             </RevealText>
           </div>
         </div>
       )}
 
-      {/* Let's Talk — contact form */}
-      <div className="tt-section border-t border-tt-border">
-        <div className="tt-wide">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <div className="space-y-5">
-              <RevealText as="h2" className="tt-heading-xl tt-serif text-tt-ink">
-                Let's Talk
-              </RevealText>
-              <p className="tt-body max-w-sm">
-                Tell us about your project and what you're trying to build.
-                We'll get back to you within 24 hours.
-              </p>
+      <div className="tt-wide" style={{ paddingBottom: 'var(--spacing-section-loose)' }}>
+        <div className="tt-panel grid grid-cols-1 gap-8 p-7 md:p-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-10">
+          <div className="tt-stack-md">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-10 bg-tt-accent" />
+              <p className="tt-caption text-tt-accent-dark">Let's Talk</p>
             </div>
-            <InquiryForm config={contactData} />
+            <RevealText as="h2" className="tt-heading-xl text-tt-ink">
+              Tell us what you are building, even if it is still only a feeling.
+            </RevealText>
+            <p className="tt-body max-w-md">
+              We will shape the right visual direction, define the scope, and figure out what
+              the next frame should be.
+            </p>
           </div>
+          <InquiryForm config={contactData} />
         </div>
       </div>
     </>

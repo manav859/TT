@@ -15,14 +15,21 @@ const GRADIENTS = [
 
 export function ServicesPreviewSection({ section }: { section: HomeData['services_preview'] }) {
   return (
-    <section className="tt-section" aria-label="Services preview">
+    <section className="tt-section-tight" aria-label="Services preview">
       <div className="tt-wide">
+        <div className="mb-12 tt-rule" />
 
         {/* Header */}
-        <div className="flex items-end justify-between mb-14">
-          <RevealText as="h2" className="tt-heading-xl tt-serif text-tt-ink">
-            {section.heading}
-          </RevealText>
+        <div className="mb-12 flex flex-col gap-5 md:mb-14 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-10 bg-tt-accent" />
+              <p className="tt-caption text-tt-accent-dark">02 / Services</p>
+            </div>
+            <RevealText as="h2" className="tt-heading-xl text-tt-ink">
+              {section.heading}
+            </RevealText>
+          </div>
           <Link to="/services" className="tt-link hidden sm:inline-flex" aria-label="View all services">
             {section.link_label} <ArrowRight size={11} strokeWidth={2} />
           </Link>
@@ -34,7 +41,7 @@ export function ServicesPreviewSection({ section }: { section: HomeData['service
           Desktop: 5 columns · Tablet: 3 columns · Mobile: 2 columns
         */}
         <StaggerGrid
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5"
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
           staggerDelay={0.07}
         >
           {section.items.map((service, i) => (
@@ -63,9 +70,16 @@ export function ServicesPreviewSection({ section }: { section: HomeData['service
                     )}
                   </div>
                 </MaskImage>
-                <p className="mt-3 tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
-                  {service.title}
-                </p>
+                <div className="mt-4 space-y-1.5">
+                  <p className="tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
+                    {service.title}
+                  </p>
+                  {service.short_desc && (
+                    <p className="tt-body text-[0.9rem] leading-relaxed line-clamp-2">
+                      {service.short_desc}
+                    </p>
+                  )}
+                </div>
               </Link>
             </StaggerItem>
           ))}

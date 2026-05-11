@@ -12,26 +12,32 @@ const PLACEHOLDERS = [
 ]
 
 export function SelectedWorksSection({ section }: { section: HomeData['selected_works'] }) {
-  const items = section.items.slice(0, 3)
+  const items = section.items.slice(0, 4)
 
   return (
     <section
-      className="w-full tt-section"
-      style={{ backgroundColor: 'var(--color-tt-taupe)' }}
+      className="w-full tt-section-tight"
+      style={{ backgroundColor: 'var(--color-tt-off-white-strong)' }}
       aria-label="Selected works"
     >
       <div className="tt-wide">
-        <div className="flex items-end justify-between mb-12">
-          <RevealText as="h2" className="tt-heading-xl tt-serif text-tt-ink">
-            {section.heading}
-          </RevealText>
+        <div className="mb-12 flex flex-col gap-5 md:mb-14 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-10 bg-tt-accent" />
+              <p className="tt-caption text-tt-accent-dark">01 / Works</p>
+            </div>
+            <RevealText as="h2" className="tt-heading-xl text-tt-ink">
+              {section.heading}
+            </RevealText>
+          </div>
           <Link to="/works" className="tt-link hidden sm:inline-flex text-tt-ink border-tt-ink shrink-0" aria-label="View all works">
             {section.link_label}
             <ArrowRight size={11} strokeWidth={2} />
           </Link>
         </div>
 
-        <StaggerGrid className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5" staggerDelay={0.1}>
+        <StaggerGrid className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4" staggerDelay={0.1}>
           {items.map((work, i) => (
             <StaggerItem key={work.slug}>
               <Link to={`/works/${work.slug}`} className="group block" aria-label={work.title}>
@@ -50,11 +56,14 @@ export function SelectedWorksSection({ section }: { section: HomeData['selected_
                     )}
                   </div>
                 </MaskImage>
-                <div className="mt-3 flex items-center justify-between">
-                  <p className="tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
-                    {work.title}
-                  </p>
-                  {work.caption && <p className="tt-caption text-tt-ink/60">{work.caption}</p>}
+                <div className="mt-4 flex items-start justify-between gap-4">
+                  <div className="space-y-1.5">
+                    <p className="tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
+                      {work.title}
+                    </p>
+                    {work.caption && <p className="tt-body text-[0.9rem] leading-relaxed">{work.caption}</p>}
+                  </div>
+                  {work.category && <p className="tt-caption whitespace-nowrap text-tt-ink/[0.55]">{work.category}</p>}
                 </div>
               </Link>
             </StaggerItem>

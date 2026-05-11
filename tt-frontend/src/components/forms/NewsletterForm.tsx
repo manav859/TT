@@ -36,14 +36,19 @@ export function NewsletterForm() {
 
   if (status === 'success') {
     return (
-      <p className="tt-caption text-tt-ink" role="status" aria-live="polite">
+      <p className="tt-caption text-tt-accent-dark" role="status" aria-live="polite">
         {message}
       </p>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-stretch gap-0 relative" noValidate aria-label="Newsletter signup">
+    <form
+      onSubmit={handleSubmit}
+      className="relative flex flex-col gap-3 sm:flex-row sm:items-start"
+      noValidate
+      aria-label="Newsletter signup"
+    >
       {/* Honeypot — hidden from users, present for backend spam check */}
       <input type="text" name="_tt_hp" tabIndex={-1} aria-hidden="true" className="hidden" />
 
@@ -55,12 +60,12 @@ export function NewsletterForm() {
         required
         aria-label="Email address for newsletter"
         aria-describedby={status === 'error' ? 'newsletter-error' : undefined}
-        className="tt-input flex-1 min-w-0 text-sm"
+        className="tt-input min-w-0 flex-1"
       />
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="tt-button shrink-0 ml-3"
+        className="tt-button tt-button-accent shrink-0 sm:min-w-[10rem]"
       >
         {status === 'loading' ? (
           <span className="inline-block w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" aria-label="Sending" />
@@ -70,7 +75,7 @@ export function NewsletterForm() {
       </button>
 
       {status === 'error' && (
-        <p id="newsletter-error" role="alert" aria-live="assertive" className="absolute -bottom-5 left-0 text-xs text-red-600">
+        <p id="newsletter-error" role="alert" aria-live="assertive" className="text-xs text-red-600 sm:absolute sm:-bottom-5 sm:left-0">
           {message}
         </p>
       )}

@@ -1,8 +1,9 @@
 import type { SEOData, GlobalSEO } from '@/types/api'
 
 export function buildTitle(pageTitle: string | undefined, template: string): string {
-  if (!pageTitle) return template.replace('{page}', 'Tusk Tales')
-  return template.replace('{page}', pageTitle)
+  const normalized = template.includes('{page}') ? template : template.replace('%s', '{page}')
+  if (!pageTitle) return normalized.replace('{page}', 'Tusk Tales')
+  return normalized.replace('{page}', pageTitle)
 }
 
 export function buildMeta(seo: SEOData | undefined, global: GlobalSEO | undefined) {

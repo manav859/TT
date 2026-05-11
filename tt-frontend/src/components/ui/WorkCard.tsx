@@ -63,16 +63,16 @@ export function WorkCard({ work, delay = 0 }: { work: WorkSummary; delay?: numbe
             </>
           )}
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-tt-ink/0 group-hover:bg-tt-ink/10 transition-colors duration-400 pointer-events-none" />
+          <div className="absolute inset-0 bg-tt-ink/0 group-hover:bg-tt-ink/10 pointer-events-none transition-colors duration-300" />
         </div>
       </MaskImage>
 
-      <div className="mt-3 flex items-start justify-between gap-3">
+      <div className="mt-4 flex items-start justify-between gap-4">
         <div>
           <p className="tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
             {work.title}
           </p>
-          {work.caption && <p className="tt-caption mt-1">{work.caption}</p>}
+          {work.caption && <p className="tt-body mt-1 text-[0.9rem] leading-relaxed">{work.caption}</p>}
         </div>
         <div className="text-right shrink-0 space-y-0.5">
           {work.category && <p className="tt-caption">{work.category}</p>}

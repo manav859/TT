@@ -181,6 +181,7 @@ export function normHome(raw: any): HomeData {
         slug:           w.slug  ?? '',
         featured_image: resolveImg(w.featured_image, w.featured_image_url, w.title ?? ''),
         caption:        w.short_caption ?? w.caption ?? undefined,
+        category:       w.category ?? undefined,
       })),
     },
     services_preview: {
@@ -404,6 +405,7 @@ export function normContact(raw: any): ContactData {
     heading:         raw?.heading    ?? "Let's Talk",
     intro:           raw?.intro_text ?? raw?.intro ?? undefined,
     form_fields:     formFields,
+    required_fields: Array.isArray(raw?.required_fields) ? raw.required_fields.map(String) : undefined,
     success_message: raw?.success_message ?? 'Thank you. We\'ll be in touch shortly.',
   }
 }

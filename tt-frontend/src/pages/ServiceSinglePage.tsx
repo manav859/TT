@@ -1,28 +1,35 @@
-import { useParams, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useService } from '@/hooks/useServices'
 import { PageSEO } from '@/components/seo/PageSEO'
-import { LoadingState } from '@/components/ui/LoadingState'
+import { SinglePageSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { MaskImage } from '@/lib/animations/MaskImage'
 import { RevealText } from '@/lib/animations/RevealText'
 import { StaggerGrid, StaggerItem } from '@/lib/animations/StaggerGrid'
-import { ArrowLeft } from 'lucide-react'
 import { ApiError } from '@/types/api'
 
 const PLACEHOLDER = 'linear-gradient(150deg, #2a2420 0%, #3d3630 50%, #4a4038 100%)'
 
-function ListSection({ heading, items }: { heading: string; items: string[] }) {
+function ListSection({
+  heading,
+  items,
+}: {
+  heading: string
+  items: string[]
+}) {
   if (!items.length) return null
+
   return (
-    <div>
-      <p className="tt-caption mb-4">{heading}</p>
-      <ul className="space-y-2">
-        {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-3">
-            <span className="tt-caption opacity-40 shrink-0 tabular-nums mt-px">
-              {String(i + 1).padStart(2, '0')}
+    <div className="tt-panel h-full p-6 md:p-7">
+      <p className="tt-caption mb-5 text-tt-accent-dark">{heading}</p>
+      <ul className="space-y-3">
+        {items.map((item, index) => (
+          <li key={index} className="flex items-start gap-3">
+            <span className="tt-caption mt-0.5 shrink-0 opacity-45 tabular-nums">
+              {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="tt-body text-sm text-tt-ink">{item}</span>
+            <span className="tt-body text-tt-ink-soft">{item}</span>
           </li>
         ))}
       </ul>
@@ -34,7 +41,7 @@ export function ServiceSinglePage() {
   const { slug } = useParams<{ slug: string }>()
   const { data, isLoading, isError, error } = useService(slug ?? '')
 
-  if (isLoading) return <LoadingState variant="card" />
+  if (isLoading) return <SinglePageSkeleton />
 
   if (isError) {
     const is404 = error instanceof ApiError && error.status === 404
@@ -43,7 +50,8 @@ export function ServiceSinglePage() {
 
   if (!data) return null
 
-  const hasLists = (data.deliverables?.length ?? 0) > 0
+  const hasLists =
+    (data.deliverables?.length ?? 0) > 0
     || (data.process?.length ?? 0) > 0
     || (data.best_for?.length ?? 0) > 0
 
@@ -51,117 +59,115 @@ export function ServiceSinglePage() {
     <>
       <PageSEO seo={data.seo} pageTitle={data.title} />
 
-      <div className="tt-section">
-        <div className="tt-wide">
+      <div className="tt-wide tt-page-shell">
+        <Link
+          to="/services"
+          className="mb-8 inline-flex items-center gap-2 tt-caption text-tt-ink-light transition-colors duration-200 hover:text-tt-ink md:mb-10"
+        >
+          <ArrowLeft size={12} strokeWidth={1.5} />
+          All Services
+        </Link>
 
-          {/* Back */}
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-2 tt-caption text-tt-ink-light hover:text-tt-ink transition-colors duration-200 mb-14"
-          >
-            <ArrowLeft size={12} strokeWidth={1.5} />
-            All Services
-          </Link>
+        <div className="mb-10 tt-rule" />
 
-          {/* Hero: image left, content right */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start mb-16">
-
-            {/* Poster image — 5:8 portrait, object-top to show full cover */}
-            <MaskImage>
-              <div className="relative overflow-hidden w-full aspect-5/8">
-                {data.image?.url ? (
-                  <img
-                    src={data.image.url}
-                    alt={data.image.alt || data.title}
-                    loading="eager"
-                    fetchPriority="high"
-                    {...(data.image.width  ? { width:  data.image.width  } : {})}
-                    {...(data.image.height ? { height: data.image.height } : {})}
-                    className="absolute inset-0 w-full h-full object-cover object-top"
-                  />
-                ) : (
-                  <div className="absolute inset-0" style={{ background: PLACEHOLDER }} />
-                )}
-              </div>
-            </MaskImage>
-
-            {/* Content */}
-            <div className="space-y-8 md:pt-4">
-              <div>
-                <RevealText as="h1" className="tt-heading-xl tt-serif text-tt-ink">
-                  {data.title}
-                </RevealText>
-                {data.short_desc && (
-                  <p className="mt-4 text-base italic text-tt-ink-light font-light leading-relaxed">
-                    {data.short_desc}
-                  </p>
-                )}
-              </div>
-
-              {data.description && (
-                <div
-                  className="tt-prose"
-                  dangerouslySetInnerHTML={{ __html: data.description }}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.86fr_1.14fr] lg:gap-14">
+          <MaskImage>
+            <div className="relative aspect-5/8 overflow-hidden">
+              {data.image?.url ? (
+                <img
+                  src={data.image.url}
+                  alt={data.image.alt || data.title}
+                  loading="eager"
+                  fetchPriority="high"
+                  {...(data.image.width ? { width: data.image.width } : {})}
+                  {...(data.image.height ? { height: data.image.height } : {})}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
                 />
+              ) : (
+                <div className="absolute inset-0" style={{ background: PLACEHOLDER }} />
+              )}
+            </div>
+          </MaskImage>
+
+          <div className="flex flex-col justify-between gap-8 md:pt-4">
+            <div className="tt-stack-md">
+              <div className="flex items-center gap-4">
+                <span className="h-px w-10 bg-tt-accent" />
+                <p className="tt-caption text-tt-accent-dark">Service</p>
+              </div>
+
+              <RevealText as="h1" className="tt-heading-xl text-tt-ink">
+                {data.title}
+              </RevealText>
+
+              {data.short_desc && (
+                <p className="tt-body-lead max-w-xl">{data.short_desc}</p>
               )}
 
-              {/* Metadata details (label/value pairs if present) */}
+              {data.description && (
+                <div className="tt-prose" dangerouslySetInnerHTML={{ __html: data.description }} />
+              )}
+
               {data.details && data.details.length > 0 && (
-                <div className="space-y-3 pt-4 border-t border-tt-border">
-                  {data.details.map((d) => (
-                    <div key={d.label} className="grid grid-cols-[130px_1fr] gap-4">
-                      <p className="tt-caption pt-0.5">{d.label}</p>
-                      <p className="text-sm text-tt-ink">{d.value}</p>
+                <div className="grid grid-cols-1 gap-4 border-t border-tt-border pt-6">
+                  {data.details.map((detail) => (
+                    <div key={detail.label} className="grid grid-cols-1 gap-1 sm:grid-cols-[9rem_1fr] sm:gap-4">
+                      <p className="tt-caption">{detail.label}</p>
+                      <p className="tt-metadata">{detail.value}</p>
                     </div>
                   ))}
                 </div>
               )}
+            </div>
 
-              <Link to="/contact" className="tt-button tt-button-accent inline-flex">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="tt-caption text-tt-ink-light">Built to fit your brand, pace, and intent.</p>
+              <Link to="/contact" className="tt-button tt-button-accent self-start">
                 Inquire About This
+                <ArrowRight size={14} strokeWidth={1.8} />
               </Link>
             </div>
           </div>
+        </div>
 
-          {/* Deliverables / Process / Best For — below the hero */}
-          {hasLists && (
-            <div className="border-t border-tt-border pt-14">
-              <StaggerGrid
-                className="grid grid-cols-1 sm:grid-cols-3 gap-10"
-                staggerDelay={0.08}
-              >
-                {data.deliverables && data.deliverables.length > 0 && (
-                  <StaggerItem>
-                    <ListSection heading="Deliverables" items={data.deliverables} />
-                  </StaggerItem>
-                )}
-                {data.process && data.process.length > 0 && (
-                  <StaggerItem>
-                    <ListSection heading="Our Process" items={data.process} />
-                  </StaggerItem>
-                )}
-                {data.best_for && data.best_for.length > 0 && (
-                  <StaggerItem>
-                    <ListSection heading="Best For" items={data.best_for} />
-                  </StaggerItem>
-                )}
-              </StaggerGrid>
+        {hasLists && (
+          <div className="pt-14">
+            <div className="mb-8 flex items-center gap-4">
+              <span className="h-px w-10 bg-tt-accent" />
+              <p className="tt-caption text-tt-accent-dark">How It Works</p>
             </div>
-          )}
+            <StaggerGrid className="grid grid-cols-1 gap-5 lg:grid-cols-3" staggerDelay={0.08}>
+              {data.deliverables && data.deliverables.length > 0 && (
+                <StaggerItem>
+                  <ListSection heading="Deliverables" items={data.deliverables} />
+                </StaggerItem>
+              )}
+              {data.process && data.process.length > 0 && (
+                <StaggerItem>
+                  <ListSection heading="Process" items={data.process} />
+                </StaggerItem>
+              )}
+              {data.best_for && data.best_for.length > 0 && (
+                <StaggerItem>
+                  <ListSection heading="Best For" items={data.best_for} />
+                </StaggerItem>
+              )}
+            </StaggerGrid>
+          </div>
+        )}
 
-          {/* Bottom CTA strip */}
-          <div className="mt-16 pt-10 border-t border-tt-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <p className="tt-caption mb-1">Ready to work together?</p>
-              <p className="text-sm text-tt-ink-light">
-                Tell us about your brand and what you're trying to build.
+        <div className="pt-14">
+          <div className="tt-panel flex flex-col gap-5 p-7 md:flex-row md:items-center md:justify-between md:p-8">
+            <div className="tt-stack-sm">
+              <p className="tt-caption text-tt-accent-dark">Ready to begin?</p>
+              <p className="tt-body max-w-xl">
+                Tell us about the brand, the launch, or the moment you need this work to carry.
               </p>
             </div>
-            <Link to="/contact" className="tt-button shrink-0">
+            <Link to="/contact" className="tt-button self-start md:self-center">
               Start a Conversation
             </Link>
           </div>
-
         </div>
       </div>
     </>

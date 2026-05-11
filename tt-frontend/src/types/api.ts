@@ -103,6 +103,7 @@ export interface HomeWorkPreview {
   slug: string
   featured_image: ImageAsset | null
   caption?: string
+  category?: string
 }
 
 export interface HomeServicePreview {
@@ -257,6 +258,7 @@ export interface ContactData {
   heading: string
   intro?: string
   form_fields: ContactFormConfig
+  required_fields?: string[]
   success_message: string
 }
 

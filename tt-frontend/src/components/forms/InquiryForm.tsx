@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import clsx from 'clsx'
 import { postInquiry } from '@/lib/api/endpoints'
 import { ApiError } from '@/types/api'
 import type { ContactData } from '@/types/api'
-import clsx from 'clsx'
 
 interface InquiryFormProps {
   config?: ContactData
@@ -34,49 +34,106 @@ const EMPTY: FormState = {
   newsletter_opt_in: false,
 }
 
+function FieldLabel({
+  htmlFor,
+  label,
+  required,
+}: {
+  htmlFor?: string
+  label: string
+  required?: boolean
+}) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className="mb-3 block text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-tt-ink-soft"
+    >
+      {label}
+      {required && <span className="ml-2 text-tt-ink-light">(required)</span>}
+    </label>
+  )
+}
+
+function ErrorText({ id, message }: { id?: string; message: string }) {
+  return (
+    <p id={id} role="alert" className="mt-2 text-sm text-red-600">
+      {message}
+    </p>
+  )
+}
+
 export function InquiryForm({ config }: InquiryFormProps) {
-  const [form, setForm]           = useState<FormState>(EMPTY)
-  const [fieldErrors, setErrors]  = useState<Record<string, string>>({})
-  const [status, setStatus]       = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [message, setMessage]     = useState('')
+  const [form, setForm] = useState<FormState>(EMPTY)
+  const [fieldErrors, setErrors] = useState<Record<string, string>>({})
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState('')
 
   const fields = config?.form_fields
   const serviceOptions = fields?.service_options ?? []
-  const successMsg = config?.success_message ?? 'Thank you. We\'ll be in touch shortly.'
+  const successMsg = config?.success_message ?? "Thank you. We'll be in touch shortly."
+
+  const requiredFields = useMemo(
+    () => new Set(config?.required_fields ?? ['email', 'message']),
+    [config?.required_fields],
+  )
+
+  function isRequired(field: keyof FormState) {
+    return requiredFields.has(field)
+  }
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) {
-    const { name, value, type } = e.target
-    const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined
-    setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
-    if (fieldErrors[name]) setErrors(prev => ({ ...prev, [name]: '' }))
+    const { name, value, type } = event.target
+    const checked =
+      type === 'checkbox' ? (event.target as HTMLInputElement).checked : undefined
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+
+    if (fieldErrors[name]) {
+      setErrors((previous) => ({ ...previous, [name]: '' }))
+    }
   }
 
   function handleServiceToggle(service: string) {
-    setForm(prev => ({
-      ...prev,
-      services: prev.services.includes(service)
-        ? prev.services.filter(s => s !== service)
-        : [...prev.services, service],
+    setForm((previous) => ({
+      ...previous,
+      services: previous.services.includes(service)
+        ? previous.services.filter((item) => item !== service)
+        : [...previous.services, service],
     }))
   }
 
   function validate(): boolean {
     const errors: Record<string, string> = {}
+
+    if (isRequired('first_name') && !form.first_name.trim()) {
+      errors.first_name = 'First name is required.'
+    }
+
+    if (isRequired('last_name') && !form.last_name.trim()) {
+      errors.last_name = 'Last name is required.'
+    }
+
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       errors.email = 'A valid email is required.'
     }
-    if (!form.message.trim()) {
+
+    if (isRequired('message') && !form.message.trim()) {
       errors.message = 'Please include a message.'
     }
+
     setErrors(errors)
     return Object.keys(errors).length === 0
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
     if (!validate()) return
+
     setStatus('loading')
 
     try {
@@ -87,12 +144,12 @@ export function InquiryForm({ config }: InquiryFormProps) {
       setMessage(result.message || successMsg)
       setStatus('success')
       setForm(EMPTY)
-    } catch (err) {
-      if (err instanceof ApiError && err.fields) {
-        setErrors(err.fields)
+    } catch (error) {
+      if (error instanceof ApiError && error.fields) {
+        setErrors(error.fields)
         setStatus('idle')
-      } else if (err instanceof ApiError) {
-        setMessage(err.message)
+      } else if (error instanceof ApiError) {
+        setMessage(error.message)
         setStatus('error')
       } else {
         setMessage('Something went wrong. Please try again.')
@@ -103,141 +160,149 @@ export function InquiryForm({ config }: InquiryFormProps) {
 
   if (status === 'success') {
     return (
-      <div className="py-8 space-y-3" role="status" aria-live="polite">
-        <p className="tt-caption text-tt-accent">Sent</p>
+      <div
+        className="border border-tt-border/80 bg-white/[0.46] px-6 py-8 md:px-8 md:py-10"
+        role="status"
+        aria-live="polite"
+      >
+        <p className="tt-caption mb-3 text-tt-accent-dark">Sent</p>
         <p className="tt-body-lead text-tt-ink">{message}</p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-label="Inquiry form" className="space-y-6">
-      {/* Honeypot */}
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      aria-label="Inquiry form"
+      className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2"
+    >
       <input type="text" name="_tt_hp" tabIndex={-1} aria-hidden="true" className="hidden" />
 
-      {/* Name row */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="first_name" className="tt-caption block mb-2">First Name <span className="text-tt-ink-light">(required)</span></label>
-          <input
-            id="first_name"
-            name="first_name"
-            type="text"
-            value={form.first_name}
-            onChange={handleChange}
-            className={clsx('tt-input', fieldErrors.first_name && 'error')}
-            autoComplete="given-name"
-          />
-          {fieldErrors.first_name && <p role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.first_name}</p>}
-        </div>
-        <div>
-          <label htmlFor="last_name" className="tt-caption block mb-2">Last Name <span className="text-tt-ink-light">(required)</span></label>
-          <input
-            id="last_name"
-            name="last_name"
-            type="text"
-            value={form.last_name}
-            onChange={handleChange}
-            className={clsx('tt-input', fieldErrors.last_name && 'error')}
-            autoComplete="family-name"
-          />
-        </div>
+      <div>
+        <FieldLabel htmlFor="first_name" label="First Name" required={isRequired('first_name')} />
+        <input
+          id="first_name"
+          name="first_name"
+          type="text"
+          value={form.first_name}
+          onChange={handleChange}
+          className={clsx('tt-input min-h-[3.25rem]', fieldErrors.first_name && 'error')}
+          autoComplete="given-name"
+        />
+        {fieldErrors.first_name && <ErrorText message={fieldErrors.first_name} />}
       </div>
 
-      {/* Email */}
       <div>
-        <label htmlFor="email" className="tt-caption block mb-2">Email <span className="text-tt-ink-light">(required)</span></label>
+        <FieldLabel htmlFor="last_name" label="Last Name" required={isRequired('last_name')} />
+        <input
+          id="last_name"
+          name="last_name"
+          type="text"
+          value={form.last_name}
+          onChange={handleChange}
+          className={clsx('tt-input min-h-[3.25rem]', fieldErrors.last_name && 'error')}
+          autoComplete="family-name"
+        />
+        {fieldErrors.last_name && <ErrorText message={fieldErrors.last_name} />}
+      </div>
+
+      <div>
+        <FieldLabel htmlFor="email" label="Email" required />
         <input
           id="email"
           name="email"
           type="email"
           value={form.email}
           onChange={handleChange}
-          className={clsx('tt-input', fieldErrors.email && 'error')}
+          className={clsx('tt-input min-h-[3.25rem]', fieldErrors.email && 'error')}
           autoComplete="email"
           aria-describedby={fieldErrors.email ? 'email-error' : undefined}
         />
-        {fieldErrors.email && <p id="email-error" role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.email}</p>}
+        {fieldErrors.email && <ErrorText id="email-error" message={fieldErrors.email} />}
       </div>
 
-      {/* Newsletter opt-in */}
-      <label className="flex items-center gap-3 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="newsletter_opt_in"
-          checked={form.newsletter_opt_in}
-          onChange={handleChange}
-          className="w-4 h-4 accent-tt-accent"
-        />
-        <span className="tt-caption">Sign up for news and updates</span>
-      </label>
-
-      {/* Phone */}
       {fields?.has_phone && (
         <div>
-          <label htmlFor="phone" className="tt-caption block mb-2">Phone</label>
+          <FieldLabel htmlFor="phone" label="Phone" />
           <input
             id="phone"
             name="phone"
             type="tel"
             value={form.phone}
             onChange={handleChange}
-            className="tt-input"
+            className="tt-input min-h-[3.25rem]"
             autoComplete="tel"
           />
         </div>
       )}
 
-      {/* Services checkboxes */}
       {fields?.has_services_checkboxes && serviceOptions.length > 0 && (
-        <div>
-          <p className="tt-caption mb-3">What services are you interested in?</p>
-          <div className="flex flex-wrap gap-3">
-            {serviceOptions.map((s) => (
-              <label key={s} className="flex items-center gap-2 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={form.services.includes(s)}
-                  onChange={() => handleServiceToggle(s)}
-                  className="w-4 h-4 accent-tt-accent"
-                />
-                <span className="tt-caption group-hover:text-tt-ink transition-colors">{s}</span>
-              </label>
-            ))}
+        <div className="md:col-span-2">
+          <div className="mb-4">
+            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-tt-ink-soft">
+              Services of Interest
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {serviceOptions.map((service) => {
+              const checked = form.services.includes(service)
+
+              return (
+                <label
+                  key={service}
+                  className={clsx(
+                    'flex min-h-[3.25rem] items-start gap-3 border px-4 py-3 transition-colors duration-200',
+                    checked
+                      ? 'border-tt-accent bg-[rgba(202,185,165,0.18)]'
+                      : 'border-tt-border bg-white/[0.36] hover:border-tt-accent/70',
+                  )}
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => handleServiceToggle(service)}
+                    className="mt-1 h-4 w-4 shrink-0 accent-tt-accent"
+                  />
+                  <span className="text-[0.94rem] leading-relaxed text-tt-ink-soft">{service}</span>
+                </label>
+              )
+            })}
           </div>
         </div>
       )}
 
-      {/* Preferred Date */}
       {fields?.has_date && (
         <div>
-          <label htmlFor="preferred_date" className="tt-caption block mb-2">Preferred Date</label>
+          <FieldLabel htmlFor="preferred_date" label="Preferred Start Date" />
           <input
             id="preferred_date"
             name="preferred_date"
             type="date"
             value={form.preferred_date}
             onChange={handleChange}
-            className="tt-input"
+            className="tt-input min-h-[3.25rem]"
           />
         </div>
       )}
 
-      {/* Budget — select if options provided by API, plain input otherwise */}
       {fields?.has_budget && (
         <div>
-          <label htmlFor="budget" className="tt-caption block mb-2">Estimated Budget</label>
+          <FieldLabel htmlFor="budget" label="Estimated Budget" />
           {fields.budget_options && fields.budget_options.length > 0 ? (
             <select
               id="budget"
               name="budget"
               value={form.budget}
               onChange={handleChange}
-              className="tt-input appearance-none bg-transparent cursor-pointer"
+              className="tt-input min-h-[3.25rem] cursor-pointer appearance-none"
             >
-              <option value="">Select a range…</option>
-              {fields.budget_options.map(o => (
-                <option key={o} value={o}>{o}</option>
+              <option value="">Select a range...</option>
+              {fields.budget_options.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
               ))}
             </select>
           ) : (
@@ -247,62 +312,75 @@ export function InquiryForm({ config }: InquiryFormProps) {
               type="text"
               value={form.budget}
               onChange={handleChange}
-              className="tt-input"
-              placeholder="e.g. ₹50,000 – ₹1,00,000"
+              className="tt-input min-h-[3.25rem]"
+              placeholder="Share your budget range"
             />
           )}
         </div>
       )}
 
-      {/* Subject */}
-      <div>
-        <label htmlFor="subject" className="tt-caption block mb-2">Subject <span className="text-tt-ink-light">(required)</span></label>
+      <div className="md:col-span-2">
+        <FieldLabel htmlFor="subject" label="Subject" />
         <input
           id="subject"
           name="subject"
           type="text"
           value={form.subject}
           onChange={handleChange}
-          className="tt-input"
+          className="tt-input min-h-[3.25rem]"
         />
       </div>
 
-      {/* Message */}
-      <div>
-        <label htmlFor="message" className="tt-caption block mb-2">Message <span className="text-tt-ink-light">(required)</span></label>
+      <div className="md:col-span-2">
+        <FieldLabel htmlFor="message" label="Tell Us More" required={isRequired('message')} />
         <textarea
           id="message"
           name="message"
           value={form.message}
           onChange={handleChange}
-          className={clsx('tt-input', fieldErrors.message && 'error')}
-          rows={5}
+          className={clsx('tt-input min-h-[11rem]', fieldErrors.message && 'error')}
+          rows={6}
           aria-describedby={fieldErrors.message ? 'message-error' : undefined}
         />
-        {fieldErrors.message && <p id="message-error" role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.message}</p>}
+        {fieldErrors.message && <ErrorText id="message-error" message={fieldErrors.message} />}
       </div>
 
-      {/* Error banner */}
+      <label className="md:col-span-2 flex items-start gap-3 border border-tt-border bg-white/[0.3] px-4 py-4 transition-colors duration-200 hover:border-tt-accent/70">
+        <input
+          type="checkbox"
+          name="newsletter_opt_in"
+          checked={form.newsletter_opt_in}
+          onChange={handleChange}
+          className="mt-1 h-4 w-4 shrink-0 accent-tt-accent"
+        />
+        <span className="text-[0.95rem] leading-relaxed text-tt-ink-soft">
+          Keep me posted with occasional studio updates and project reveals.
+        </span>
+      </label>
+
       {status === 'error' && (
-        <div role="alert" className="p-4 border border-red-200 bg-red-50">
+        <div role="alert" className="md:col-span-2 border border-red-200 bg-red-50 px-4 py-3">
           <p className="text-sm text-red-700">{message}</p>
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="tt-button tt-button-accent"
-      >
-        {status === 'loading' ? (
-          <>
-            <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            Sending…
-          </>
-        ) : (
-          'Submit'
-        )}
-      </button>
+      <div className="md:col-span-2 flex flex-col gap-4 border-t border-tt-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="tt-caption text-tt-ink-light">We usually respond within 24 to 48 hours.</p>
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="tt-button tt-button-accent self-start"
+        >
+          {status === 'loading' ? (
+            <>
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              Sending...
+            </>
+          ) : (
+            'Submit Inquiry'
+          )}
+        </button>
+      </div>
     </form>
   )
 }

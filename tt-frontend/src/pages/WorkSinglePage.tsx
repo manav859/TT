@@ -1,29 +1,54 @@
-import { useParams, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
+import clsx from 'clsx'
 import { useWork } from '@/hooks/useWorks'
 import { PageSEO } from '@/components/seo/PageSEO'
-import { LoadingState } from '@/components/ui/LoadingState'
+import { SinglePageSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { AspectImage } from '@/components/ui/AspectImage'
 import { aspectRatioFromDimensions } from '@/lib/imageUtils'
+import type { ImageRatio } from '@/lib/imageUtils'
 import { MaskImage } from '@/lib/animations/MaskImage'
 import { RevealText } from '@/lib/animations/RevealText'
 import { StaggerGrid, StaggerItem } from '@/lib/animations/StaggerGrid'
-import { ArrowLeft } from 'lucide-react'
 import { ApiError } from '@/types/api'
 import type { ImageAsset } from '@/types/api'
 
-/* ── Gallery layout ───────────────────────────────────────────────────── */
+function galleryRatioForImage(image: ImageAsset, index: number): ImageRatio {
+  return aspectRatioFromDimensions(image.width, image.height)
+    ?? (index % 2 === 0 ? '4/3' : '3/4')
+}
 
-function GalleryImage({ img, index, title }: { img: ImageAsset; index: number; title: string }) {
-  const ratio = aspectRatioFromDimensions(img.width, img.height) ?? (index % 3 === 0 ? '3/4' : '4/3')
+function isPortraitRatio(ratio: ImageRatio) {
+  return ratio === '2/3' || ratio === '3/4' || ratio === '1/1'
+}
+
+function isWideRatio(ratio: ImageRatio) {
+  return ratio === '3/2' || ratio === '16/9' || ratio === '16/7'
+}
+
+function GalleryImage({
+  image,
+  index,
+  title,
+}: {
+  image: ImageAsset
+  index: number
+  title: string
+}) {
+  const ratio = galleryRatioForImage(image, index)
+  const spanWide = isWideRatio(ratio) && index % 4 === 0
+
   return (
     <StaggerItem>
-      <div className="break-inside-avoid mb-4 md:mb-5">
-        <MaskImage delay={0.04 * index}>
+      <div className={clsx(spanWide && 'md:col-span-2')}>
+        <MaskImage delay={0.05 * index}>
           <AspectImage
-            image={img}
+            image={image}
             ratio={ratio}
-            label={img.alt || `${title} — ${index + 1}`}
+            label={image.alt || `${title} - ${index + 1}`}
+            className="bg-tt-off-white-strong"
+            objectPosition={isPortraitRatio(ratio) ? 'center top' : 'center center'}
           />
         </MaskImage>
       </div>
@@ -35,7 +60,7 @@ export function WorkSinglePage() {
   const { slug } = useParams<{ slug: string }>()
   const { data, isLoading, isError, error } = useWork(slug ?? '')
 
-  if (isLoading) return <LoadingState variant="card" />
+  if (isLoading) return <SinglePageSkeleton />
 
   if (isError) {
     const is404 = error instanceof ApiError && error.status === 404
@@ -45,94 +70,130 @@ export function WorkSinglePage() {
   if (!data) return null
 
   const hasGallery = data.gallery && data.gallery.length > 0
+  const featuredRatio =
+    aspectRatioFromDimensions(data.featured_image?.width, data.featured_image?.height) ?? '4/3'
+  const featuredFit = isPortraitRatio(featuredRatio) ? 'contain' : 'cover'
+  const metaItems = ([
+    { label: 'Category', value: data.category },
+    { label: 'Client', value: data.client },
+    { label: 'Year', value: data.year ? String(data.year) : undefined },
+    { label: 'Location', value: data.location },
+  ] as const).filter((item) => item.value)
 
   return (
     <>
       <PageSEO seo={data.seo} pageTitle={data.title} />
 
-      <div className="tt-section">
-        <div className="tt-wide">
-          {/* Back */}
-          <Link
-            to="/works"
-            className="inline-flex items-center gap-2 tt-caption text-tt-ink-light hover:text-tt-ink transition-colors duration-200 mb-14"
-          >
-            <ArrowLeft size={12} strokeWidth={1.5} />
-            All Works
-          </Link>
-
-          {/* Title + metadata */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14 items-end">
-            <RevealText as="h1" className="tt-display tt-serif text-tt-ink">
-              {data.title}
-            </RevealText>
-            <dl className="flex flex-wrap gap-x-10 gap-y-5 md:justify-end pb-1">
-              {([
-                { label: 'Client',   value: data.client   },
-                { label: 'Category', value: data.category },
-                { label: 'Year',     value: data.year     },
-                { label: 'Location', value: data.location },
-              ] as const).filter(m => m.value).map(m => (
-                <div key={m.label}>
-                  <dt className="tt-caption mb-1">{m.label}</dt>
-                  <dd className="text-sm text-tt-ink">{m.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          {/* Featured image */}
-          <MaskImage className="w-full mb-12">
-            <AspectImage
-              image={data.featured_image}
-              ratio={aspectRatioFromDimensions(
-                data.featured_image?.width,
-                data.featured_image?.height
-              ) ?? '16/9'}
-              label={data.title}
-              priority
-            />
-          </MaskImage>
-
-          {/* Description */}
-          {data.description && (
-            <div className="max-w-2xl mb-16">
-              <div className="tt-prose" dangerouslySetInnerHTML={{ __html: data.description }} />
-            </div>
-          )}
-
-          {/* Gallery */}
-          {hasGallery && (
-            <div>
-              <div className="flex items-center gap-4 mb-8">
-                <p className="tt-caption">Gallery</p>
-                <div className="flex-1 h-px bg-tt-border" />
-                <p className="tt-caption">{data.gallery.length} images</p>
+      <article className="tt-wide pb-24 pt-16 md:pb-32 md:pt-24">
+        <header className="mx-auto mb-16 max-w-[90rem] md:mb-24">
+          <div className="grid grid-cols-1 gap-10 xl:gap-16 lg:grid-cols-[minmax(0,0.58fr)_minmax(360px,0.42fr)]">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <span className="h-px w-10 bg-tt-accent" />
+                <p className="tt-caption text-tt-accent-dark">Project / 01</p>
               </div>
 
-              <StaggerGrid
-                className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-5"
-                staggerDelay={0.06}
-              >
-                {data.gallery.map((img, i) => (
-                  <GalleryImage key={img.id ?? i} img={img} index={i} title={data.title} />
-                ))}
-              </StaggerGrid>
+              <MaskImage className="w-full">
+                <AspectImage
+                  image={data.featured_image}
+                  ratio="auto"
+                  label={data.title}
+                  priority
+                  objectFit={featuredFit}
+                  objectPosition={featuredFit === 'contain' ? 'center center' : 'center top'}
+                  className="h-[clamp(320px,65vh,480px)] bg-tt-off-white-strong md:h-[clamp(520px,72vh,760px)]"
+                />
+              </MaskImage>
             </div>
-          )}
 
-          {/* Bottom */}
-          <div className="mt-20 pt-10 border-t border-tt-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <Link to="/works" className="tt-link">
-              <ArrowLeft size={11} strokeWidth={2} />
-              Back to Works
-            </Link>
-            <Link to="/contact" className="tt-button">
-              Start a Project
-            </Link>
+            <div className="flex flex-col justify-between gap-8 lg:sticky lg:top-[calc(var(--height-nav)+2rem)] lg:self-start">
+              <div className="space-y-8">
+                <div className="flex items-center gap-4">
+                  <span className="h-px w-10 bg-tt-accent" />
+                  <p className="tt-caption text-tt-accent-dark">Overview</p>
+                </div>
+
+                <div className="space-y-5">
+                  <RevealText as="h1" className="tt-display text-tt-ink">
+                    {data.title}
+                  </RevealText>
+                  {data.caption && <p className="tt-body-lead max-w-xl">{data.caption}</p>}
+                </div>
+
+                {metaItems.length > 0 && (
+                  <dl className="grid grid-cols-2 gap-x-8 gap-y-5 border-y border-tt-border py-5">
+                    {metaItems.map((item) => (
+                      <div key={item.label}>
+                        <dt className="tt-caption mb-1.5">{item.label}</dt>
+                        <dd className="tt-metadata">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+
+                {data.description && (
+                  <div className="tt-prose max-w-none">
+                    <div dangerouslySetInnerHTML={{ __html: data.description }} />
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-5 border-t border-tt-border pt-6">
+                <Link
+                  to="/works"
+                  className="inline-flex items-center gap-2 tt-caption text-tt-ink-light transition-colors duration-200 hover:text-tt-ink"
+                >
+                  <ArrowLeft size={12} strokeWidth={1.5} />
+                  All Works
+                </Link>
+                {data.category && <p className="tt-caption">{data.category}</p>}
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {hasGallery && (
+          <section className="py-16 md:py-24">
+            <div className="mx-auto mb-8 flex max-w-[90rem] flex-wrap items-center gap-x-4 gap-y-2 md:mb-10">
+              <div className="flex items-center gap-4">
+                <span className="h-px w-10 bg-tt-accent" />
+                <p className="tt-caption text-tt-accent-dark">Gallery</p>
+              </div>
+              <p className="tt-caption">{data.gallery.length} images</p>
+            </div>
+
+            <StaggerGrid
+              className="mx-auto grid max-w-[90rem] grid-cols-1 gap-6 md:grid-cols-2 md:gap-8"
+              staggerDelay={0.06}
+            >
+              {data.gallery.map((image, index) => (
+                <GalleryImage key={image.id ?? index} image={image} index={index} title={data.title} />
+              ))}
+            </StaggerGrid>
+          </section>
+        )}
+
+        <div className="mx-auto max-w-[76rem] border-t border-tt-border pt-10 md:pt-12">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-3">
+              <p className="tt-caption text-tt-accent-dark">Next Step</p>
+              <p className="tt-body max-w-xl">
+                If this atmosphere feels close to what your brand needs, let us shape the next story with you.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Link to="/works" className="tt-link">
+                <ArrowLeft size={11} strokeWidth={2} />
+                Back to Works
+              </Link>
+              <Link to="/contact" className="tt-button tt-button-accent">
+                Start a Project
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </article>
     </>
   )
 }
