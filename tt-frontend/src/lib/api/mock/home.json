@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "data": {
+    "hero": {
+      "title": "Tusk Tales",
+      "subtitle": "Purpose in every frame",
+      "image": { "url": "", "alt": "Tusk Tales hero image" }
+    },
+    "selected_works": {
+      "heading": "Select Works",
+      "link_label": "View Work",
+      "items": [
+        { "title": "Sisters",       "slug": "sisters",       "featured_image": { "url": "", "alt": "Sisters" },       "caption": "Campaign" },
+        { "title": "Golden Hour",   "slug": "golden-hour",   "featured_image": { "url": "", "alt": "Golden Hour" },   "caption": "Editorial" },
+        { "title": "The Pour",      "slug": "the-pour",      "featured_image": { "url": "", "alt": "The Pour" },      "caption": "Cinematic" }
+      ]
+    },
+    "services_preview": {
+      "heading": "Services",
+      "link_label": "View Packages",
+      "items": [
+        { "title": "Campaign Shoots & Creative Direction", "slug": "campaign-shoots", "image": { "url": "", "alt": "Campaign Shoots" }, "short_desc": "Concept-led shoots built around a brand idea. Not just beautiful images." },
+        { "title": "Cinematic & Product Content",         "slug": "cinematic-content", "image": { "url": "", "alt": "Cinematic Content" }, "short_desc": "Motion-inspired photography that uses technique to create images that feel like frames from a film." }
+      ]
+    },
+    "journal_preview": {
+      "heading": "Blog",
+      "link_label": "Read More",
+      "items": [
+        { "title": "Shooting in Difficult Light", "slug": "shooting-in-difficult-light", "featured_image": { "url": "", "alt": "Shooting in Difficult Light" }, "excerpt": "How to work with challenging natural light and turn it into your greatest asset." },
+        { "title": "Building a Brand Story",      "slug": "building-a-brand-story",      "featured_image": { "url": "", "alt": "Building a Brand Story" }, "excerpt": "A campaign is more than a collection of images. It is a sequence of feelings." },
+        { "title": "The Art of the Still Life",   "slug": "art-of-the-still-life",       "featured_image": { "url": "", "alt": "The Art of the Still Life" }, "excerpt": "Product photography that communicates craft before a single word is read." }
+      ]
+    },
+    "cta_banner": {
+      "title": "Let's Build Something Worth Feeling.",
+      "image": { "url": "", "alt": "Studio space" },
+      "button_label": "Get In Touch",
+      "button_url": "/contact"
+    },
+    "seo": {
+      "title": "Tusk Tales — Purpose in Every Frame",
+      "description": "Tusk Tales is a visual storytelling studio specialising in campaign shoots, cinematic content, and brand photography.",
+      "og_image": null
+    }
+  },
+  "meta": { "cached": false, "version": "1.0" }
+}

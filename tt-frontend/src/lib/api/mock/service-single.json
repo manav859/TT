@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "title": "Campaign Shoots & Creative Direction",
+    "slug": "campaign-shoots",
+    "image": { "url": "", "alt": "Campaign Shoots" },
+    "short_desc": "Concept-led shoots built around a brand idea. Not just beautiful images.",
+    "description": "<p>Every great campaign starts with a clear idea — what the brand stands for, what it wants people to feel, and what it needs to communicate without saying a word. That's where we begin.</p><p>We develop the concept, build the visual language, direct the shoot, and deliver imagery that works across every platform your brand touches.</p>",
+    "details": [
+      { "label": "Duration",      "value": "1–2 shoot days" },
+      { "label": "Deliverables",  "value": "40–80 edited images" },
+      { "label": "Includes",      "value": "Concept development, mood board, art direction, on-set direction, post-production" },
+      { "label": "Best for",      "value": "Brand launches, seasonal campaigns, lookbooks, editorial features" }
+    ],
+    "inquiry_option": true,
+    "seo": {
+      "title": "Campaign Shoots & Creative Direction — Tusk Tales",
+      "description": "Concept-led campaign shoots built around a brand idea. We develop the visual language and direct every frame.",
+      "og_image": null
+    }
+  },
+  "meta": { "cached": false, "version": "1.0" }
+}

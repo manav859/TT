@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "data": {
+    "heading": "Let's Talk",
+    "intro": "Tell us about your project. We'll get back to you within 24 hours.",
+    "form_fields": {
+      "has_phone": true,
+      "has_services_checkboxes": true,
+      "has_date": true,
+      "has_budget": true,
+      "service_options": [
+        "Campaign Shoots & Creative Direction",
+        "Cinematic & Product Content",
+        "Social Media Management",
+        "Meta Ads"
+      ],
+      "recaptcha_site_key": null
+    },
+    "success_message": "Thank you. We'll be in touch shortly."
+  },
+  "meta": { "cached": false, "version": "1.0" }
+}

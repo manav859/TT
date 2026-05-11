@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "data": {
+    "heading": "About",
+    "intro": "Some brands have a great story. Most just haven't found the right way to show it yet.",
+    "body": "<p>That's the gap we work in — translating what a brand truly stands for into visuals that people actually feel. Our primary work is in fashion and apparel, building campaign-level shoots that go beyond catalogue and into storytelling.</p><p>We also work with F&B, lifestyle, and heritage brands who take their visual identity seriously. We think deeply, work closely, and take every project personally.</p>",
+    "main_image": { "url": "", "alt": "Studio workspace" },
+    "secondary_images": [],
+    "values": [
+      { "heading": "Intentional", "text": "Every frame has a reason. We don't shoot until we understand what we're trying to say." },
+      { "heading": "Close",       "text": "We work with a small number of clients at a time. This is deliberate." },
+      { "heading": "Honest",      "text": "We'll tell you when an idea isn't working and offer something better." }
+    ],
+    "cta_text": "If you want a creative partner who'll push your brand further than you expected",
+    "seo": {
+      "title": "About — Tusk Tales",
+      "description": "Some brands have a great story. Most just haven't found the right way to show it yet. Tusk Tales translates brand truth into visual feeling.",
+      "og_image": null
+    }
+  },
+  "meta": { "cached": false, "version": "1.0" }
+}

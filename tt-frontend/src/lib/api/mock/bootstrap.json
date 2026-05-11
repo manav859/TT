@@ -1,0 +1,46 @@
+{
+  "success": true,
+  "data": {
+    "identity": {
+      "logo_text": "TUSK TALES",
+      "logo_image": null,
+      "tagline": "Purpose in every frame",
+      "favicon": null,
+      "social": {
+        "instagram": "https://instagram.com/tusktales",
+        "facebook": "https://facebook.com/tusktales",
+        "twitter": "https://twitter.com/tusktales"
+      }
+    },
+    "navigation": [
+      { "label": "Works",    "url": "/works",    "new_tab": false },
+      { "label": "Services", "url": "/services", "new_tab": false },
+      { "label": "About",    "url": "/about",    "new_tab": false }
+    ],
+    "footer": {
+      "newsletter_heading": "Subscribe",
+      "newsletter_text": "Stay close to the work.",
+      "newsletter_success": "You're in.",
+      "nav": [
+        { "label": "Works",    "url": "/works" },
+        { "label": "Services", "url": "/services" },
+        { "label": "Blog",     "url": "/journal" },
+        { "label": "About",    "url": "/about" },
+        { "label": "Contact",  "url": "/contact" }
+      ],
+      "copyright": "© 2025 Tusk Tales",
+      "credit": "Visual Storytelling Studio"
+    },
+    "seo": {
+      "title_template": "{page} — Tusk Tales",
+      "default_description": "Tusk Tales is a visual storytelling studio specialising in campaign shoots, cinematic content, and brand photography.",
+      "default_og_image": null,
+      "schema": {
+        "type": "Organization",
+        "name": "Tusk Tales",
+        "url": "http://localhost:5173"
+      }
+    }
+  },
+  "meta": { "cached": false, "version": "1.0" }
+}
