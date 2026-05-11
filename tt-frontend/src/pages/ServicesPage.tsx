@@ -27,10 +27,10 @@ export function ServicesPage() {
     <>
       <PageSEO pageTitle="Services" />
 
-      <div className="tt-wide tt-page-shell">
+      <div className="tt-wide tt-page">
         <div className="mb-10 tt-rule" />
 
-        <div className="mb-14 max-w-3xl space-y-5 md:mb-16">
+        <div className="max-w-3xl space-y-5">
           <div className="flex items-center gap-4">
             <span className="h-px w-10 bg-tt-accent" />
             <p className="tt-caption text-tt-accent-dark">Services</p>
@@ -44,7 +44,7 @@ export function ServicesPage() {
         </div>
 
         <StaggerGrid
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+          className="tt-heading-gap grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
           staggerDelay={0.07}
         >
           {data.items.map((service, index) => (
@@ -54,7 +54,7 @@ export function ServicesPage() {
           ))}
         </StaggerGrid>
 
-        <section className="mt-24 border-t border-tt-border/80 py-20 md:mt-32 md:py-28">
+        <section className="tt-section-gap border-t border-tt-border/80 py-20 md:py-28">
           <div className="mx-auto max-w-[84rem]">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:gap-14 xl:gap-20">
               <div className="space-y-8 lg:pt-2">
@@ -85,7 +85,7 @@ export function ServicesPage() {
                 </div>
               </div>
 
-              <div className="tt-panel p-7 md:p-10 xl:p-12">
+              <div className="border border-tt-border/70 bg-white/[0.34] p-7 md:p-10 xl:p-12">
                 <InquiryForm config={contactData} />
               </div>
             </div>
