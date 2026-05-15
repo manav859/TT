@@ -24,7 +24,7 @@ export function CTABannerSection({ banner }: { banner: HomeData['cta_banner'] })
   return (
     <section ref={ref} className="tt-section-loose" aria-label="Start a project">
       <div className="tt-wide">
-        <div className="tt-panel grid grid-cols-1 gap-8 p-7 md:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <div className="flex flex-col justify-between gap-10 lg:gap-14">
             <div className="tt-stack-md">
               <div className="flex items-center gap-4">
@@ -62,7 +62,7 @@ export function CTABannerSection({ banner }: { banner: HomeData['cta_banner'] })
           </div>
 
           <MaskImage className="h-full">
-            <div className="tt-editorial-frame relative min-h-[20rem] overflow-hidden bg-tt-off-white-strong md:min-h-[26rem]">
+            <div className="relative min-h-[20rem] overflow-hidden bg-tt-off-white-strong md:min-h-[26rem]">
               <motion.div className="absolute inset-0 scale-105" style={{ y: imageY }}>
                 {banner.image?.url ? (
                   <img

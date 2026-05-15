@@ -13,12 +13,8 @@ interface FormState {
   last_name: string
   email: string
   phone: string
-  subject: string
-  services: string[]
-  preferred_date: string
-  budget: string
+  service: string
   message: string
-  newsletter_opt_in: boolean
 }
 
 const EMPTY: FormState = {
@@ -26,12 +22,8 @@ const EMPTY: FormState = {
   last_name: '',
   email: '',
   phone: '',
-  subject: '',
-  services: [],
-  preferred_date: '',
-  budget: '',
+  service: '',
   message: '',
-  newsletter_opt_in: false,
 }
 
 function FieldLabel({
@@ -46,10 +38,10 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="mb-3 block text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-tt-ink-soft"
+      className="mb-3 flex items-baseline gap-2 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-tt-ink-soft"
     >
-      {label}
-      {required && <span className="ml-2 text-tt-ink-light">(required)</span>}
+      <span>{label}</span>
+      {required && <span aria-hidden="true" className="text-tt-accent-dark">*</span>}
     </label>
   )
 }
@@ -84,27 +76,12 @@ export function InquiryForm({ config }: InquiryFormProps) {
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) {
-    const { name, value, type } = event.target
-    const checked =
-      type === 'checkbox' ? (event.target as HTMLInputElement).checked : undefined
-
-    setForm((previous) => ({
-      ...previous,
-      [name]: type === 'checkbox' ? checked : value,
-    }))
+    const { name, value } = event.target
+    setForm((previous) => ({ ...previous, [name]: value }))
 
     if (fieldErrors[name]) {
       setErrors((previous) => ({ ...previous, [name]: '' }))
     }
-  }
-
-  function handleServiceToggle(service: string) {
-    setForm((previous) => ({
-      ...previous,
-      services: previous.services.includes(service)
-        ? previous.services.filter((item) => item !== service)
-        : [...previous.services, service],
-    }))
   }
 
   function validate(): boolean {
@@ -138,7 +115,12 @@ export function InquiryForm({ config }: InquiryFormProps) {
 
     try {
       const result = await postInquiry({
-        ...form,
+        first_name: form.first_name,
+        last_name: form.last_name,
+        email: form.email,
+        phone: form.phone,
+        message: form.message,
+        services: form.service ? [form.service] : [],
         _tt_hp: '',
       })
       setMessage(result.message || successMsg)
@@ -160,12 +142,8 @@ export function InquiryForm({ config }: InquiryFormProps) {
 
   if (status === 'success') {
     return (
-      <div
-        className="border border-tt-border/80 bg-white/[0.46] px-6 py-8 md:px-8 md:py-10"
-        role="status"
-        aria-live="polite"
-      >
-        <p className="tt-caption mb-3 text-tt-accent-dark">Sent</p>
+      <div role="status" aria-live="polite" className="py-10">
+        <p className="tt-caption mb-4 text-tt-accent-dark">Sent</p>
         <p className="tt-body-lead text-tt-ink">{message}</p>
       </div>
     )
@@ -176,7 +154,7 @@ export function InquiryForm({ config }: InquiryFormProps) {
       onSubmit={handleSubmit}
       noValidate
       aria-label="Inquiry form"
-      className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2"
+      className="grid grid-cols-1 gap-x-10 gap-y-9 md:grid-cols-2 md:gap-y-10"
     >
       <input type="text" name="_tt_hp" tabIndex={-1} aria-hidden="true" className="hidden" />
 
@@ -188,7 +166,7 @@ export function InquiryForm({ config }: InquiryFormProps) {
           type="text"
           value={form.first_name}
           onChange={handleChange}
-          className={clsx('tt-input min-h-[3.25rem]', fieldErrors.first_name && 'error')}
+          className={clsx('tt-input', fieldErrors.first_name && 'error')}
           autoComplete="given-name"
         />
         {fieldErrors.first_name && <ErrorText message={fieldErrors.first_name} />}
@@ -202,7 +180,7 @@ export function InquiryForm({ config }: InquiryFormProps) {
           type="text"
           value={form.last_name}
           onChange={handleChange}
-          className={clsx('tt-input min-h-[3.25rem]', fieldErrors.last_name && 'error')}
+          className={clsx('tt-input', fieldErrors.last_name && 'error')}
           autoComplete="family-name"
         />
         {fieldErrors.last_name && <ErrorText message={fieldErrors.last_name} />}
@@ -216,120 +194,45 @@ export function InquiryForm({ config }: InquiryFormProps) {
           type="email"
           value={form.email}
           onChange={handleChange}
-          className={clsx('tt-input min-h-[3.25rem]', fieldErrors.email && 'error')}
+          className={clsx('tt-input', fieldErrors.email && 'error')}
           autoComplete="email"
           aria-describedby={fieldErrors.email ? 'email-error' : undefined}
         />
         {fieldErrors.email && <ErrorText id="email-error" message={fieldErrors.email} />}
       </div>
 
-      {fields?.has_phone && (
-        <div>
-          <FieldLabel htmlFor="phone" label="Phone" />
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={form.phone}
-            onChange={handleChange}
-            className="tt-input min-h-[3.25rem]"
-            autoComplete="tel"
-          />
-        </div>
-      )}
-
-      {fields?.has_services_checkboxes && serviceOptions.length > 0 && (
-        <div className="md:col-span-2">
-          <div className="mb-4">
-            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-tt-ink-soft">
-              Services of Interest
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {serviceOptions.map((service) => {
-              const checked = form.services.includes(service)
-
-              return (
-                <label
-                  key={service}
-                  className={clsx(
-                    'flex min-h-[3.25rem] items-start gap-3 border px-4 py-3 transition-colors duration-200',
-                    checked
-                      ? 'border-tt-accent bg-[rgba(202,185,165,0.18)]'
-                      : 'border-tt-border bg-white/[0.36] hover:border-tt-accent/70',
-                  )}
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => handleServiceToggle(service)}
-                    className="mt-1 h-4 w-4 shrink-0 accent-tt-accent"
-                  />
-                  <span className="text-[0.94rem] leading-relaxed text-tt-ink-soft">{service}</span>
-                </label>
-              )
-            })}
-          </div>
-        </div>
-      )}
-
-      {fields?.has_date && (
-        <div>
-          <FieldLabel htmlFor="preferred_date" label="Preferred Start Date" />
-          <input
-            id="preferred_date"
-            name="preferred_date"
-            type="date"
-            value={form.preferred_date}
-            onChange={handleChange}
-            className="tt-input min-h-[3.25rem]"
-          />
-        </div>
-      )}
-
-      {fields?.has_budget && (
-        <div>
-          <FieldLabel htmlFor="budget" label="Estimated Budget" />
-          {fields.budget_options && fields.budget_options.length > 0 ? (
-            <select
-              id="budget"
-              name="budget"
-              value={form.budget}
-              onChange={handleChange}
-              className="tt-input min-h-[3.25rem] cursor-pointer appearance-none"
-            >
-              <option value="">Select a range...</option>
-              {fields.budget_options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              id="budget"
-              name="budget"
-              type="text"
-              value={form.budget}
-              onChange={handleChange}
-              className="tt-input min-h-[3.25rem]"
-              placeholder="Share your budget range"
-            />
-          )}
-        </div>
-      )}
-
-      <div className="md:col-span-2">
-        <FieldLabel htmlFor="subject" label="Subject" />
+      <div>
+        <FieldLabel htmlFor="phone" label="Phone" />
         <input
-          id="subject"
-          name="subject"
-          type="text"
-          value={form.subject}
+          id="phone"
+          name="phone"
+          type="tel"
+          value={form.phone}
           onChange={handleChange}
-          className="tt-input min-h-[3.25rem]"
+          className="tt-input"
+          autoComplete="tel"
         />
       </div>
+
+      {serviceOptions.length > 0 && (
+        <div className="md:col-span-2">
+          <FieldLabel htmlFor="service" label="Service of Interest" />
+          <select
+            id="service"
+            name="service"
+            value={form.service}
+            onChange={handleChange}
+            className="tt-input cursor-pointer appearance-none bg-[url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2012%208%22%20fill=%22none%22%20stroke=%22%238c6b3b%22%20stroke-width=%221.4%22><path%20d=%22M1%201.5L6%206.5L11%201.5%22/></svg>')] bg-position-[right_0.25rem_center] bg-no-repeat pr-8"
+          >
+            <option value="">Select a service…</option>
+            {serviceOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div className="md:col-span-2">
         <FieldLabel htmlFor="message" label="Tell Us More" required={isRequired('message')} />
@@ -338,34 +241,22 @@ export function InquiryForm({ config }: InquiryFormProps) {
           name="message"
           value={form.message}
           onChange={handleChange}
-          className={clsx('tt-input min-h-[11rem]', fieldErrors.message && 'error')}
-          rows={6}
+          className={clsx('tt-input min-h-36', fieldErrors.message && 'error')}
+          rows={5}
+          placeholder="A brand, an idea, or a feeling you want to build…"
           aria-describedby={fieldErrors.message ? 'message-error' : undefined}
         />
         {fieldErrors.message && <ErrorText id="message-error" message={fieldErrors.message} />}
       </div>
 
-      <label className="md:col-span-2 flex items-start gap-3 border border-tt-border bg-white/[0.3] px-4 py-4 transition-colors duration-200 hover:border-tt-accent/70">
-        <input
-          type="checkbox"
-          name="newsletter_opt_in"
-          checked={form.newsletter_opt_in}
-          onChange={handleChange}
-          className="mt-1 h-4 w-4 shrink-0 accent-tt-accent"
-        />
-        <span className="text-[0.95rem] leading-relaxed text-tt-ink-soft">
-          Keep me posted with occasional studio updates and project reveals.
-        </span>
-      </label>
-
       {status === 'error' && (
-        <div role="alert" className="md:col-span-2 border border-red-200 bg-red-50 px-4 py-3">
+        <div role="alert" className="md:col-span-2 border border-red-200 bg-red-50/70 px-4 py-3">
           <p className="text-sm text-red-700">{message}</p>
         </div>
       )}
 
-      <div className="md:col-span-2 flex flex-col gap-4 border-t border-tt-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="tt-caption text-tt-ink-light">We usually respond within 24 to 48 hours.</p>
+      <div className="md:col-span-2 mt-2 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="tt-caption text-tt-ink-light">We usually respond within 24–48 hours.</p>
         <button
           type="submit"
           disabled={status === 'loading'}
@@ -374,10 +265,10 @@ export function InquiryForm({ config }: InquiryFormProps) {
           {status === 'loading' ? (
             <>
               <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-              Sending...
+              Sending…
             </>
           ) : (
-            'Submit Inquiry'
+            'Send Inquiry'
           )}
         </button>
       </div>

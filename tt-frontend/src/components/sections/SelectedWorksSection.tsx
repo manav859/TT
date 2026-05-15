@@ -56,14 +56,14 @@ export function SelectedWorksSection({ section }: { section: HomeData['selected_
                     )}
                   </div>
                 </MaskImage>
-                <div className="mt-4 flex items-start justify-between gap-4">
-                  <div className="space-y-1.5">
-                    <p className="tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
+                <div className="mt-4 space-y-1.5">
+                  <div className="min-h-[2.8rem]">
+                    <p className="tt-label leading-[1.45] text-tt-ink transition-opacity duration-200 group-hover:opacity-60">
                       {work.title}
                     </p>
-                    {work.caption && <p className="tt-body text-[0.9rem] leading-relaxed">{work.caption}</p>}
                   </div>
-                  {work.category && <p className="tt-caption whitespace-nowrap text-tt-ink/[0.55]">{work.category}</p>}
+                  {work.category && <p className="tt-caption text-tt-ink/[0.55]">{work.category}</p>}
+                  {work.caption && <p className="tt-body text-[0.9rem] leading-relaxed">{work.caption}</p>}
                 </div>
               </Link>
             </StaggerItem>

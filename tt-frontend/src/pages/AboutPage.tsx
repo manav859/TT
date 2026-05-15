@@ -30,10 +30,10 @@ export function AboutPage() {
     <>
       <PageSEO seo={data.seo} pageTitle={data.heading} />
 
-      <div className="tt-wide tt-page-shell">
+      <div className="tt-wide tt-page-shell pb-0">
         <div className="mb-10 tt-rule" />
 
-        <div className="mb-14 space-y-5 md:mb-16">
+        <div className="mb-10 space-y-5 md:mb-12">
           <div className="flex items-center gap-4">
             <span className="h-px w-10 bg-tt-accent" />
             <p className="tt-caption text-tt-accent-dark">About</p>
@@ -43,7 +43,7 @@ export function AboutPage() {
           </RevealText>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
           <RevealText as="p" className="tt-body-lead text-tt-ink" delay={0.08}>
             {data.intro}
           </RevealText>
@@ -53,7 +53,7 @@ export function AboutPage() {
         </div>
       </div>
 
-      <div className="tt-wide mt-14 md:mt-[4.5rem]">
+      <div className="tt-wide mt-6 md:mt-8">
         <MaskImage className="w-full">
           <div className="tt-editorial-frame relative aspect-16/7 overflow-hidden">
             {data.main_image?.url ? (
@@ -84,7 +84,7 @@ export function AboutPage() {
           >
             {data.values.map((value) => (
               <StaggerItem key={value.heading}>
-                <div className="tt-panel h-full p-6 md:p-7">
+                <div className="h-full border-t border-tt-border/80 pt-4 md:pt-5">
                   <div className="space-y-4">
                     <p className="tt-label text-tt-ink">{value.heading}</p>
                     <div className="h-px w-8 bg-tt-border-strong" />
@@ -98,8 +98,8 @@ export function AboutPage() {
       )}
 
       {data.cta_text && (
-        <div className="tt-wide pb-10 md:pb-14">
-          <div className="tt-panel p-7 md:p-10">
+        <div className="tt-wide pb-14 md:pb-20">
+          <div className="border-t border-tt-border/80 pt-8 md:pt-12">
             <RevealText as="p" className="tt-heading-xl max-w-3xl text-tt-ink">
               {data.cta_text}
             </RevealText>
@@ -108,13 +108,13 @@ export function AboutPage() {
       )}
 
       <div className="tt-wide" style={{ paddingBottom: 'var(--spacing-section-loose)' }}>
-        <div className="tt-panel grid grid-cols-1 gap-8 p-7 md:p-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-10">
-          <div className="tt-stack-md">
+        <div className="grid grid-cols-1 gap-10 border-t border-tt-border/80 pt-12 md:pt-16 lg:grid-cols-[0.68fr_1.32fr] lg:gap-16">
+          <div className="tt-stack-md max-w-[30rem]">
             <div className="flex items-center gap-4">
               <span className="h-px w-10 bg-tt-accent" />
               <p className="tt-caption text-tt-accent-dark">Let's Talk</p>
             </div>
-            <RevealText as="h2" className="tt-heading-xl text-tt-ink">
+            <RevealText as="h2" className="tt-heading-lg text-tt-ink">
               Tell us what you are building, even if it is still only a feeling.
             </RevealText>
             <p className="tt-body max-w-md">
@@ -122,7 +122,9 @@ export function AboutPage() {
               the next frame should be.
             </p>
           </div>
-          <InquiryForm config={contactData} />
+          <div className="lg:pt-10">
+            <InquiryForm config={contactData} />
+          </div>
         </div>
       </div>
     </>

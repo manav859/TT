@@ -131,7 +131,7 @@ export function Navbar() {
 
               <Link
                 to={contactItem.url}
-                className="hidden min-w-[10rem] items-center justify-center border border-tt-accent/[0.7] px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-tt-ink transition-all duration-200 hover:bg-tt-ink hover:text-tt-white md:inline-flex"
+                className="hidden min-w-[10rem] items-center justify-center border border-tt-accent/[0.7] px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-tt-ink transition-colors duration-200 hover:border-tt-accent hover:bg-tt-accent hover:text-tt-off-white md:inline-flex"
               >
                 {contactItem.label}
               </Link>

@@ -1,18 +1,29 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { PageTransition } from '@/lib/animations/PageTransition'
-import { useLenis } from '@/lib/animations/useLenis'
+import { getLenis, useLenis } from '@/lib/animations/useLenis'
 
 export function RootLayout() {
-  const location  = useLocation()
-  const mainRef   = useRef<HTMLElement>(null)
+  const location = useLocation()
+  const mainRef = useRef<HTMLElement>(null)
 
   useLenis()
 
-  /* Move focus to main on route change — accessibility */
+  useLayoutEffect(() => {
+    const lenis = getLenis()
+
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true })
+      return
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [location.pathname])
+
+  // Move focus to main on route change for keyboard and screen-reader users.
   useEffect(() => {
     const el = mainRef.current
     if (!el) return
@@ -29,7 +40,12 @@ export function RootLayout() {
 
       <Navbar />
 
-      <main id="main-content" ref={mainRef} className="flex-1 outline-none" style={{ paddingTop: 'var(--height-nav)' }}>
+      <main
+        id="main-content"
+        ref={mainRef}
+        className="flex-1 outline-none"
+        style={{ paddingTop: 'var(--height-nav)' }}
+      >
         <AnimatePresence mode="wait" initial={false}>
           <PageTransition key={location.pathname}>
             <Outlet />

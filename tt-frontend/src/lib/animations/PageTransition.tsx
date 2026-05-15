@@ -10,11 +10,11 @@ export function PageTransition({ children }: PageTransitionProps) {
 
   return (
     <motion.div
-      initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }}
+      initial={reduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
       animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }}
+      exit={reduced ? { opacity: 0 } : { opacity: 0, y: -14 }}
       transition={{
-        duration: reduced ? 0.2 : 0.45,
+        duration: reduced ? 0.2 : 0.5,
         ease: [0.16, 1, 0.3, 1],
       }}
     >

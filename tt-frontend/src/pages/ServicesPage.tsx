@@ -85,7 +85,7 @@ export function ServicesPage() {
                 </div>
               </div>
 
-              <div className="border border-tt-border/70 bg-white/[0.34] p-7 md:p-10 xl:p-12">
+              <div className="mt-10 lg:mt-24">
                 <InquiryForm config={contactData} />
               </div>
             </div>

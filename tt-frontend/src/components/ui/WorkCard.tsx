@@ -67,17 +67,19 @@ export function WorkCard({ work, delay = 0 }: { work: WorkSummary; delay?: numbe
         </div>
       </MaskImage>
 
-      <div className="mt-4 flex items-start justify-between gap-4">
-        <div>
-          <p className="tt-label text-tt-ink group-hover:opacity-60 transition-opacity duration-200">
+      <div className="mt-4 space-y-1.5">
+        <div className="min-h-[2.8rem]">
+          <p className="tt-label leading-[1.45] text-tt-ink transition-opacity duration-200 group-hover:opacity-60">
             {work.title}
           </p>
-          {work.caption && <p className="tt-body mt-1 text-[0.9rem] leading-relaxed">{work.caption}</p>}
         </div>
-        <div className="text-right shrink-0 space-y-0.5">
-          {work.category && <p className="tt-caption">{work.category}</p>}
-          {work.year     && <p className="tt-caption">{work.year}</p>}
-        </div>
+        {(work.category || work.year) && (
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            {work.category && <p className="tt-caption text-tt-ink/[0.55]">{work.category}</p>}
+            {work.year && <p className="tt-caption text-tt-ink/[0.42]">{work.year}</p>}
+          </div>
+        )}
+        {work.caption && <p className="tt-body text-[0.9rem] leading-relaxed">{work.caption}</p>}
       </div>
     </Link>
   )
