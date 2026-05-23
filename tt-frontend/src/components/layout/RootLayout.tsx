@@ -44,7 +44,6 @@ export function RootLayout() {
         id="main-content"
         ref={mainRef}
         className="flex-1 outline-none"
-        style={{ paddingTop: 'var(--height-nav)' }}
       >
         <AnimatePresence mode="wait" initial={false}>
           <PageTransition key={location.pathname}>

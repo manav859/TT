@@ -1,5 +1,80 @@
 @import "tailwindcss";
 
+/* Display — hero headlines, editorial pull quotes */
+@font-face {
+  font-family: "Lovan";
+  src: url("/font/main/Lovan.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brillant";
+  src: url("/font/main/brillant.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Serif — subheadings, body editorial, journal copy, captions */
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/font/Extra/Extra/LibreBaskerville-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/font/Extra/Extra/LibreBaskerville-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/font/Extra/Extra/LibreBaskerville-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Sans — UI, nav, buttons, labels, metadata */
+@font-face {
+  font-family: "Almarai";
+  src: url("/font/Extra/Extra/Almarai-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Almarai";
+  src: url("/font/Extra/Extra/Almarai-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Almarai";
+  src: url("/font/Extra/Extra/Almarai-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Almarai";
+  src: url("/font/Extra/Extra/Almarai-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-tt-white: #fffdfa;
   --color-tt-off-white: #f6f2eb;
@@ -14,8 +89,9 @@
   --color-tt-accent: #b39058;
   --color-tt-accent-dark: #8c6b3b;
 
-  --font-serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-  --font-sans: "Avenir Next", "Neue Haas Grotesk Text", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-display: "Lovan", "Brillant", "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Libre Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Almarai", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
   --spacing-gutter: clamp(1.125rem, 3vw, 3rem);
@@ -29,7 +105,7 @@
   --width-text: 42rem;
   --width-content: 76rem;
   --width-wide: 92rem;
-  --height-nav: 5.5rem;
+  --height-nav: 4rem;
 }
 
 *, *::before, *::after {
@@ -55,6 +131,18 @@ body {
     radial-gradient(circle at top left, rgba(202, 185, 165, 0.32), transparent 28rem),
     radial-gradient(circle at 85% 18%, rgba(179, 144, 88, 0.08), transparent 20rem),
     linear-gradient(180deg, #fbf8f3 0%, var(--color-tt-off-white) 22%, #f3ede4 100%);
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+}
+
+h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+p {
+  font-family: var(--font-serif);
 }
 
 body::before {
@@ -223,17 +311,17 @@ button {
 }
 
 .tt-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(2.85rem, 5.8vw, 5.1rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.94;
   letter-spacing: -0.035em;
 }
 
 .tt-heading-xl {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(1.95rem, 3.5vw, 3.4rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.06;
   letter-spacing: -0.03em;
 }
@@ -346,34 +434,37 @@ button {
 }
 
 .tt-nav-link {
-  position: relative;
-  padding-bottom: 0.35rem;
   font-family: var(--font-sans);
-  font-size: 0.79rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-tt-ink);
-  opacity: 0.72;
-  transition: opacity 180ms ease;
+  color: #999999;
+  transition: color 200ms ease;
 }
 
-.tt-nav-link:hover {
-  opacity: 1;
-}
-
+.tt-nav-link:hover,
 .tt-nav-link.active {
-  opacity: 1;
+  color: #111111;
 }
 
-.tt-nav-link.active::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--color-tt-accent) 20%, var(--color-tt-accent) 80%, transparent 100%);
+.tt-nav-link--contact {
+  color: #111111;
+  letter-spacing: 0.1em;
+}
+
+.tt-nav-link--contact:hover,
+.tt-nav-link--contact.active {
+  color: #111111;
+}
+
+.tt-brand-mark {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #111111;
 }
 
 .tt-input {
@@ -541,7 +632,7 @@ textarea.tt-input {
 
 .tt-prose h2 {
   margin: 2.4rem 0 1rem;
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(1.7rem, 2vw, 2.3rem);
   font-weight: 400;
   line-height: 1.12;
@@ -610,10 +701,6 @@ textarea.tt-input {
 }
 
 @media (max-width: 63.99rem) {
-  :root {
-    --height-nav: 4.9rem;
-  }
-
   .tt-page-shell {
     padding-top: 3rem;
   }
