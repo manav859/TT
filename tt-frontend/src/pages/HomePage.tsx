@@ -6,7 +6,7 @@ import { ErrorState } from '@/components/ui/ErrorState'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { WhatWeBuildSection } from '@/components/sections/WhatWeBuildSection'
-import { SelectedWorksSection } from '@/components/sections/SelectedWorksSection'
+import { OurWorkSection } from '@/components/sections/OurWorkSection'
 import { ServicesPreviewSection } from '@/components/sections/ServicesPreviewSection'
 import { JournalPreviewSection } from '@/components/sections/JournalPreviewSection'
 import { CTABannerSection } from '@/components/sections/CTABannerSection'
@@ -44,9 +44,7 @@ export function HomePage() {
 
       <WhatWeBuildSection />
 
-      {data.selected_works.items.length > 0 && (
-        <SelectedWorksSection section={data.selected_works} />
-      )}
+      <OurWorkSection />
 
       {data.services_preview.items.length > 0 && (
         <ServicesPreviewSection section={data.services_preview} />

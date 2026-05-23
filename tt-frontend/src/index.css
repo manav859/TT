@@ -234,6 +234,47 @@ button {
   justify-content: center;
 }
 
+/* Our Work — horizontal hover-expand carousel */
+.our-work-track::-webkit-scrollbar {
+  display: none;
+}
+
+.our-work-item {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 28vw;
+  height: 75vh;
+  cursor: pointer;
+  transition: width 0.5s ease;
+}
+
+.our-work-item:hover {
+  width: 45vw;
+}
+
+.our-work-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.our-work-item:hover .our-work-image {
+  transform: scale(1.03);
+}
+
+@media (max-width: 47.99rem) {
+  .our-work-item {
+    width: 80vw;
+  }
+  .our-work-item:hover {
+    width: 80vw;
+  }
+}
+
 .tt-page {
   padding-top: clamp(3.5rem, 7vw, 4.5rem);
   padding-bottom: var(--spacing-section-loose);
