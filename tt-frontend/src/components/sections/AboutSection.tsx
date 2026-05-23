@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useReducedMotionPreference } from '@/hooks/useReducedMotionPreference'
 
+const ABOUT_IMAGE = '/images/About_image.png'
+const ABOUT_TAGLINE = '/logo/Tagline.png'
+
 export function AboutSection() {
   const reduced = useReducedMotionPreference()
 
@@ -16,128 +19,74 @@ export function AboutSection() {
 
   return (
     <section
+      id="about"
+      className="tt-home-about"
       aria-label="About"
-      className="tt-screen-section"
-      style={{
-        background: '#C4B5A5',
-        padding: '0 5%',
-      }}
+      style={{ scrollMarginTop: 'var(--height-nav)' }}
     >
-      <div className="mx-auto grid w-full max-w-[92rem] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-16">
-        {/* Left — Text */}
-        <div>
-          <motion.p
-            {...enter(0)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '11px',
-              letterSpacing: '0.15em',
-              color: '#7a6a5a',
-              marginBottom: '1.25rem',
-              textTransform: 'uppercase',
-            }}
-          >
-            About Us
-          </motion.p>
-
-          <motion.h2
-            {...enter(0.08)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 400,
-              lineHeight: 1,
-              letterSpacing: '-0.01em',
-              color: '#1a1a1a',
-            }}
-          >
-            About
-          </motion.h2>
-
-          <motion.p
-            {...enter(0.18)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontStyle: 'italic',
-              fontSize: '17px',
-              lineHeight: 1.8,
-              color: '#3a3028',
-              marginTop: '1.75rem',
-              maxWidth: '34rem',
-            }}
-          >
-            Some brands have a great story. Most just haven't found the right way to show it yet.
-          </motion.p>
-
-          <motion.p
-            {...enter(0.26)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontStyle: 'italic',
-              fontSize: '17px',
-              lineHeight: 1.8,
-              color: '#3a3028',
-              marginTop: '1rem',
-              maxWidth: '34rem',
-            }}
-          >
-            That's the gap we work in — translating what a brand truly stands for into visuals people actually feel.
-          </motion.p>
-
-          <motion.div
-            {...enter(0.34)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{ marginTop: '2rem' }}
-          >
-            <Link
-              to="/contact"
-              style={{
-                display: 'inline-block',
-                background: '#3a2e26',
-                color: '#f5f0e8',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '13px',
-                fontWeight: 400,
-                letterSpacing: '0.1em',
-                padding: '14px 36px',
-                borderRadius: '2px',
-                textTransform: 'uppercase',
-              }}
+      <div className="tt-wide tt-home-about-shell">
+        <div className="tt-home-about-grid">
+          <div className="tt-home-about-copy">
+            <motion.h2
+              {...enter(0.08)}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              className="tt-home-about-title"
             >
-              Let's talk
-            </Link>
-          </motion.div>
-        </div>
+              About
+            </motion.h2>
 
-        {/* Right — Image (sized to fit one screen height) */}
-        <motion.div
-          {...enter(0.1)}
-          viewport={{ once: true, margin: '-10% 0px' }}
-          style={{
-            aspectRatio: '4 / 5',
-            maxHeight: '80vh',
-            overflow: 'hidden',
-            justifySelf: 'end',
-            width: '100%',
-          }}
-        >
-          <img
-            src="/portfolio/about.jpg"
-            alt="Tusk Tales studio"
-            loading="lazy"
-            decoding="async"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-            }}
-          />
-        </motion.div>
+            <motion.p
+              {...enter(0.18)}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              className="tt-home-about-text"
+            >
+              Some brands have a great story. Most just haven&apos;t found the right way to show it yet.
+            </motion.p>
+
+            <motion.p
+              {...enter(0.26)}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              className="tt-home-about-text"
+            >
+              That&apos;s the gap we work in, translating what a brand truly stands for into visuals that people actually feel. If you want a creative partner who&apos;ll push your brand further than you expected.
+            </motion.p>
+
+            <motion.div
+              {...enter(0.34)}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              className="tt-home-about-cta-wrap"
+            >
+              <Link to="/contact" className="tt-home-about-cta">
+                Let&apos;s Talk
+              </Link>
+            </motion.div>
+          </div>
+
+          <div className="tt-home-about-media">
+            <div className="tt-home-about-image-heading">
+              <img
+                src={ABOUT_TAGLINE}
+                alt="Purpose in every frame"
+                loading="lazy"
+                decoding="async"
+                className="tt-home-about-image-heading-mark"
+              />
+            </div>
+            <motion.div
+              {...enter(0.1)}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              className="tt-home-about-image-wrap"
+            >
+              <img
+                src={ABOUT_IMAGE}
+                alt="Purpose in every frame"
+                loading="lazy"
+                decoding="async"
+                className="tt-home-about-image"
+              />
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

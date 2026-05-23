@@ -1,49 +1,45 @@
 const WORKS = [
   {
-    category: 'Fashion',
-    title: 'Campaign Shoots',
-    image: '/portfolio/works/anaya.jpg',
+    title: 'FASHION CAMPAIGN',
+    description: 'Editorial campaign visuals built around emotion, movement, and premium perception.',
+    image: '/images/Cover_fashion.jpeg',
     placeholder: '#2a2520',
   },
   {
-    category: 'F&B',
-    title: 'Cinematic Content',
-    image: '/portfolio/works/the-pour.jpg',
-    placeholder: '#1e1a17',
-  },
-  {
-    category: 'Lifestyle',
-    title: 'Spatial Identity',
-    image: '/portfolio/works/heritage-objects.jpg',
+    title: 'LIFESTYLE & SPATIAL IDENTITY',
+    description: 'Visual narratives connecting interiors, atmosphere, and brand perception.',
+    image: '/images/lifestyle-spatial.jpeg',
     placeholder: '#252018',
   },
   {
-    category: 'Product',
-    title: 'Brand Storytelling',
-    image: '/portfolio/works/still.jpg',
-    placeholder: '#1a1e20',
+    title: 'F&B STORYTELLING',
+    description: 'Cinematic beverage visuals shaped through texture, light, and sensory atmosphere.',
+    image: '/images/fb-storytelling.jpeg',
+    placeholder: '#1e1a17',
   },
 ] as const
 
 export function OurWorkSection() {
   return (
     <section
+      id="our-work"
       aria-label="Our work"
       style={{
-        background: '#111111',
+        background: '#c4b5a5',
         padding: '5rem 4% 6rem',
+        scrollMarginTop: 'var(--height-nav)',
       }}
     >
       <h2
         style={{
-          fontFamily: 'var(--font-display)',
+          fontFamily: 'var(--font-serif)',
           fontSize: 'clamp(2.5rem, 5vw, 4rem)',
           fontWeight: 400,
           lineHeight: 1,
           letterSpacing: '-0.01em',
-          color: '#f5f0e8',
+          color: '#8c7556',
           marginBottom: '3rem',
-          paddingLeft: '1rem',
+          textAlign: 'center',
         }}
       >
         Our Work
@@ -66,8 +62,8 @@ export function OurWorkSection() {
             />
 
             <div className="our-work-overlay">
-              <p className="our-work-category">{work.category}</p>
               <h3 className="our-work-title">{work.title}</h3>
+              <p className="our-work-description">{work.description}</p>
             </div>
           </article>
         ))}

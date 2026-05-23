@@ -2,39 +2,43 @@ const SERVICES = [
   {
     title: 'Campaign Shoots',
     description: 'Editorial campaigns shaped through mood and storytelling.',
-    image: '/portfolio/services/campaign-shoots.jpg',
+    image: '/images/Cover_CAMPAIGN%20SHOOTS.jpg.jpeg',
   },
   {
     title: 'Creative Direction',
     description: 'Visual language, styling, and narrative thinking.',
-    image: '/portfolio/works/heritage-objects.jpg',
+    image: '/images/Cover_CREATIVE%20DIRECTION.JPG.jpeg',
   },
   {
     title: 'Brand Storytelling',
     description: 'Atmospheric visuals designed for recognition and recall.',
-    image: '/portfolio/services/cinematic-content.jpg',
+    image: '/images/Cover_BRAND%20STORYTELLING.jpg.jpeg',
   },
 ] as const
+
+const KHAKI = '#8c7556'
 
 export function WhatWeBuildSection() {
   return (
     <section
+      id="what-we-build"
       aria-label="What we build"
       style={{
-        background: '#f5f0e8',
+        background: '#ffffff',
         padding: '8rem 5%',
+        scrollMarginTop: 'var(--height-nav)',
       }}
     >
       <div style={{ maxWidth: '92rem', margin: '0 auto', width: '100%' }}>
         {/* Heading block */}
         <h2
           style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--font-serif)',
             fontSize: 'clamp(3rem, 6vw, 5rem)',
             fontWeight: 400,
             lineHeight: 1,
             letterSpacing: '-0.01em',
-            color: '#1a1a1a',
+            color: KHAKI,
             textAlign: 'center',
             margin: 0,
           }}
@@ -44,13 +48,15 @@ export function WhatWeBuildSection() {
 
         <p
           style={{
-            fontFamily: 'var(--font-serif)',
+            fontFamily: 'var(--font-sans)',
             fontSize: '16px',
             lineHeight: 1.8,
-            color: '#6b5e52',
-            maxWidth: '580px',
-            margin: '1.25rem auto 0',
+            color: KHAKI,
+            margin: '1.25rem 0 0',
             textAlign: 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
           }}
         >
           Campaign-led visuals designed to shape perception, create emotional recall, and give brands a distinct visual identity.
@@ -59,8 +65,22 @@ export function WhatWeBuildSection() {
         {/* 3-column grid */}
         <div className="what-we-build-grid">
           {SERVICES.map((service) => (
-            <div key={service.title}>
-              <div style={{ aspectRatio: '3 / 4', width: '100%', background: '#c4b5a5' }}>
+            <div
+              key={service.title}
+              style={{
+                textAlign: 'left',
+                containerType: 'inline-size',
+                minWidth: 0,
+              }}
+            >
+              <div
+                style={{
+                  aspectRatio: '3 / 4',
+                  width: '100%',
+                  background: '#ece4d6',
+                  overflow: 'hidden',
+                }}
+              >
                 <img
                   src={service.image}
                   alt={service.title}
@@ -77,12 +97,16 @@ export function WhatWeBuildSection() {
 
               <h3
                 style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '11px',
+                  fontFamily: 'var(--font-serif)',
+                  /* cqi = % of column width, so title scales with image.
+                     Tuned so the longest 18-char title fits inside the
+                     column on one line at typical viewports; wraps
+                     gracefully on narrow screens. */
+                  fontSize: 'clamp(1.1rem, 5.2cqi, 1.85rem)',
                   fontWeight: 400,
-                  letterSpacing: '0.18em',
+                  letterSpacing: '0.04em',
                   textTransform: 'uppercase',
-                  color: '#1a1a1a',
+                  color: KHAKI,
                   margin: '1.5rem 0 0',
                 }}
               >
@@ -91,11 +115,10 @@ export function WhatWeBuildSection() {
 
               <p
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '14px',
-                  lineHeight: 1.75,
-                  color: '#7a6a5a',
+                  lineHeight: 1.65,
+                  color: KHAKI,
                   margin: '0.75rem 0 0',
                 }}
               >

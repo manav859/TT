@@ -1,135 +1,94 @@
-import { useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { motion, useInView } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import { useBootstrap } from '@/hooks/useBootstrap'
-import { NewsletterForm } from '@/components/forms/NewsletterForm'
-import { SocialIcon } from '@/components/ui/SocialIcon'
+
+function InstagramIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function GmailIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+      <polyline points="22,6 12,13 2,6" />
+    </svg>
+  )
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  )
+}
+
+const FALLBACK_SOCIALS = {
+  instagram: 'https://www.instagram.com/tusk_tales_/',
+  email: 'support@tusktales.in',
+} as const
 
 export function Footer() {
   const { data: bootstrap } = useBootstrap()
-  const footer = bootstrap?.footer
-  const identity = bootstrap?.identity
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-12% 0px' })
-  const year = new Date().getFullYear()
+  const social = bootstrap?.identity?.social
+  const { pathname } = useLocation()
 
-  const copyright =
-    footer?.copyright?.replace('{year}', String(year)) ?? `Copyright ${year} Tusk Tales`
+  /* The Let's-talk footer duplicates intent on the contact page. */
+  if (pathname === '/contact') return null
 
-  const socialEntries = Object.entries(identity?.social ?? {}).filter(([, value]) => Boolean(value)) as [
-    'instagram' | 'facebook' | 'twitter',
-    string,
-  ][]
-
-  const logoText = identity?.logo_text ?? 'TUSK TALES'
-  const logoParts = logoText.split(' ')
-  const navItems = footer?.nav?.filter((item) => item.url !== '/contact') ?? []
-  const credit = footer?.credit ?? 'Built with intention.'
-  const socialLabels: Record<'instagram' | 'facebook' | 'twitter', string> = {
-    instagram: 'Instagram',
-    facebook: 'Facebook',
-    twitter: 'Twitter',
-  }
+  const socialLinks = [
+    {
+      label: 'Instagram',
+      href: social?.instagram || FALLBACK_SOCIALS.instagram,
+      icon: InstagramIcon,
+      external: true,
+    },
+    {
+      label: 'Email',
+      href: FALLBACK_SOCIALS.email,
+      icon: GmailIcon,
+      external: false,
+    },
+    {
+      label: 'Contact',
+      href: '/contact',
+      icon: PhoneIcon,
+      external: false,
+    },
+  ] as const
 
   return (
-    <motion.footer
-      ref={ref}
-      aria-label="Footer"
-      className="mt-auto bg-[rgba(246,242,235,0.82)]"
-      initial={{ opacity: 0, y: 42, filter: 'blur(10px)' }}
-      animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-      transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <div className="tt-wide py-16 md:py-20">
-        <div className="tt-rule" />
+    <footer className="tt-lets-talk-footer" aria-label="Let's talk">
+      <h2 className="tt-lets-talk-heading">Let&apos;s talk.</h2>
+      <p className="tt-lets-talk-subtitle">
+        We understand your branding problems. Give us a call or connect with us on socials.
+      </p>
 
-        <div className="grid grid-cols-1 gap-12 pt-10 lg:grid-cols-[1.05fr_0.95fr_0.82fr] lg:gap-16">
-          <div className="min-w-0 space-y-5">
-            <p className="tt-caption text-tt-accent-dark">Tusk Tales</p>
-
-            {identity?.logo_image?.url ? (
-              <img
-                src={identity.logo_image.url}
-                alt={identity.logo_image.alt || logoText}
-                className="h-12 w-auto md:h-14"
-              />
-            ) : (
-              <span className="tt-logo-wordmark">
-                <strong>{logoParts[0]}</strong>
-                <span>{logoParts.slice(1).join(' ') || 'Tales'}</span>
-              </span>
-            )}
-
-            {identity?.tagline && (
-              <p className="tt-body-lead max-w-sm text-tt-ink">{identity.tagline}</p>
-            )}
-            {identity?.description && (
-              <p className="tt-body max-w-md">{identity.description}</p>
-            )}
-          </div>
-
-          <div className="min-w-0 space-y-5">
-            <div className="space-y-3">
-              <p className="tt-caption text-tt-accent-dark">
-                {footer?.newsletter_heading ?? 'Stay in the frame.'}
-              </p>
-              {footer?.newsletter_text && (
-                <p className="tt-body max-w-md">{footer.newsletter_text}</p>
-              )}
-            </div>
-
-            <NewsletterForm />
-          </div>
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
-            <div className="space-y-4">
-              <p className="tt-caption">Navigate</p>
-              <nav aria-label="Footer navigation" className="grid grid-cols-1 gap-3">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.url}
-                    to={item.url}
-                    className="text-[0.98rem] leading-relaxed text-tt-ink-soft transition-colors duration-200 hover:text-tt-ink"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-
-            <div className="space-y-4">
-              <p className="tt-caption">Connect</p>
-              <div className="grid gap-3">
-                <Link
-                  to="/contact"
-                  className="text-[0.98rem] leading-relaxed text-tt-ink-soft transition-colors duration-200 hover:text-tt-ink"
-                >
-                  Start a Conversation
-                </Link>
-
-                {socialEntries.map(([key, url]) => (
-                  <a
-                    key={key}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={socialLabels[key]}
-                    className="inline-flex items-center gap-3 text-[0.98rem] leading-relaxed text-tt-ink-soft transition-colors duration-200 hover:text-tt-ink"
-                  >
-                    <SocialIcon name={key} size={16} />
-                    <span>{socialLabels[key]}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-12 flex flex-col gap-3 border-t border-tt-border pt-5 text-[0.8rem] uppercase tracking-[0.15em] text-tt-ink-light sm:flex-row sm:items-center sm:justify-between">
-          <p>{copyright}</p>
-          <p>{credit}</p>
-        </div>
+      <div className="tt-lets-talk-socials" aria-label="Social links">
+        {socialLinks.map(({ label, href, icon: Icon, external }) => (
+          <a
+            key={label}
+            href={href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+            aria-label={label}
+            className="tt-lets-talk-social"
+          >
+            <Icon />
+          </a>
+        ))}
       </div>
-    </motion.footer>
+
+      <div className="flex justify-center">
+        <a href="/contact" className="tt-lets-talk-contact" aria-label="Go to contact page">
+          Contact
+        </a>
+      </div>
+    </footer>
   )
 }

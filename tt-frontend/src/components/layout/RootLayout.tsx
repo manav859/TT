@@ -13,6 +13,7 @@ export function RootLayout() {
   useLenis()
 
   useLayoutEffect(() => {
+    if (location.hash) return /* hash navigation handled below */
     const lenis = getLenis()
 
     if (lenis) {
@@ -21,7 +22,38 @@ export function RootLayout() {
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [location.pathname])
+  }, [location.pathname, location.hash])
+
+  /* When the URL has a #section-id, smooth-scroll to that section. Two
+     rAFs give the page-transition / lazy chunk time to mount before we
+     measure the target. */
+  useEffect(() => {
+    if (!location.hash) return
+    const id = location.hash.slice(1)
+    let cancelled = false
+
+    const scroll = () => {
+      if (cancelled) return
+      const el = document.getElementById(id)
+      if (!el) return
+      const lenis = getLenis()
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -64 })
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    const raf1 = requestAnimationFrame(() => {
+      const raf2 = requestAnimationFrame(scroll)
+      ;(scroll as { _raf2?: number })._raf2 = raf2
+    })
+
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(raf1)
+    }
+  }, [location.pathname, location.hash])
 
   // Move focus to main on route change for keyboard and screen-reader users.
   useEffect(() => {

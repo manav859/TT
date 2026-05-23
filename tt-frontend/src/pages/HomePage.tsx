@@ -7,9 +7,6 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { WhatWeBuildSection } from '@/components/sections/WhatWeBuildSection'
 import { OurWorkSection } from '@/components/sections/OurWorkSection'
-import { ServicesPreviewSection } from '@/components/sections/ServicesPreviewSection'
-import { JournalPreviewSection } from '@/components/sections/JournalPreviewSection'
-import { CTABannerSection } from '@/components/sections/CTABannerSection'
 
 export function HomePage() {
   const { data, isLoading, isError, error, refetch } = useHome()
@@ -45,16 +42,6 @@ export function HomePage() {
       <WhatWeBuildSection />
 
       <OurWorkSection />
-
-      {data.services_preview.items.length > 0 && (
-        <ServicesPreviewSection section={data.services_preview} />
-      )}
-
-      {data.journal_preview.items.length > 0 && (
-        <JournalPreviewSection section={data.journal_preview} />
-      )}
-
-      <CTABannerSection banner={data.cta_banner} />
     </>
   )
 }

@@ -133,16 +133,12 @@ body {
     linear-gradient(180deg, #fbf8f3 0%, var(--color-tt-off-white) 22%, #f3ede4 100%);
 }
 
-h1, h2 {
-  font-family: var(--font-display);
-}
-
-h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
 }
 
 p {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 body::before {
@@ -300,6 +296,7 @@ button {
     transparent 100%
   );
   pointer-events: none;
+  text-align: center;
 }
 
 .our-work-category {
@@ -312,12 +309,21 @@ button {
 }
 
 .our-work-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 1.3vw, 1.3rem);
   font-weight: 400;
   line-height: 1.2;
-  color: #ffffff;
+  color: #c4b5a5;
   margin: 0;
+}
+
+.our-work-description {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
+  color: #c4b5a5;
+  margin: 0.6rem 0 0;
 }
 
 @media (max-width: 47.99rem) {
@@ -429,7 +435,7 @@ button {
 }
 
 .tt-display {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: clamp(2.85rem, 5.8vw, 5.1rem);
   font-weight: 400;
   line-height: 0.94;
@@ -437,7 +443,7 @@ button {
 }
 
 .tt-heading-xl {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: clamp(1.95rem, 3.5vw, 3.4rem);
   font-weight: 400;
   line-height: 1.06;
@@ -549,6 +555,13 @@ button {
   width: 1.75rem;
   height: 1px;
   background: linear-gradient(90deg, var(--color-tt-accent), transparent);
+}
+
+.tt-navbar-logo {
+  display: block;
+  width: auto;
+  height: 42px;
+  filter: contrast(1.12) brightness(0.88);
 }
 
 .tt-nav-link {
@@ -750,7 +763,7 @@ textarea.tt-input {
 
 .tt-prose h2 {
   margin: 2.4rem 0 1rem;
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: clamp(1.7rem, 2vw, 2.3rem);
   font-weight: 400;
   line-height: 1.12;
@@ -849,6 +862,10 @@ textarea.tt-input {
     font-size: 1.55rem;
   }
 
+  .tt-navbar-logo {
+    height: 36px;
+  }
+
   .tt-input {
     padding: 0.9rem 0 0.8rem;
   }
@@ -862,5 +879,473 @@ textarea.tt-input {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* What We Build */
+.what-we-build-section {
+  width: 100%;
+  background: #f5f0e8;
+  padding: 8rem 5%;
+}
+
+.what-we-build-shell {
+  width: 100%;
+  max-width: 88rem;
+  margin: 0 auto;
+}
+
+.what-we-build-header {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.what-we-build-heading {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.what-we-build-subtitle {
+  margin: 1.25rem auto 0;
+  max-width: 580px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.8;
+  color: #6b5e52;
+  text-align: center;
+}
+
+.what-we-build-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  align-items: start;
+  margin-top: 5rem;
+}
+
+.what-we-build-item {
+  min-width: 0;
+}
+
+.what-we-build-image-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #c4b5a5;
+  overflow: hidden;
+}
+
+.what-we-build-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.what-we-build-title {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+.what-we-build-description {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.75;
+  color: #7a6a5a;
+}
+
+.tt-home-hero {
+  width: 100%;
+  background: #ffffff;
+  min-height: calc(100vh - var(--height-nav));
+  display: flex;
+  flex-direction: column;
+}
+
+.tt-home-hero-brand {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 1.35rem 5% 1rem;
+}
+
+.tt-home-hero-logo {
+  display: block;
+  width: min(23rem, 48vw);
+  height: auto;
+  margin-top: 15px;
+}
+
+.tt-home-hero-image-wrap {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;
+  background: #ffffff;
+  margin-top: 15px;
+}
+
+.tt-home-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tt-lets-talk-footer {
+  width: 100%;
+  background: #ffffff;
+  padding: 8rem 5%;
+  text-align: center;
+}
+
+.tt-lets-talk-heading {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #c4b5a5;
+}
+
+.tt-lets-talk-subtitle {
+  margin: 1rem auto 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  color: #c4b5a5;
+  white-space: nowrap;
+}
+
+.tt-lets-talk-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 2.5rem;
+}
+
+.tt-lets-talk-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  color: #c4b5a5;
+  transition: color 200ms ease;
+}
+
+.tt-lets-talk-social svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tt-lets-talk-social:hover {
+  color: #8c7556;
+}
+
+/* Contact CTA below the icon row — width matches 3 icons + 2 gaps
+   (3 * 56px + 2 * 12px = 192px). */
+.tt-lets-talk-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  margin: 0.25rem auto 0;
+  /* Wide letter-spacing adds a trailing empty slot after the last letter.
+     Push text right by half that amount so the visible characters land
+     visually centered inside the box. */
+  padding: 0.45rem 0 0.45rem 0.35em;
+  background: transparent;
+  border: 1px solid #c4b5a5;
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.7em;
+  text-transform: uppercase;
+  color: #c4b5a5;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.tt-lets-talk-contact:hover {
+  background: #c4b5a5;
+  color: #ffffff;
+  border-color: #c4b5a5;
+}
+
+.tt-about-page-hero {
+  background: #050505;
+}
+
+.tt-about-page-copy {
+  padding-bottom: 4rem;
+}
+
+.tt-about-page-title {
+  margin: 0;
+  font-family: "Libre Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: clamp(3rem, 6vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #ffffff;
+}
+
+.tt-about-page-text-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.tt-about-page-intro,
+.tt-about-page-body,
+.tt-about-page-body p {
+  margin: 0;
+  font-family: "Almarai", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.95;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.tt-about-page-body p + p {
+  margin-top: 1.25rem;
+}
+
+.tt-about-page-image-stage {
+  background: #050505;
+}
+
+.tt-about-page-image-heading {
+  margin: 0;
+  padding: 0 1.5rem 1rem;
+  text-align: center;
+  font-family: "Libre Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: clamp(3.5rem, 9vw, 6.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.08);
+}
+
+.tt-about-page-image-wrap {
+  width: 100%;
+}
+
+.tt-about-page-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tt-home-about {
+  background: #c4b5a5;
+  color: #ffffff;
+  padding: 6rem 5%;
+}
+
+.tt-home-about-shell {
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+}
+
+.tt-home-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 3rem;
+}
+
+.tt-home-about-copy {
+  max-width: 36rem;
+}
+
+.tt-home-about-title {
+  margin: 0;
+  font-family: "Libre Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: clamp(3rem, 6vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #ffffff;
+}
+
+.tt-home-about-text {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-family: "Almarai", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tt-home-about-cta-wrap {
+  margin-top: 2rem;
+}
+
+.tt-home-about-cta {
+  display: inline-block;
+  padding: 14px 36px;
+  background: #3a2e26;
+  color: #f5f0e8;
+  font-family: "Almarai", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.tt-home-about-image-stage {
+  width: 100%;
+}
+
+.tt-home-about-image-heading {
+  margin: 0;
+  padding: 0 0 1rem;
+  display: block;
+  width: 100%;
+  max-width: none;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 3.6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.32em;
+  color: rgba(8, 12, 12, 0.62);
+  white-space: nowrap;
+}
+
+.tt-home-about-media {
+  width: 100%;
+  max-width: 38rem;
+  justify-self: end;
+  padding: 0.75rem 0.75rem 0;
+  background: transparent;
+}
+
+.tt-home-about-image-wrap {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.tt-home-about-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 48rem) {
+  .tt-about-page-text-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  .tt-about-page-copy {
+    padding-bottom: 5rem;
+  }
+
+  .tt-about-page-image-heading {
+    padding-bottom: 1.25rem;
+  }
+
+  .tt-home-about {
+    padding: 7rem 5%;
+  }
+
+  .tt-home-about-grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .what-we-build-section {
+    padding: 6rem 5%;
+  }
+
+  .what-we-build-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .tt-home-hero-brand {
+    padding: 1rem 5% 0.85rem;
+  }
+
+  .tt-home-hero-logo {
+    width: min(16rem, 62vw);
+  }
+
+  .tt-about-page-copy {
+    padding-bottom: 3rem;
+  }
+
+  .tt-about-page-title {
+    font-size: clamp(2.4rem, 10vw, 3.25rem);
+  }
+
+  .tt-about-page-intro,
+  .tt-about-page-body,
+  .tt-about-page-body p {
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .tt-about-page-image-heading {
+    padding: 0 1rem 0.85rem;
+    letter-spacing: 0.08em;
+  }
+
+  .tt-home-about {
+    padding: 4.5rem 5%;
+  }
+
+  .tt-home-about-title {
+    font-size: clamp(2.4rem, 10vw, 3.25rem);
+  }
+
+  .tt-home-about-text {
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .tt-home-about-image-heading {
+    padding: 0 0 0.85rem;
+    font-size: clamp(1.4rem, 6.4vw, 2rem);
+    letter-spacing: 0.18em;
+    white-space: normal;
+  }
+
+  .tt-home-about-media {
+    max-width: none;
+    justify-self: stretch;
+    padding: 0.65rem 0.65rem 0;
+  }
+
+  .tt-home-about-image-wrap {
+    aspect-ratio: auto;
+    max-width: none;
+  }
+
+  .tt-lets-talk-footer {
+    padding: 6rem 5%;
   }
 }

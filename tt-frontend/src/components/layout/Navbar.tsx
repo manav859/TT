@@ -4,12 +4,13 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import clsx from 'clsx'
 
+/* Ordered to follow the home-page section sequence:
+   Hero → About → What We Build → Our Work. */
 const NAV_ITEMS = [
   { label: 'HOME',     url: '/' },
-  { label: 'WORKS',    url: '/works' },
-  { label: 'SERVICES', url: '/services' },
-  { label: 'ABOUT',    url: '/about' },
-  { label: 'JOURNAL',  url: '/journal' },
+  { label: 'ABOUT',    url: '/#about' },
+  { label: 'SERVICES', url: '/#what-we-build' },
+  { label: 'WORKS',    url: '/#our-work' },
 ] as const
 
 const CONTACT_ITEM = { label: 'CONTACT', url: '/contact' }
@@ -17,8 +18,10 @@ const CONTACT_ITEM = { label: 'CONTACT', url: '/contact' }
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [logoBroken, setLogoBroken] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const location = useLocation()
   const menuRef = useRef<HTMLDivElement>(null)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     setMenuOpen(false)
@@ -40,11 +43,42 @@ export function Navbar() {
     }
   }, [menuOpen])
 
+  /* Hide navbar when scrolling down past a threshold; show when scrolling up
+     or near the top. Mobile menu open always forces visible. */
+  useEffect(() => {
+    const TOP_THRESHOLD = 80
+    const DELTA = 6
+
+    const onScroll = () => {
+      const y = window.scrollY
+      const diff = y - lastScrollY.current
+
+      if (y <= TOP_THRESHOLD) {
+        setHidden(false)
+      } else if (diff > DELTA) {
+        setHidden(true)
+      } else if (diff < -DELTA) {
+        setHidden(false)
+      }
+      lastScrollY.current = y
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const navHidden = hidden && !menuOpen
+
   return (
     <>
       <header
         className="sticky left-0 right-0 top-0 z-50 h-16 bg-white"
-        style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}
+        style={{
+          borderBottom: '2px solid #bdb6ac',
+          transform: navHidden ? 'translateY(-100%)' : 'translateY(0)',
+          transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+          willChange: 'transform',
+        }}
       >
         <div className="tt-wide flex h-full items-center justify-between">
           <Link
@@ -56,9 +90,9 @@ export function Navbar() {
               <span className="tt-brand-mark">TUSK TALES</span>
             ) : (
               <img
-                src="/images/tt-logo.png"
+                src="/logo/sub-logo-black.png"
                 alt="Tusk Tales"
-                style={{ height: '26px', width: 'auto' }}
+                className="tt-navbar-logo"
                 onError={() => setLogoBroken(true)}
               />
             )}
