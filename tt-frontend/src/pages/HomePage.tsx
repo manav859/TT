@@ -5,6 +5,7 @@ import { HomeSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { AboutSection } from '@/components/sections/AboutSection'
+import { WhatWeBuildSection } from '@/components/sections/WhatWeBuildSection'
 import { SelectedWorksSection } from '@/components/sections/SelectedWorksSection'
 import { ServicesPreviewSection } from '@/components/sections/ServicesPreviewSection'
 import { JournalPreviewSection } from '@/components/sections/JournalPreviewSection'
@@ -40,6 +41,8 @@ export function HomePage() {
       <HeroSection hero={data.hero} />
 
       <AboutSection />
+
+      <WhatWeBuildSection />
 
       {data.selected_works.items.length > 0 && (
         <SelectedWorksSection section={data.selected_works} />
