@@ -4,6 +4,7 @@ import { PageSEO } from '@/components/seo/PageSEO'
 import { HomeSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { HeroSection } from '@/components/sections/HeroSection'
+import { AboutSection } from '@/components/sections/AboutSection'
 import { SelectedWorksSection } from '@/components/sections/SelectedWorksSection'
 import { ServicesPreviewSection } from '@/components/sections/ServicesPreviewSection'
 import { JournalPreviewSection } from '@/components/sections/JournalPreviewSection'
@@ -37,6 +38,8 @@ export function HomePage() {
       <PageSEO seo={data.seo} type="website" jsonLd={orgJsonLd} />
 
       <HeroSection hero={data.hero} />
+
+      <AboutSection />
 
       {data.selected_works.items.length > 0 && (
         <SelectedWorksSection section={data.selected_works} />
