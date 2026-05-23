@@ -1,6 +1,3 @@
-import { motion } from 'framer-motion'
-import { useReducedMotionPreference } from '@/hooks/useReducedMotionPreference'
-
 const SERVICES = [
   {
     title: 'Campaign Shoots',
@@ -20,72 +17,50 @@ const SERVICES = [
 ] as const
 
 export function WhatWeBuildSection() {
-  const reduced = useReducedMotionPreference()
-
-  const enter = (delay = 0) =>
-    reduced
-      ? { initial: { opacity: 0 }, whileInView: { opacity: 1 }, transition: { duration: 0.35, delay } }
-      : {
-          initial: { opacity: 0, y: 24 },
-          whileInView: { opacity: 1, y: 0 },
-          transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] as const },
-        }
-
   return (
     <section
       aria-label="What we build"
-      className="tt-screen-section"
       style={{
         background: '#f5f0e8',
-        padding: '0 5%',
+        padding: '8rem 5%',
       }}
     >
-      <div className="mx-auto w-full max-w-[92rem]">
-        {/* Header */}
-        <div className="text-center">
-          <motion.h2
-            {...enter(0)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 400,
-              lineHeight: 1,
-              letterSpacing: '-0.01em',
-              color: '#1a1a1a',
-            }}
-          >
-            What We Build
-          </motion.h2>
+      <div style={{ maxWidth: '92rem', margin: '0 auto', width: '100%' }}>
+        {/* Heading block */}
+        <h2
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(3rem, 6vw, 5rem)',
+            fontWeight: 400,
+            lineHeight: 1,
+            letterSpacing: '-0.01em',
+            color: '#1a1a1a',
+            textAlign: 'center',
+            margin: 0,
+          }}
+        >
+          What We Build
+        </h2>
 
-          <motion.p
-            {...enter(0.1)}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: '16px',
-              lineHeight: 1.8,
-              color: '#6b5e52',
-              maxWidth: '600px',
-              margin: '1rem auto 0',
-            }}
-          >
-            Campaign-led visuals designed to shape perception, create emotional recall, and give brands a distinct visual identity.
-          </motion.p>
-        </div>
+        <p
+          style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: '16px',
+            lineHeight: 1.8,
+            color: '#6b5e52',
+            maxWidth: '580px',
+            margin: '1.25rem auto 0',
+            textAlign: 'center',
+          }}
+        >
+          Campaign-led visuals designed to shape perception, create emotional recall, and give brands a distinct visual identity.
+        </p>
 
         {/* 3-column grid */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3"
-          style={{ gap: '2.5rem', marginTop: 'clamp(2.5rem, 5vw, 5rem)' }}
-        >
-          {SERVICES.map((service, i) => (
-            <motion.div
-              key={service.title}
-              {...enter(0.15 + i * 0.08)}
-              viewport={{ once: true, margin: '-10% 0px' }}
-            >
-              <div style={{ aspectRatio: '3 / 4', overflow: 'hidden' }}>
+        <div className="what-we-build-grid">
+          {SERVICES.map((service) => (
+            <div key={service.title}>
+              <div style={{ aspectRatio: '3 / 4', width: '100%', background: '#c4b5a5' }}>
                 <img
                   src={service.image}
                   alt={service.title}
@@ -103,12 +78,12 @@ export function WhatWeBuildSection() {
               <h3
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '12px',
+                  fontSize: '11px',
                   fontWeight: 400,
-                  letterSpacing: '0.15em',
+                  letterSpacing: '0.18em',
                   textTransform: 'uppercase',
                   color: '#1a1a1a',
-                  marginTop: '1.25rem',
+                  margin: '1.5rem 0 0',
                 }}
               >
                 {service.title}
@@ -119,14 +94,14 @@ export function WhatWeBuildSection() {
                   fontFamily: 'var(--font-serif)',
                   fontStyle: 'italic',
                   fontSize: '14px',
-                  lineHeight: 1.7,
+                  lineHeight: 1.75,
                   color: '#7a6a5a',
-                  marginTop: '0.5rem',
+                  margin: '0.75rem 0 0',
                 }}
               >
                 {service.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
