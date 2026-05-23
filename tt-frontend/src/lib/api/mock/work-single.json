@@ -4,12 +4,12 @@
     "id": 1,
     "title": "Sisters",
     "slug": "sisters",
-    "featured_image": { "url": "", "alt": "Sisters campaign shoot" },
+    "featured_image": { "url": "/portfolio/gallery/sisters-1.jpg", "alt": "Sisters campaign shoot" },
     "gallery": [
-      { "url": "", "alt": "Sisters — frame one",   "width": 1200, "height": 1600 },
-      { "url": "", "alt": "Sisters — frame two",   "width": 1200, "height": 900  },
-      { "url": "", "alt": "Sisters — frame three", "width": 1200, "height": 1600 },
-      { "url": "", "alt": "Sisters — frame four",  "width": 1200, "height": 900  }
+      { "url": "/portfolio/gallery/sisters-1.jpg", "alt": "Sisters — frame one",   "width": 1200, "height": 1600 },
+      { "url": "/portfolio/gallery/sisters-2.png", "alt": "Sisters — frame two",   "width": 1200, "height": 900  },
+      { "url": "/portfolio/gallery/sisters-3.jpg", "alt": "Sisters — frame three", "width": 1200, "height": 1600 },
+      { "url": "/portfolio/gallery/sisters-4.jpg", "alt": "Sisters — frame four",  "width": 1200, "height": 900  }
     ],
     "category": "Campaign Shoots",
     "caption": "A portrait of two",

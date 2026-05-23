@@ -10,8 +10,22 @@ function buildUrl(path: string): string {
   return `${BASE_URL}${API_PREFIX}/${path.replace(/^\//, '')}`
 }
 
+function mockKeyFor(path: string): string {
+  /* Strip leading slash + query string */
+  const clean = path.replace(/^\//, '').split('?')[0]
+  /* Detail routes use a shared single-page fixture, ignoring the slug */
+  const detail = clean.match(/^(works|services|journal)\/[^/]+$/)
+  if (detail) {
+    const collection = detail[1]
+    if (collection === 'works')    return 'work-single'
+    if (collection === 'services') return 'service-single'
+    if (collection === 'journal')  return 'journal-single'
+  }
+  return clean.replace(/\//g, '-')
+}
+
 async function loadMock<T>(path: string): Promise<T> {
-  const key = path.replace(/^\//, '').replace(/\//g, '-')
+  const key = mockKeyFor(path)
   const modules = import.meta.glob('./mock/*.json', { eager: true })
   const mod = modules[`./mock/${key}.json`] as { default: ApiEnvelope<T> } | undefined
   if (!mod) {
@@ -65,6 +79,13 @@ async function get<T>(path: string): Promise<T> {
 }
 
 async function post<T>(path: string, payload: unknown): Promise<T> {
+  if (USE_MOCK) {
+    /* Pure-frontend mode: simulate a successful submission */
+    await new Promise((r) => setTimeout(r, 400))
+    void payload
+    return { ok: true, message: "Thanks — we'll be in touch shortly." } as unknown as T
+  }
+
   let res: Response
   try {
     res = await fetch(buildUrl(path), {
