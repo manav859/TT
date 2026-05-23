@@ -1,138 +1,61 @@
-import { useEffect, useRef } from 'react'
-
 const WORKS = [
   {
-    label: 'Editorial',
-    title: 'Fashion Campaign',
-    description: 'Editorial campaign visuals built around emotion, movement, and premium perception.',
+    category: 'Fashion',
+    title: 'Campaign Shoots',
     image: '/portfolio/works/anaya.jpg',
+    placeholder: '#2a2520',
   },
   {
-    label: 'Atmospheric',
-    title: 'Lifestyle & Spatial',
-    description: 'Visual narratives connecting interiors, atmosphere, and brand perception.',
+    category: 'F&B',
+    title: 'Cinematic Content',
+    image: '/portfolio/works/the-pour.jpg',
+    placeholder: '#1e1a17',
+  },
+  {
+    category: 'Lifestyle',
+    title: 'Spatial Identity',
     image: '/portfolio/works/heritage-objects.jpg',
+    placeholder: '#252018',
   },
   {
-    label: 'Cinematic',
-    title: 'F&B Storytelling',
-    description: 'Cinematic beverage visuals shaped through texture, light, and sensory atmosphere.',
-    image: '/portfolio/works/the-splash.jpg',
-  },
-  {
-    label: 'Object',
-    title: 'Product Story',
-    description: 'Quiet object photography built around craft, material, and stillness.',
+    category: 'Product',
+    title: 'Brand Storytelling',
     image: '/portfolio/works/still.jpg',
+    placeholder: '#1a1e20',
   },
 ] as const
 
-/** Mouse-drag horizontal scrolling on desktop. Native touch scroll works as-is. */
-function useDragScroll() {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    let isDown = false
-    let startX = 0
-    let scrollStart = 0
-    let moved = false
-
-    const onDown = (e: MouseEvent) => {
-      isDown = true
-      moved = false
-      startX = e.pageX - el.offsetLeft
-      scrollStart = el.scrollLeft
-      el.style.cursor = 'grabbing'
-      el.style.userSelect = 'none'
-    }
-    const onUp = () => {
-      isDown = false
-      el.style.cursor = 'grab'
-      el.style.userSelect = ''
-    }
-    const onMove = (e: MouseEvent) => {
-      if (!isDown) return
-      const x = e.pageX - el.offsetLeft
-      const walk = (x - startX) * 1.2
-      if (Math.abs(walk) > 4) moved = true
-      el.scrollLeft = scrollStart - walk
-    }
-    /* Suppress click after a drag so item hovers/clicks don't misfire. */
-    const onClick = (e: MouseEvent) => {
-      if (moved) {
-        e.preventDefault()
-        e.stopPropagation()
-      }
-    }
-
-    el.addEventListener('mousedown', onDown)
-    window.addEventListener('mouseup', onUp)
-    window.addEventListener('mousemove', onMove)
-    el.addEventListener('click', onClick, true)
-
-    return () => {
-      el.removeEventListener('mousedown', onDown)
-      window.removeEventListener('mouseup', onUp)
-      window.removeEventListener('mousemove', onMove)
-      el.removeEventListener('click', onClick, true)
-    }
-  }, [])
-
-  return ref
-}
-
 export function OurWorkSection() {
-  const trackRef = useDragScroll()
-
   return (
     <section
       aria-label="Our work"
       style={{
-        background: '#1a1a1a',
-        height: '100vh',
-        minHeight: '100vh',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        paddingTop: '5rem',
+        background: '#111111',
+        padding: '5rem 4% 6rem',
       }}
     >
-      <header style={{ padding: '0 5%', marginBottom: '3rem' }}>
-        <h2
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2.5rem, 5vw, 5rem)',
-            fontWeight: 400,
-            lineHeight: 1,
-            letterSpacing: '-0.01em',
-            color: '#f5f0e8',
-          }}
-        >
-          Our Work
-        </h2>
-      </header>
-
-      <div
-        ref={trackRef}
-        className="our-work-track"
+      <h2
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '0',
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          cursor: 'grab',
-          flex: '0 0 auto',
-          padding: '0 5%',
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+          fontWeight: 400,
+          lineHeight: 1,
+          letterSpacing: '-0.01em',
+          color: '#f5f0e8',
+          marginBottom: '3rem',
+          paddingLeft: '1rem',
         }}
       >
+        Our Work
+      </h2>
+
+      <div className="our-work-carousel">
         {WORKS.map((work) => (
-          <article key={work.title} className="our-work-item">
+          <article
+            key={work.title}
+            className="our-work-item"
+            style={{ background: work.placeholder }}
+          >
             <img
               src={work.image}
               alt={work.title}
@@ -142,64 +65,9 @@ export function OurWorkSection() {
               className="our-work-image"
             />
 
-            <div
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to bottom, transparent 55%, rgba(0, 0, 0, 0.75) 100%)',
-                pointerEvents: 'none',
-              }}
-            />
-
-            <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                bottom: 0,
-                padding: '2rem',
-                color: '#ffffff',
-                pointerEvents: 'none',
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '11px',
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255, 255, 255, 0.6)',
-                  marginBottom: '0.5rem',
-                }}
-              >
-                {work.label}
-              </p>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '1.8rem',
-                  fontWeight: 400,
-                  lineHeight: 1.1,
-                  color: '#ffffff',
-                  margin: 0,
-                }}
-              >
-                {work.title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontSize: '14px',
-                  lineHeight: 1.6,
-                  color: 'rgba(255, 255, 255, 0.78)',
-                  marginTop: '0.75rem',
-                  maxWidth: '34rem',
-                }}
-              >
-                {work.description}
-              </p>
+            <div className="our-work-overlay">
+              <p className="our-work-category">{work.category}</p>
+              <h3 className="our-work-title">{work.title}</h3>
             </div>
           </article>
         ))}
