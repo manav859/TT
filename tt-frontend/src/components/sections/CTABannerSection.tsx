@@ -22,7 +22,7 @@ export function CTABannerSection({ banner }: { banner: HomeData['cta_banner'] })
   )
 
   return (
-    <section ref={ref} className="tt-section-loose" aria-label="Start a project">
+    <section ref={ref} className="tt-screen-section" aria-label="Start a project">
       <div className="tt-wide">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <div className="flex flex-col justify-between gap-10 lg:gap-14">

@@ -16,7 +16,7 @@ export function SelectedWorksSection({ section }: { section: HomeData['selected_
 
   return (
     <section
-      className="w-full tt-section-tight"
+      className="w-full tt-screen-section"
       style={{ backgroundColor: 'var(--color-tt-off-white-strong)' }}
       aria-label="Selected works"
     >

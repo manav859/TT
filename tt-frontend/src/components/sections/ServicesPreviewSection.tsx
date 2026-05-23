@@ -15,7 +15,7 @@ const GRADIENTS = [
 
 export function ServicesPreviewSection({ section }: { section: HomeData['services_preview'] }) {
   return (
-    <section className="tt-section-tight" aria-label="Services preview">
+    <section className="tt-screen-section" aria-label="Services preview">
       <div className="tt-wide">
         <div className="mb-12 tt-rule" />
 

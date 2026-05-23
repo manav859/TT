@@ -17,14 +17,13 @@ export function AboutSection() {
   return (
     <section
       aria-label="About"
+      className="tt-screen-section"
       style={{
         background: '#C4B5A5',
-        padding: '7rem 5%',
+        padding: '0 5%',
       }}
     >
-      <div
-        className="mx-auto grid w-full max-w-[92rem] grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-20"
-      >
+      <div className="mx-auto grid w-full max-w-[92rem] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-16">
         {/* Left — Text */}
         <div>
           <motion.p
@@ -35,7 +34,7 @@ export function AboutSection() {
               fontSize: '11px',
               letterSpacing: '0.15em',
               color: '#7a6a5a',
-              marginBottom: '1.5rem',
+              marginBottom: '1.25rem',
               textTransform: 'uppercase',
             }}
           >
@@ -47,7 +46,7 @@ export function AboutSection() {
             viewport={{ once: true, margin: '-10% 0px' }}
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3rem, 6vw, 5rem)',
+              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
               fontWeight: 400,
               lineHeight: 1,
               letterSpacing: '-0.01em',
@@ -64,9 +63,9 @@ export function AboutSection() {
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
               fontSize: '17px',
-              lineHeight: 1.9,
+              lineHeight: 1.8,
               color: '#3a3028',
-              marginTop: '2rem',
+              marginTop: '1.75rem',
               maxWidth: '34rem',
             }}
           >
@@ -80,9 +79,9 @@ export function AboutSection() {
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
               fontSize: '17px',
-              lineHeight: 1.9,
+              lineHeight: 1.8,
               color: '#3a3028',
-              marginTop: '1.25rem',
+              marginTop: '1rem',
               maxWidth: '34rem',
             }}
           >
@@ -92,7 +91,7 @@ export function AboutSection() {
           <motion.div
             {...enter(0.34)}
             viewport={{ once: true, margin: '-10% 0px' }}
-            style={{ marginTop: '2.5rem' }}
+            style={{ marginTop: '2rem' }}
           >
             <Link
               to="/contact"
@@ -114,11 +113,17 @@ export function AboutSection() {
           </motion.div>
         </div>
 
-        {/* Right — Image */}
+        {/* Right — Image (sized to fit one screen height) */}
         <motion.div
           {...enter(0.1)}
           viewport={{ once: true, margin: '-10% 0px' }}
-          style={{ aspectRatio: '4 / 5', overflow: 'hidden' }}
+          style={{
+            aspectRatio: '4 / 5',
+            maxHeight: '80vh',
+            overflow: 'hidden',
+            justifySelf: 'end',
+            width: '100%',
+          }}
         >
           <img
             src="/portfolio/about.jpg"

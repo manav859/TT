@@ -11,7 +11,7 @@ interface JournalPreviewProps {
 
 export function JournalPreviewSection({ section }: JournalPreviewProps) {
   return (
-    <section className="tt-section-tight" aria-label="Journal preview">
+    <section className="tt-screen-section" aria-label="Journal preview">
       <div className="tt-wide">
         <div className="mb-12 tt-rule" />
         <div className="mb-6 flex flex-col gap-5 md:mb-8 md:flex-row md:items-end md:justify-between">
