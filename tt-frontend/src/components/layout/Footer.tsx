@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useBootstrap } from '@/hooks/useBootstrap'
 
 function InstagramIcon() {
@@ -89,9 +89,9 @@ export function Footer() {
       </div>
 
       <div className="flex justify-center">
-        <a href="/contact" className="tt-lets-talk-contact" aria-label="Go to contact page">
+        <Link to="/contact" className="tt-lets-talk-contact" aria-label="Go to contact page">
           Contact
-        </a>
+        </Link>
       </div>
     </footer>
   )
