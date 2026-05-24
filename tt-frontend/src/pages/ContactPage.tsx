@@ -22,14 +22,26 @@ export function ContactPage() {
     <>
       <PageSEO pageTitle="Contact" />
 
-      <div className="tt-wide" style={{ paddingTop: 'clamp(4rem, 8vw, 7rem)', paddingBottom: 'clamp(5rem, 10vw, 9rem)' }}>
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 xl:gap-32">
-          <aside className="lg:w-[38%] lg:sticky lg:top-32 lg:self-start">
+      <div
+        className="tt-wide"
+        style={{
+          height: 'calc(100vh - var(--height-nav))',
+          minHeight: '0',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          paddingTop: 'clamp(1rem, 2vh, 2rem)',
+          paddingBottom: 'clamp(1rem, 2vh, 2rem)',
+        }}
+      >
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 xl:gap-24">
+          <aside className="lg:w-[36%] lg:self-center">
             <h1
               className="leading-[1.05]"
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2.75rem, 5vw, 3.75rem)',
+                fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
                 fontWeight: 400,
                 color: '#c4b5a5',
                 margin: 0,
@@ -40,10 +52,10 @@ export function ContactPage() {
             <p
               style={{
                 fontFamily: 'var(--font-sans)',
-                fontSize: '15px',
-                lineHeight: 1.7,
+                fontSize: '14px',
+                lineHeight: 1.6,
                 color: '#c4b5a5',
-                margin: '1.25rem 0 0',
+                margin: '1rem 0 0',
                 maxWidth: '24rem',
               }}
             >
@@ -51,7 +63,7 @@ export function ContactPage() {
             </p>
           </aside>
 
-          <div className="lg:w-[62%]">
+          <div className="lg:w-[64%]">
             <InquiryForm />
           </div>
         </div>

@@ -16,6 +16,11 @@ const ContactPage       = lazy(() => import('@/pages/ContactPage').then(m => ({ 
 const PrivacyPage       = lazy(() => import('@/pages/PrivacyPage').then(m => ({ default: m.PrivacyPage })))
 const NotFoundPage      = lazy(() => import('@/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })))
 
+/* Our Work detail pages */
+const FashionCampaignPage  = lazy(() => import('@/pages/work/FashionCampaignPage').then(m => ({ default: m.FashionCampaignPage })))
+const LifestyleSpatialPage = lazy(() => import('@/pages/work/LifestyleSpatialPage').then(m => ({ default: m.LifestyleSpatialPage })))
+const FbStorytellingPage   = lazy(() => import('@/pages/work/FbStorytellingPage').then(m => ({ default: m.FbStorytellingPage })))
+
 function SuspendedPage({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<PageSkeleton />}>{children}</Suspense>
 }
@@ -35,6 +40,11 @@ export const router = createBrowserRouter([
       { path: 'journal/:slug',   element: <SuspendedPage><JournalSinglePage /></SuspendedPage> },
       { path: 'contact',         element: <SuspendedPage><ContactPage /></SuspendedPage> },
       { path: 'privacy',         element: <SuspendedPage><PrivacyPage /></SuspendedPage> },
+
+      { path: 'work/fashion-campaign',  element: <SuspendedPage><FashionCampaignPage /></SuspendedPage> },
+      { path: 'work/lifestyle-spatial', element: <SuspendedPage><LifestyleSpatialPage /></SuspendedPage> },
+      { path: 'work/fb-storytelling',   element: <SuspendedPage><FbStorytellingPage /></SuspendedPage> },
+
       { path: '*',               element: <SuspendedPage><NotFoundPage /></SuspendedPage> },
     ],
   },

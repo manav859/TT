@@ -28,9 +28,13 @@ function PhoneIcon() {
   )
 }
 
+const CONTACT_PHONE_HREF = 'tel:9898129808'
+const CONTACT_EMAIL = 'support@tusktales.in'
+
 const FALLBACK_SOCIALS = {
   instagram: 'https://www.instagram.com/tusk_tales_/',
-  email: 'support@tusktales.in',
+  email: `mailto:${CONTACT_EMAIL}`,
+  phone: CONTACT_PHONE_HREF,
 } as const
 
 export function Footer() {
@@ -55,8 +59,8 @@ export function Footer() {
       external: false,
     },
     {
-      label: 'Contact',
-      href: '/contact',
+      label: 'Phone',
+      href: FALLBACK_SOCIALS.phone,
       icon: PhoneIcon,
       external: false,
     },

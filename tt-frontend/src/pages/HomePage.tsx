@@ -7,6 +7,7 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { WhatWeBuildSection } from '@/components/sections/WhatWeBuildSection'
 import { OurWorkSection } from '@/components/sections/OurWorkSection'
+import { ExtraSlideSection } from '@/components/sections/ExtraSlideSection'
 
 export function HomePage() {
   const { data, isLoading, isError, error, refetch } = useHome()
@@ -42,6 +43,8 @@ export function HomePage() {
       <WhatWeBuildSection />
 
       <OurWorkSection />
+
+      <ExtraSlideSection />
     </>
   )
 }

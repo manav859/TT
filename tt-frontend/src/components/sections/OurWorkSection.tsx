@@ -1,21 +1,26 @@
+import { Link } from 'react-router-dom'
+
 const WORKS = [
   {
     title: 'FASHION CAMPAIGN',
     description: 'Editorial campaign visuals built around emotion, movement, and premium perception.',
     image: '/images/Cover_fashion.jpeg',
     placeholder: '#2a2520',
+    to: '/work/fashion-campaign',
   },
   {
     title: 'LIFESTYLE & SPATIAL IDENTITY',
     description: 'Visual narratives connecting interiors, atmosphere, and brand perception.',
     image: '/images/lifestyle-spatial.jpeg',
     placeholder: '#252018',
+    to: '/work/lifestyle-spatial',
   },
   {
     title: 'F&B STORYTELLING',
     description: 'Cinematic beverage visuals shaped through texture, light, and sensory atmosphere.',
     image: '/images/fb-storytelling.jpeg',
     placeholder: '#1e1a17',
+    to: '/work/fb-storytelling',
   },
 ] as const
 
@@ -47,10 +52,12 @@ export function OurWorkSection() {
 
       <div className="our-work-carousel">
         {WORKS.map((work) => (
-          <article
+          <Link
             key={work.title}
+            to={work.to}
             className="our-work-item"
             style={{ background: work.placeholder }}
+            aria-label={work.title}
           >
             <img
               src={work.image}
@@ -65,7 +72,7 @@ export function OurWorkSection() {
               <h3 className="our-work-title">{work.title}</h3>
               <p className="our-work-description">{work.description}</p>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>

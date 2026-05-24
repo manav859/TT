@@ -57,7 +57,7 @@ export function InquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-6 font-sans w-full max-w-2xl"
+      className="flex flex-col gap-3 font-sans w-full max-w-2xl"
     >
       <div className="flex flex-col gap-2">
         <span className="text-[14px] text-[#333]">Name</span>
@@ -73,7 +73,7 @@ export function InquiryForm() {
               required
               value={form.first_name}
               onChange={handleChange}
-              className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-4 py-3 text-[15px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+              className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
             />
           </div>
           <div className="flex-1 flex flex-col gap-1.5">
@@ -87,7 +87,7 @@ export function InquiryForm() {
               required
               value={form.last_name}
               onChange={handleChange}
-              className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-4 py-3 text-[15px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+              className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ export function InquiryForm() {
           type="email"
           value={form.email}
           onChange={handleChange}
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-4 py-3 text-[15px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
         />
       </div>
 
@@ -119,7 +119,7 @@ export function InquiryForm() {
           value={form.phone}
           onChange={handleChange}
           autoComplete="tel"
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-4 py-3 text-[15px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
         />
       </div>
 
@@ -148,7 +148,7 @@ export function InquiryForm() {
           required
           value={form.subject}
           onChange={handleChange}
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-4 py-3 text-[15px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
         />
       </div>
 
@@ -159,17 +159,17 @@ export function InquiryForm() {
         <textarea
           id="message"
           name="message"
-          rows={5}
+          rows={2}
           value={form.message}
           onChange={handleChange}
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-4 py-3 text-[15px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent resize-y"
+          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent resize-y"
         />
       </div>
 
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-4 inline-flex items-center justify-center min-w-[180px] min-h-[50px] bg-[#c4a993] text-white px-14 py-4 rounded-lg text-[13px] font-medium tracking-[0.18em] shadow-sm hover:bg-[#b39780] hover:shadow-md transition-all duration-200 self-start disabled:opacity-70"
+        className="mt-2 inline-flex items-center justify-center min-w-[120px] bg-[#c4a993] text-white px-8 py-2 rounded-lg text-[14px] font-normal hover:bg-[#b39780] transition-colors duration-200 self-start disabled:opacity-70"
       >
         {status === 'loading' ? 'Submitting…' : 'Submit'}
       </button>
