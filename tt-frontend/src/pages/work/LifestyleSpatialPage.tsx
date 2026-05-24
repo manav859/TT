@@ -57,7 +57,7 @@ export function LifestyleSpatialPage() {
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
           color: '#b8a898',
-          textAlign: 'left',
+          textAlign: 'center',
           padding: '1rem 6% 0',
           margin: 0,
         }}
@@ -71,7 +71,7 @@ export function LifestyleSpatialPage() {
         style={{ marginTop: '4rem', padding: '0 6%' }}
         aria-labelledby="ls-purpose"
       >
-        <div>
+        <div className="work-split-copy">
           <h2 id="ls-purpose" style={headingStyle}>Purpose in space</h2>
           <p style={subtitleStyle}>
             Light, texture, and space existing in quiet tension.
@@ -90,6 +90,7 @@ export function LifestyleSpatialPage() {
         </div>
 
         <img
+          className="work-split-media"
           src={PURPOSE_IN_SPACE_IMAGE}
           alt="Purpose in space"
           loading="lazy"
@@ -105,6 +106,7 @@ export function LifestyleSpatialPage() {
         aria-labelledby="ls-light"
       >
         <img
+          className="work-split-media"
           src={LIGHT_PERCEPTION_IMAGE}
           alt="Light and perception"
           loading="lazy"
@@ -112,7 +114,7 @@ export function LifestyleSpatialPage() {
           style={mediaStyle}
         />
 
-        <div>
+        <div className="work-split-copy">
           <h2 id="ls-light" style={headingStyle}>Light &amp; perception</h2>
           <p style={subtitleStyle}>
             Warmth, shadow, and form existing in quiet balance.
@@ -136,7 +138,7 @@ export function LifestyleSpatialPage() {
         style={{ marginTop: '6rem', padding: '0 6% 8rem' }}
         aria-labelledby="ls-narrative"
       >
-        <div>
+        <div className="work-split-copy">
           <h2 id="ls-narrative" style={headingStyle}>Spatial narrative</h2>
           <p style={subtitleStyle}>
             An environment designed to feel immersive rather than decorative.
@@ -155,6 +157,7 @@ export function LifestyleSpatialPage() {
         </div>
 
         <img
+          className="work-split-media"
           src={SPATIAL_NARRATIVE_IMAGE}
           alt="Spatial narrative"
           loading="lazy"

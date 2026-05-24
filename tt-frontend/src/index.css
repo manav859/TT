@@ -243,6 +243,10 @@ button {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  /* On mobile, always show media (image/video) before its copy text,
+     regardless of the desktop DOM order. */
+  .work-split .work-split-media { order: 0; }
+  .work-split .work-split-copy  { order: 1; }
 }
 
 /* What We Build — 3 equal columns, single column on mobile */
@@ -1304,12 +1308,23 @@ textarea.tt-input {
     gap: 3rem;
   }
 
+  .tt-home-hero {
+    /* On mobile the hero image is much shorter than viewport — drop the
+       viewport-height floor so the section is just content-tall and the
+       About section starts right after, no white gap. */
+    min-height: 0;
+  }
+
   .tt-home-hero-brand {
     padding: 1rem 5% 0.85rem;
   }
 
   .tt-home-hero-logo {
     width: min(16rem, 62vw);
+  }
+
+  .tt-home-hero-image-wrap {
+    margin-top: 0;
   }
 
   .tt-about-page-copy {
@@ -1365,5 +1380,13 @@ textarea.tt-input {
 
   .tt-lets-talk-footer {
     padding: 2.5rem 5% 4rem;
+  }
+
+  /* Subtitle is forced one-line on desktop — let it wrap on mobile so
+     it doesn't overflow off the right edge. */
+  .tt-lets-talk-subtitle {
+    white-space: normal;
+    font-size: 14px;
+    max-width: 30rem;
   }
 }

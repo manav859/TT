@@ -10,7 +10,7 @@ const headingStyle: React.CSSProperties = {
   fontWeight: 400,
   letterSpacing: '0.2em',
   textTransform: 'uppercase',
-  color: '#2a201a',
+  color: '#ffffff',
   margin: 0,
 }
 
@@ -18,7 +18,7 @@ const subtitleStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: '13px',
   letterSpacing: '0.06em',
-  color: '#7a6a5a',
+  color: '#ffffff',
   margin: '0.5rem 0 0',
 }
 
@@ -26,7 +26,7 @@ const bodyStyle: React.CSSProperties = {
   fontFamily: 'var(--font-serif)',
   fontSize: '18px',
   lineHeight: 1.85,
-  color: '#2a201a',
+  color: '#ffffff',
   textAlign: 'justify',
   margin: 0,
 }
@@ -56,7 +56,7 @@ export function FashionCampaignPage() {
           fontWeight: 400,
           letterSpacing: '0.25em',
           textTransform: 'uppercase',
-          color: '#2a201a',
+          color: '#ffffff',
           textAlign: 'center',
           paddingTop: '1rem',
           margin: 0,
@@ -71,7 +71,7 @@ export function FashionCampaignPage() {
         style={{ marginTop: '4rem', padding: '0 6%' }}
         aria-labelledby="fc-still"
       >
-        <div>
+        <div className="work-split-copy">
           <h2 id="fc-still" style={headingStyle}>Still</h2>
           <p style={subtitleStyle}>
             Model locked centre, everything else motion-blurred
@@ -86,6 +86,7 @@ export function FashionCampaignPage() {
         </div>
 
         <video
+          className="work-split-media"
           src={STILL_VIDEO}
           autoPlay
           muted
@@ -113,6 +114,7 @@ export function FashionCampaignPage() {
         aria-labelledby="fc-light"
       >
         <img
+          className="work-split-media"
           src={SHAPED_BY_LIGHT_IMAGE}
           alt="Shaped by light"
           loading="lazy"
@@ -120,7 +122,7 @@ export function FashionCampaignPage() {
           style={mediaStyle}
         />
 
-        <div>
+        <div className="work-split-copy">
           <h2 id="fc-light" style={headingStyle}>Shaped by light</h2>
           <p style={subtitleStyle}>
             Built around stillness, silhouette, and spatial tension.
@@ -144,7 +146,7 @@ export function FashionCampaignPage() {
         style={{ marginTop: '6rem', padding: '0 6% 8rem' }}
         aria-labelledby="fc-dual"
       >
-        <div>
+        <div className="work-split-copy">
           <h2 id="fc-dual" style={headingStyle}>Dual perspective</h2>
           <p style={subtitleStyle}>
             Stillness and movement existing within the same atmosphere.
@@ -162,6 +164,7 @@ export function FashionCampaignPage() {
         </div>
 
         <img
+          className="work-split-media"
           src={DUAL_PERSPECTIVE_IMAGE}
           alt="Dual perspective"
           loading="lazy"

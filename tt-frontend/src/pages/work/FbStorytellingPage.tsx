@@ -10,7 +10,7 @@ const headingStyle: React.CSSProperties = {
   fontWeight: 400,
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
-  color: '#2a201a',
+  color: '#ffffff',
   margin: 0,
 }
 
@@ -18,7 +18,7 @@ const subtitleStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: '13px',
   letterSpacing: '0.05em',
-  color: '#7a6a5a',
+  color: '#ffffff',
   margin: '0.5rem 0 0',
 }
 
@@ -26,7 +26,7 @@ const bodyStyle: React.CSSProperties = {
   fontFamily: 'var(--font-serif)',
   fontSize: '17px',
   lineHeight: 1.85,
-  color: '#2a201a',
+  color: '#ffffff',
   textAlign: 'justify',
   margin: 0,
 }
@@ -56,7 +56,7 @@ export function FbStorytellingPage() {
           fontWeight: 400,
           letterSpacing: '0.25em',
           textTransform: 'uppercase',
-          color: '#2a201a',
+          color: '#ffffff',
           textAlign: 'center',
           paddingTop: '1rem',
           margin: 0,
@@ -71,7 +71,7 @@ export function FbStorytellingPage() {
         style={{ marginTop: '4rem', padding: '0 6%' }}
         aria-labelledby="fb-light"
       >
-        <div>
+        <div className="work-split-copy">
           <h2 id="fb-light" style={headingStyle}>Light, shadow &amp; product</h2>
           <p style={subtitleStyle}>
             A product frame built through shadow, depth, and atmosphere.
@@ -87,6 +87,7 @@ export function FbStorytellingPage() {
         </div>
 
         <img
+          className="work-split-media"
           src={LIGHT_SHADOW_PRODUCT_IMAGE}
           alt="Light, shadow and product"
           loading="lazy"
@@ -102,6 +103,7 @@ export function FbStorytellingPage() {
         aria-labelledby="fb-flavor"
       >
         <img
+          className="work-split-media"
           src={VISUAL_FLAVOR_IMAGE}
           alt="Visual flavor"
           loading="lazy"
@@ -109,7 +111,7 @@ export function FbStorytellingPage() {
           style={mediaStyle}
         />
 
-        <div>
+        <div className="work-split-copy">
           <h2 id="fb-flavor" style={headingStyle}>Visual flavor</h2>
           <p style={subtitleStyle}>
             A composition designed to feel warm, grounded, and sensory.
@@ -132,7 +134,7 @@ export function FbStorytellingPage() {
         style={{ marginTop: '6rem', padding: '0 6% 8rem' }}
         aria-labelledby="fb-cinematic"
       >
-        <div>
+        <div className="work-split-copy">
           <h2 id="fb-cinematic" style={headingStyle}>Designed to feel cinematic</h2>
           <p style={subtitleStyle}>
             An editorial beverage frame shaped through light and restraint.
@@ -151,6 +153,7 @@ export function FbStorytellingPage() {
         </div>
 
         <img
+          className="work-split-media"
           src={CINEMATIC_IMAGE}
           alt="Designed to feel cinematic"
           loading="lazy"
