@@ -20,6 +20,8 @@ const EMPTY: FormState = {
   message: '',
 }
 
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+
 export function InquiryForm() {
   const [form, setForm] = useState<FormState>(EMPTY)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -36,13 +38,56 @@ export function InquiryForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('loading')
+    setMessage('')
 
-    // Simulate API call since endpoint may not support new fields
-    setTimeout(() => {
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined
+    if (!accessKey) {
+      setStatus('error')
+      setMessage(
+        'Contact form is not configured yet. Please email us directly at support@tusktales.in.',
+      )
+      return
+    }
+
+    const fullName = `${form.first_name} ${form.last_name}`.trim()
+    const payload = {
+      access_key: accessKey,
+      from_name: 'Tusk Tales — Website Inquiry',
+      subject: form.subject?.trim()
+        ? `Tusk Tales: ${form.subject.trim()}`
+        : `New inquiry from ${fullName || 'website visitor'}`,
+      name: fullName,
+      first_name: form.first_name,
+      last_name: form.last_name,
+      email: form.email,
+      phone: form.phone,
+      newsletter_opt_in: form.newsletter ? 'Yes' : 'No',
+      message: form.message,
+      /* Honeypot — bots fill this; real users won't. Web3Forms rejects if filled. */
+      botcheck: (event.currentTarget.elements.namedItem('botcheck') as HTMLInputElement | null)?.value ?? '',
+    }
+
+    try {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const data = (await res.json()) as { success?: boolean; message?: string }
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || `Submission failed (HTTP ${res.status})`)
+      }
       setStatus('success')
       setMessage('Thank you. We will be in touch shortly.')
       setForm(EMPTY)
-    }, 1000)
+    } catch (err) {
+      setStatus('error')
+      setMessage(
+        err instanceof Error
+          ? `Couldn't send your message: ${err.message}`
+          : 'Something went wrong. Please try again or email support@tusktales.in.',
+      )
+    }
   }
 
   if (status === 'success') {
@@ -58,6 +103,16 @@ export function InquiryForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-3 font-sans w-full max-w-2xl"
     >
+      {/* Honeypot — visually hidden, bots auto-fill input fields */}
+      <input
+        type="text"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+      />
+
       <div className="flex flex-col gap-2">
         <span className="text-[14px] text-[#333]">Name</span>
         <div className="flex flex-col sm:flex-row gap-4">
@@ -94,12 +149,13 @@ export function InquiryForm() {
 
       <div className="flex flex-col gap-1.5">
         <label htmlFor="email" className="text-[13px] text-[#333]">
-          Email
+          Email <span className="text-[#888] ml-1">(required)</span>
         </label>
         <input
           id="email"
           name="email"
           type="email"
+          required
           value={form.email}
           onChange={handleChange}
           className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
@@ -164,6 +220,12 @@ export function InquiryForm() {
           className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent resize-y"
         />
       </div>
+
+      {status === 'error' && message && (
+        <p role="alert" className="text-[13px] text-[#a8463a]">
+          {message}
+        </p>
+      )}
 
       <button
         type="submit"
