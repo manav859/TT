@@ -91,7 +91,18 @@ export function FashionCampaignPage() {
           muted
           loop
           playsInline
-          style={mediaStyle}
+          /* Click to toggle audio. Browsers block autoplay with sound, so
+             starts muted; user opts in by clicking. */
+          onClick={(e) => {
+            const v = e.currentTarget
+            v.muted = !v.muted
+          }}
+          title="Click to toggle audio"
+          style={{
+            ...mediaStyle,
+            cursor: 'pointer',
+            backgroundColor: '#1a1a1a',
+          }}
         />
       </section>
 

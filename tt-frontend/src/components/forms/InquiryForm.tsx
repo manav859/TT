@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import clsx from 'clsx'
 
 interface FormState {
   first_name: string

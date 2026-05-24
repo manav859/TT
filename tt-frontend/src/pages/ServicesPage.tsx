@@ -1,6 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
 import { useServices } from '@/hooks/useServices'
-import { getContact } from '@/lib/api/endpoints'
 import { PageSEO } from '@/components/seo/PageSEO'
 import { ServicesSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
@@ -8,15 +6,9 @@ import { RevealText } from '@/lib/animations/RevealText'
 import { StaggerGrid, StaggerItem } from '@/lib/animations/StaggerGrid'
 import { InquiryForm } from '@/components/forms/InquiryForm'
 import { ServiceCard } from '@/components/ui/ServiceCard'
-import type { ContactData } from '@/types/api'
 
 export function ServicesPage() {
   const { data, isLoading, isError, error, refetch } = useServices()
-  const { data: contactData } = useQuery<ContactData>({
-    queryKey: ['contact'],
-    queryFn: getContact,
-    staleTime: 1000 * 60 * 10,
-  })
 
   if (isLoading) return <ServicesSkeleton />
   if (isError || !data) {
@@ -86,7 +78,7 @@ export function ServicesPage() {
               </div>
 
               <div className="mt-10 lg:mt-24">
-                <InquiryForm config={contactData} />
+                <InquiryForm />
               </div>
             </div>
           </div>

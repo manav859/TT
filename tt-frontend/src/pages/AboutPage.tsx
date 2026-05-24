@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import { getAbout, getContact } from '@/lib/api/endpoints'
+import { getAbout } from '@/lib/api/endpoints'
 import { PageSEO } from '@/components/seo/PageSEO'
 import { AboutSkeleton } from '@/components/ui/PageSkeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { RevealText } from '@/lib/animations/RevealText'
 import { StaggerGrid, StaggerItem } from '@/lib/animations/StaggerGrid'
 import { InquiryForm } from '@/components/forms/InquiryForm'
-import type { AboutData, ContactData } from '@/types/api'
+import type { AboutData } from '@/types/api'
 
 const ABOUT_IMAGE = '/images/About_image.png'
 
@@ -14,11 +14,6 @@ export function AboutPage() {
   const { data, isLoading, isError, error, refetch } = useQuery<AboutData>({
     queryKey: ['about'],
     queryFn: getAbout,
-    staleTime: 1000 * 60 * 10,
-  })
-  const { data: contactData } = useQuery<ContactData>({
-    queryKey: ['contact'],
-    queryFn: getContact,
     staleTime: 1000 * 60 * 10,
   })
 
@@ -117,7 +112,7 @@ export function AboutPage() {
             </p>
           </div>
           <div className="lg:pt-10">
-            <InquiryForm config={contactData} />
+            <InquiryForm />
           </div>
         </div>
       </div>

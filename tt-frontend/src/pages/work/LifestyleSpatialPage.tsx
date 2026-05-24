@@ -1,7 +1,7 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
 const PURPOSE_IN_SPACE_IMAGE = '/images/2.jpeg'
-const LIGHT_PERCEPTION_IMAGE = '/images/cover-creative-direction.jpeg'
+const LIGHT_PERCEPTION_IMAGE = '/images/3.jpeg'
 const SPATIAL_NARRATIVE_IMAGE = '/images/lifestyle-spatial.jpeg'
 
 const headingStyle: React.CSSProperties = {

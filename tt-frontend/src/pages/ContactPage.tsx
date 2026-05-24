@@ -7,7 +7,7 @@ import { InquiryForm } from '@/components/forms/InquiryForm'
 import type { ContactData } from '@/types/api'
 
 export function ContactPage() {
-  const { data, isLoading, isError, error, refetch } = useQuery<ContactData>({
+  const { isLoading, isError, error, refetch } = useQuery<ContactData>({
     queryKey: ['contact'],
     queryFn: getContact,
     staleTime: 1000 * 60 * 10,
