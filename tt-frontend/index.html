@@ -9,8 +9,9 @@
     <!-- Above-the-fold hero asset preload (loads in parallel with the main bundle) -->
     <link rel="preload" as="image" href="/images/Tusk%20tales%20(7).JPG.jpeg" fetchpriority="high" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <!-- Favicon — theme-aware: black mark on light theme, white mark on dark theme -->
+    <link rel="icon" type="image/png" href="/favicon.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" href="/favicon-white.png" media="(prefers-color-scheme: dark)" />
     <link rel="shortcut icon" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
   </head>
