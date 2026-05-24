@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
-/* Display — hero headlines, editorial pull quotes */
+/* Display — hero headlines, editorial pull quotes.
+   font-display: optional — these are decorative; if they aren't already
+   in cache the browser skips them rather than blocking paint.
+   The serif/sans fallbacks in the @theme stack take over silently. */
 @font-face {
   font-family: "Lovan";
   src: url("/font/main/Lovan.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
@@ -14,7 +17,7 @@
   src: url("/font/main/brillant.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 /* Serif — subheadings, body editorial, journal copy, captions */

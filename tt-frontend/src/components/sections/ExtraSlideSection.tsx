@@ -1,4 +1,6 @@
 const SLIDE_IMAGE = '/images/Extra%20slide.png'
+/* TODO: compress /images/Extra slide.png — currently 11.9 MB.
+ * Re-export as JPEG (or WebP) at 1920px wide, quality 82 → target ≤ 400 KB. */
 
 export function ExtraSlideSection() {
   return (

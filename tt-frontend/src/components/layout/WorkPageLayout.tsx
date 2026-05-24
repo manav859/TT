@@ -36,6 +36,8 @@ export function WorkPageLayout({
         src={HALF_LOGO}
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{
           position: 'absolute',
           top: '-2rem',
@@ -54,6 +56,8 @@ export function WorkPageLayout({
         src={HALF_LOGO}
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{
           position: 'absolute',
           bottom: '-2rem',

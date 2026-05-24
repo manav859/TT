@@ -1,8 +1,18 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
 const STILL_VIDEO = '/images/IMG_0122%20-%20Trim.mp4'
+/* Poster shown while the video loads. Reusing the Section 2 image keeps
+   visual continuity and avoids shipping a separate thumbnail. */
+const STILL_POSTER = '/images/Cover_fashion.jpeg'
 const SHAPED_BY_LIGHT_IMAGE = '/images/Cover_fashion.jpeg'
 const DUAL_PERSPECTIVE_IMAGE = '/images/DSC09941.jpg'
+
+/* TODO: compress these oversized assets — current sizes are extreme.
+ * Recommended max sizes (preserve visual quality):
+ *   - /images/IMG_0122 - Trim.mp4   27 MB → target  ≤ 5 MB (HandBrake H.264 web-optimized)
+ *   - /images/Cover_fashion.jpeg   1.1 MB → target ≤ 300 KB (export at 1600px wide, quality 80)
+ *   - /images/DSC09941.jpg         2.9 MB → target ≤ 300 KB
+ */
 
 const headingStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
@@ -88,6 +98,8 @@ export function FashionCampaignPage() {
         <video
           className="work-split-media"
           src={STILL_VIDEO}
+          poster={STILL_POSTER}
+          preload="none"
           autoPlay
           muted
           loop

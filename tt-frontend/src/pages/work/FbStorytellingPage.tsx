@@ -4,6 +4,12 @@ const LIGHT_SHADOW_PRODUCT_IMAGE = '/images/tusk-tales-4.jpg'
 const VISUAL_FLAVOR_IMAGE        = '/images/5.png'
 const CINEMATIC_IMAGE            = '/images/fb-storytelling.jpeg'
 
+/* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
+ *   - /images/fb-storytelling.jpeg   1.6 MB
+ *   - /images/tusk-tales-4.jpg       179 KB (already OK)
+ *   - /images/5.png                  123 KB (already OK)
+ */
+
 const headingStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: 'clamp(1.4rem, 1.9vw, 1.85rem)',

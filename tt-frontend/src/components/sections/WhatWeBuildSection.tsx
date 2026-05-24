@@ -1,3 +1,10 @@
+/* TODO: compress these cover JPGs — each is 6-8 MB, way over the 300 KB
+ * target for a 1600px-wide hero card. Re-export at quality 82 in any image
+ * editor (or run through TinyPNG / squoosh.app):
+ *   - Cover_CAMPAIGN SHOOTS.jpg.jpeg     6.4 MB
+ *   - Cover_CREATIVE DIRECTION.JPG.jpeg  8.3 MB
+ *   - Cover_BRAND STORYTELLING.jpg.jpeg  6.6 MB
+ */
 const SERVICES = [
   {
     title: 'Campaign Shoots',

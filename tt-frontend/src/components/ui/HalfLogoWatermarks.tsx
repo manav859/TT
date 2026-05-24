@@ -22,12 +22,16 @@ export function HalfLogoWatermarks() {
         src={HALF_LOGO}
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{ ...baseStyle, top: '-2rem', left: '-3rem' }}
       />
       <img
         src={HALF_LOGO}
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{ ...baseStyle, bottom: '-2rem', right: '-3rem' }}
       />
     </>

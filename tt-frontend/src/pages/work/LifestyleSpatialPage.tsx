@@ -4,6 +4,12 @@ const PURPOSE_IN_SPACE_IMAGE = '/images/2.jpeg'
 const LIGHT_PERCEPTION_IMAGE = '/images/3.jpeg'
 const SPATIAL_NARRATIVE_IMAGE = '/images/lifestyle-spatial.jpeg'
 
+/* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
+ *   - /images/3.jpeg                 6.7 MB
+ *   - /images/lifestyle-spatial.jpeg 6.3 MB
+ *   - /images/2.jpeg                 296 KB (already OK)
+ */
+
 const headingStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: 'clamp(1.4rem, 1.9vw, 1.85rem)',
