@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useReducedMotionPreference } from '@/hooks/useReducedMotionPreference'
-import { HalfLogoWatermarks } from '@/components/ui/HalfLogoWatermarks'
 
 const ABOUT_IMAGE = '/images/About_image.png'
 const ABOUT_TAGLINE = '/logo/Tagline.png'
@@ -23,10 +22,9 @@ export function AboutSection() {
       id="about"
       className="tt-home-about"
       aria-label="About"
-      style={{ scrollMarginTop: 'var(--height-nav)', position: 'relative', overflow: 'hidden' }}
+      style={{ scrollMarginTop: 'var(--height-nav)' }}
     >
-      <HalfLogoWatermarks />
-      <div className="tt-wide tt-home-about-shell" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="tt-wide tt-home-about-shell">
         <div className="tt-home-about-grid">
           <div className="tt-home-about-copy">
             <motion.h2

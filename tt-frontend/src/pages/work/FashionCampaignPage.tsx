@@ -92,13 +92,25 @@ export function FashionCampaignPage() {
           muted
           loop
           playsInline
-          /* Click to toggle audio. Browsers block autoplay with sound, so
-             starts muted; user opts in by clicking. */
+          /* Tap/click to toggle audio. Browsers block autoplay with sound,
+             so it starts muted; user opts in via the gesture. On iOS the
+             play() call must run synchronously inside the gesture handler. */
           onClick={(e) => {
             const v = e.currentTarget
             v.muted = !v.muted
+            v.volume = 1
+            void v.play().catch(() => {})
           }}
-          title="Click to toggle audio"
+          onTouchEnd={(e) => {
+            const v = e.currentTarget
+            v.muted = !v.muted
+            v.volume = 1
+            void v.play().catch(() => {})
+            /* Prevent the click handler from firing right after touchend
+               and re-toggling. */
+            e.preventDefault()
+          }}
+          title="Tap to toggle audio"
           style={{
             ...mediaStyle,
             cursor: 'pointer',

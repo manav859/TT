@@ -2,7 +2,9 @@ import type { ApiEnvelope, ApiErrorShape } from '@/types/api'
 import { ApiError } from '@/types/api'
 
 const BASE_URL = import.meta.env.VITE_WP_API_BASE_URL as string
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
+/* Default to mock mode so the deployed frontend works without a backend.
+   Set VITE_USE_MOCK=false in env to enable the real WordPress API. */
+const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
 
 const API_PREFIX = '/wp-json/tt/v1'
 
