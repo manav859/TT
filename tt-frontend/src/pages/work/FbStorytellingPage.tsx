@@ -1,7 +1,7 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
 const LIGHT_SHADOW_PRODUCT_IMAGE = '/images/tusk-tales-4.jpg'
-const VISUAL_FLAVOR_IMAGE        = '/images/5.png'
+const VISUAL_FLAVOR_IMAGE        = '/images/7.jpeg'
 const CINEMATIC_IMAGE            = '/images/fb-storytelling.jpeg'
 
 /* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
