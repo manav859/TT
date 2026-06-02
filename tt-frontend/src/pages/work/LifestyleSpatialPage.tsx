@@ -1,8 +1,8 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
 const PURPOSE_IN_SPACE_IMAGE = '/images/2.jpeg'
-const LIGHT_PERCEPTION_IMAGE = '/images/3.jpeg'
-const SPATIAL_NARRATIVE_IMAGE = '/images/lifestyle-spatial.jpeg'
+const LIGHT_PERCEPTION_IMAGE = '/images/lifestyle-spatial.jpeg'
+const SPATIAL_NARRATIVE_IMAGE = '/images/3.jpeg'
 
 /* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
  *   - /images/3.jpeg                 6.7 MB
@@ -53,7 +53,7 @@ const mediaStyle: React.CSSProperties = {
 
 export function LifestyleSpatialPage() {
   return (
-    <WorkPageLayout background="#f5f0e8">
+    <WorkPageLayout background="#ffffff">
       {/* Page title — left-aligned, large, muted taupe */}
       <h1
         style={{
@@ -114,25 +114,24 @@ export function LifestyleSpatialPage() {
         <img
           className="work-split-media"
           src={LIGHT_PERCEPTION_IMAGE}
-          alt="Light and perception"
+          alt="Intimacy in experience"
           loading="lazy"
           decoding="async"
           style={mediaStyle}
         />
 
         <div className="work-split-copy">
-          <h2 id="ls-light" style={headingStyle}>Light &amp; perception</h2>
+          <h2 id="ls-light" style={headingStyle}>Intimacy in experience</h2>
           <p style={subtitleStyle}>
-            Warmth, shadow, and form existing in quiet balance.
+            A frame shaped by stillness, comfort, and everyday ritual.
           </p>
           <div style={bodyBlockStyle}>
             <p style={bodyStyle}>
-              The interplay between light, texture, and gesture creates a
-              cinematic stillness that feels immersive and intentional.
-            </p>
-            <p style={bodyStyle}>
-              The composition focuses on how atmosphere can carry memory long
-              after the visual disappears.
+              The frame was composed to express the emotional side of the
+              environment, not through architecture alone, but through the way
+              the space is lived in. The soft reflections, muted palette, and
+              quiet interaction create a sense of calm, making the brand feel
+              thoughtful, welcoming, and deeply human.
             </p>
           </div>
         </div>
