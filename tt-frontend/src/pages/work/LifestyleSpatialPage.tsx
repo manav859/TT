@@ -1,6 +1,6 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
-const PURPOSE_IN_SPACE_IMAGE = '/images/2.jpeg'
+const PURPOSE_IN_SPACE_IMAGE = '/images/Tusk tales (21).jpg.jpeg'
 const LIGHT_PERCEPTION_IMAGE = '/images/lifestyle-spatial.jpeg'
 const SPATIAL_NARRATIVE_IMAGE = '/images/Tusk tales (15).jpg.jpeg'
 
@@ -78,19 +78,20 @@ export function LifestyleSpatialPage() {
         aria-labelledby="ls-purpose"
       >
         <div className="work-split-copy">
-          <h2 id="ls-purpose" style={headingStyle}>Purpose in space</h2>
+          <h2 id="ls-purpose" style={headingStyle}>Brand in motion</h2>
           <p style={subtitleStyle}>
-            Light, texture, and space existing in quiet tension.
+            A visual study of space, movement, and atmosphere.
           </p>
           <div style={bodyBlockStyle}>
             <p style={bodyStyle}>
-              The frame was designed to blur the line between environment and
-              identity, allowing texture, depth, and mood to shape perception
-              naturally.
+              The image was composed to show the café not as a static interior,
+              but as a working brand environment alive with people, light, and
+              service.
             </p>
             <p style={bodyStyle}>
-              Every visual element contributes to a world that feels
-              intentional, immersive, and memorable.
+              The blurred movement adds energy, while the structured counter,
+              warm tones, and greenery create a sense of comfort, identity, and
+              recall.
             </p>
           </div>
         </div>
@@ -98,7 +99,7 @@ export function LifestyleSpatialPage() {
         <img
           className="work-split-media"
           src={PURPOSE_IN_SPACE_IMAGE}
-          alt="Purpose in space"
+          alt="Brand in motion"
           loading="lazy"
           decoding="async"
           style={mediaStyle}
