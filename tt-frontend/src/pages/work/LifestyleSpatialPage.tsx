@@ -2,7 +2,7 @@ import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
 const PURPOSE_IN_SPACE_IMAGE = '/images/2.jpeg'
 const LIGHT_PERCEPTION_IMAGE = '/images/lifestyle-spatial.jpeg'
-const SPATIAL_NARRATIVE_IMAGE = '/images/3.jpeg'
+const SPATIAL_NARRATIVE_IMAGE = '/images/Tusk tales (15).jpg.jpeg'
 
 /* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
  *   - /images/3.jpeg                 6.7 MB
@@ -144,19 +144,18 @@ export function LifestyleSpatialPage() {
         aria-labelledby="ls-narrative"
       >
         <div className="work-split-copy">
-          <h2 id="ls-narrative" style={headingStyle}>Spatial narrative</h2>
+          <h2 id="ls-narrative" style={headingStyle}>The art of preparation</h2>
           <p style={subtitleStyle}>
-            An environment designed to feel immersive rather than decorative.
+            Warmth, texture, and process captured in a single frame.
           </p>
           <div style={bodyBlockStyle}>
             <p style={bodyStyle}>
-              The frame relies on layered depth, suspended form, and controlled
-              lighting to create an atmosphere that feels emotionally immersive
-              rather than staged.
-            </p>
-            <p style={bodyStyle}>
-              The visual language remains minimal, cinematic, and
-              perception-led.
+              The image focuses on the making, not just the outcome, where
+              steam, light, and material detail come together to express care
+              and craftsmanship. The machine's metallic texture, the cup's
+              rising warmth, and the close framing turn an everyday coffee
+              moment into a brand experience that feels intentional, sensory,
+              and memorable.
             </p>
           </div>
         </div>
@@ -164,7 +163,7 @@ export function LifestyleSpatialPage() {
         <img
           className="work-split-media"
           src={SPATIAL_NARRATIVE_IMAGE}
-          alt="Spatial narrative"
+          alt="The art of preparation"
           loading="lazy"
           decoding="async"
           style={mediaStyle}
