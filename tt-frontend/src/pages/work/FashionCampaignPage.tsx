@@ -1,7 +1,7 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
 const STILL_IMAGE = '/images/Cover_fashion.jpeg'
-const SHAPED_BY_LIGHT_IMAGE = '/images/Cover_fashion.jpeg'
+const SHAPED_BY_LIGHT_IMAGE = '/images/DSC00056.jpg.jpeg'
 const DUAL_PERSPECTIVE_IMAGE = '/images/DSC09941.jpg'
 
 /* TODO: compress these oversized assets — current sizes are extreme.
@@ -119,25 +119,28 @@ export function FashionCampaignPage() {
         <img
           className="work-split-media"
           src={SHAPED_BY_LIGHT_IMAGE}
-          alt="Shaped by light"
+          alt="Modern heritage"
           loading="lazy"
           decoding="async"
           style={mediaStyle}
         />
 
         <div className="work-split-copy">
-          <h2 id="fc-light" style={headingStyle}>Shaped by light</h2>
+          <h2 id="fc-light" style={headingStyle}>Modern heritage</h2>
           <p style={subtitleStyle}>
-            Built around stillness, silhouette, and spatial tension.
+            A study of silhouette, reflection, and contemporary identity.
           </p>
           <div style={bodyBlockStyle}>
             <p style={bodyStyle}>
-              The visual language relies on softness, shadow, and spatial
-              storytelling to create emotional depth within the frame.
+              The image explores the relationship between fashion and
+              environment, placing contemporary styling within an organic
+              landscape to create a sense of balance, presence, and
+              individuality.
             </p>
             <p style={bodyStyle}>
-              Rather than forcing attention, the campaign allows the viewer to
-              discover mood, texture, and presence naturally.
+              From the relaxed posture and tonal restraint to the interplay of
+              reflection and greenery, every element contributes to a campaign
+              that feels refined, expressive, and visually strong.
             </p>
           </div>
         </div>
