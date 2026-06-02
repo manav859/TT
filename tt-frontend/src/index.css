@@ -722,6 +722,105 @@ textarea.tt-input {
   transform: none;
 }
 
+.contact-form {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(183, 165, 145, 0.92);
+  background: transparent;
+  color: var(--color-tt-ink);
+  padding: 0.7rem 0 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(111, 102, 92, 0.7);
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+  border-color: rgba(156, 136, 114, 0.95);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--color-tt-accent);
+  box-shadow: inset 0 -1px 0 0 var(--color-tt-accent);
+}
+
+.contact-form textarea {
+  min-height: 9.5rem;
+  resize: none;
+}
+
+.contact-form button {
+  display: inline-flex;
+  min-height: 3.9rem;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2rem;
+  border: 1px solid var(--color-tt-ink);
+  background: var(--color-tt-ink);
+  color: var(--color-tt-white);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.contact-form button:hover {
+  background: transparent;
+  color: var(--color-tt-ink);
+  transform: translateY(-1px);
+}
+
+.contact-form button:focus-visible {
+  outline: 2px solid var(--color-tt-accent);
+  outline-offset: 4px;
+}
+
+.contact-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+}
+
+.form-success,
+.form-error {
+  margin: -0.5rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.form-success {
+  color: #406a45;
+}
+
+.form-error {
+  color: #a33c2f;
+}
+
 .tt-button-ghost {
   background: transparent;
   color: var(--color-tt-ink);
@@ -1276,6 +1375,43 @@ textarea.tt-input {
   object-fit: cover;
 }
 
+.tt-extra-slide {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+.tt-extra-slide-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+}
+
+.tt-extra-slide-copy {
+  position: absolute;
+  right: 50%;
+  bottom: clamp(1.75rem, 5vw, 4rem);
+  width: min(92%, 96rem);
+  transform: translateX(50%);
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 2.1vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  z-index: 2;
+}
+
 @media (min-width: 48rem) {
   .tt-about-page-text-grid {
     grid-template-columns: 0.9fr 1.1fr;
@@ -1379,6 +1515,13 @@ textarea.tt-input {
   .tt-home-about-image-wrap {
     aspect-ratio: auto;
     max-width: none;
+  }
+
+  .tt-extra-slide-copy {
+    bottom: clamp(1.25rem, 4vw, 2rem);
+    width: min(94%, 40rem);
+    font-size: clamp(0.8rem, 3.8vw, 1.3rem);
+    line-height: 1.03;
   }
 
   .tt-lets-talk-footer {
