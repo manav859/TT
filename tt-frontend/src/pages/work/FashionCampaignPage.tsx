@@ -1,9 +1,6 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 
-const STILL_VIDEO = '/images/IMG_0122%20-%20Trim.mp4'
-/* Poster shown while the video loads. Reusing the Section 2 image keeps
-   visual continuity and avoids shipping a separate thumbnail. */
-const STILL_POSTER = '/images/Cover_fashion.jpeg'
+const STILL_IMAGE = '/images/Cover_fashion.jpeg'
 const SHAPED_BY_LIGHT_IMAGE = '/images/Cover_fashion.jpeg'
 const DUAL_PERSPECTIVE_IMAGE = '/images/DSC09941.jpg'
 
@@ -82,50 +79,32 @@ export function FashionCampaignPage() {
         aria-labelledby="fc-still"
       >
         <div className="work-split-copy">
-          <h2 id="fc-still" style={headingStyle}>Still</h2>
+          <h2 id="fc-still" style={headingStyle}>Cinematic femininity</h2>
           <p style={subtitleStyle}>
-            Model locked centre, everything else motion-blurred
+            Where fabric, light, and mood form a striking visual language.
           </p>
           <div style={bodyBlockStyle}>
             <p style={bodyStyle}>
-              A slow-shutter concept where the world blurs and the brand holds
-              steady. Built on a single idea: in a crowded market, Barekee
-              stands clear.
+              The frame explores fashion through atmosphere rather than
+              expression alone, using darkness, selective light, and fluid drape
+              to create a moment that feels intimate and elevated.
+            </p>
+            <p style={bodyStyle}>
+              From the multicoloured sari and tassel detailing to the warm glow
+              of the background, every element contributes to a campaign that
+              feels graceful, refined, and visually distinct.
             </p>
           </div>
         </div>
 
-        <video
+        <img
           className="work-split-media"
-          src={STILL_VIDEO}
-          poster={STILL_POSTER}
-          preload="none"
-          autoPlay
-          muted
-          loop
-          playsInline
-          /* Tap/click to toggle audio. Browsers block autoplay with sound,
-             so it starts muted; user opts in via the gesture. On iOS the
-             play() call must run synchronously inside the gesture handler. */
-          onClick={(e) => {
-            const v = e.currentTarget
-            v.muted = !v.muted
-            v.volume = 1
-            void v.play().catch(() => {})
-          }}
-          onTouchEnd={(e) => {
-            const v = e.currentTarget
-            v.muted = !v.muted
-            v.volume = 1
-            void v.play().catch(() => {})
-            /* Prevent the click handler from firing right after touchend
-               and re-toggling. */
-            e.preventDefault()
-          }}
-          title="Tap to toggle audio"
+          src={STILL_IMAGE}
+          alt="Fashion campaign still"
+          loading="eager"
+          decoding="async"
           style={{
             ...mediaStyle,
-            cursor: 'pointer',
             backgroundColor: '#1a1a1a',
           }}
         />
