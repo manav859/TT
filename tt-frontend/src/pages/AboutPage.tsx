@@ -8,7 +8,7 @@ import { StaggerGrid, StaggerItem } from '@/lib/animations/StaggerGrid'
 import { InquiryForm } from '@/components/forms/InquiryForm'
 import type { AboutData } from '@/types/api'
 
-const ABOUT_IMAGE = '/images/About_image.png'
+const ABOUT_IMAGE = '/images/Tusk tales (79).jpg.jpeg'
 
 export function AboutPage() {
   const { data, isLoading, isError, error, refetch } = useQuery<AboutData>({

@@ -2,7 +2,7 @@ import type { HomeData } from '@/types/api'
 import { ImageParticles } from './ImageParticles'
 
 const HERO_LOGO = '/logo/logo- black-01 (1).png'
-const HERO_IMAGE = '/images/Tusk tales (7).JPG.jpeg'
+const HERO_IMAGE = '/images/Tusk tales (79).jpg.jpeg'
 
 export function HeroSection({ hero }: { hero: HomeData['hero'] }) {
   return (

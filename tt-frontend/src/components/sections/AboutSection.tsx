@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useReducedMotionPreference } from '@/hooks/useReducedMotionPreference'
 
-const ABOUT_IMAGE = '/images/About_image.png'
+const ABOUT_IMAGE = '/images/2-_DSC1083.jpg.jpeg'
 const ABOUT_TAGLINE = '/logo/Tagline.png'
 /* TODO: compress /images/About_image.png — currently 7.8 MB.
  * Re-export as JPEG at 1600px wide, quality 82 → target ≤ 300 KB. */
