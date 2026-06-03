@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 
-const COUNT = 70
+const MAX_COUNT = 70 /* firefly count at desktop widths */
 const GLOW_SIZE = 14 /* sprite half-extent in px — bigger = softer aura */
+
+/* Scale the firefly count down on narrow screens so the field doesn't look
+   overcrowded when the canvas shrinks — density tracks width rather than
+   staying fixed at MAX_COUNT. */
+function particleCount(width: number) {
+  const base = width || window.innerWidth
+  const factor = Math.min(1, Math.max(0.3, base / 1200))
+  return Math.round(MAX_COUNT * factor)
+}
 
 /**
  * Drifting firefly field — warm amber glow sprites with per-particle
@@ -56,7 +65,7 @@ export function ImageParticles() {
     sctx.fillStyle = grad
     sctx.fillRect(0, 0, GLOW_SIZE * 2, GLOW_SIZE * 2)
 
-    const particles = Array.from({ length: COUNT }, () => ({
+    const particles = Array.from({ length: particleCount(width) }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       vx: (Math.random() - 0.5) * 0.3,
