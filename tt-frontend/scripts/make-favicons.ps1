@@ -93,7 +93,8 @@ function Make-SolidFavicon {
     Write-Host "wrote $Out ($Size x $Size, solid)"
 }
 
-$logo = "public/logo"
-Make-TransparentFavicon "$logo/sub-logo-black.png" "public/favicon.png" 64
-Make-TransparentFavicon "$logo/icon-white.png" "public/favicon-white.png" 64
-Make-SolidFavicon "$logo/Icon with BG.jpg.jpeg" "public/apple-touch-icon.png" 180
+# sub-logo-black is also used by the site so it stays in public/logo; the other
+# two sources are favicon-only and live in brand/ (outside the deployed bundle).
+Make-TransparentFavicon "public/logo/sub-logo-black.png" "public/favicon.png" 64
+Make-TransparentFavicon "brand/icon-white.png" "public/favicon-white.png" 64
+Make-SolidFavicon "brand/Icon with BG.jpg.jpeg" "public/apple-touch-icon.png" 180
