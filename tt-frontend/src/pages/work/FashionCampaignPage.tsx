@@ -1,16 +1,9 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 import SmoothImage from '@/components/SmoothImage'
 
-const STILL_IMAGE = '/images/Cover_fashion.jpeg'
-const SHAPED_BY_LIGHT_IMAGE = '/images/DSC00056.jpg.jpeg'
-const DUAL_PERSPECTIVE_IMAGE = '/images/DSC09941.jpg'
-
-/* TODO: compress these oversized assets — target ≤ 300 KB each
- * (export at 1600px wide, quality 80):
- *   - /images/Cover_fashion.jpeg     924 KB
- *   - /images/DSC00056.jpg.jpeg      6.7 MB
- *   - /images/DSC09941.jpg           2.9 MB
- */
+const STILL_IMAGE = '/images/Cover_fashion.webp'
+const SHAPED_BY_LIGHT_IMAGE = '/images/DSC00056.jpg.webp'
+const DUAL_PERSPECTIVE_IMAGE = '/images/DSC09941.webp'
 
 const headingStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',

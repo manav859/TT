@@ -1,30 +1,25 @@
 import { Link } from 'react-router-dom'
 import SmoothImage from '@/components/SmoothImage'
 
-/* TODO: compress these cover JPEGs — target ≤ 300 KB each (1600px wide, q82):
- *   - Cover_fashion.jpeg        924 KB
- *   - lifestyle-spatial.jpeg    1.2 MB
- *   - fb-storytelling.jpeg      1.6 MB
- */
 const WORKS = [
   {
     title: 'FASHION CAMPAIGN',
     description: 'Editorial campaign visuals built around emotion, movement, and premium perception.',
-    image: '/images/Cover_fashion.jpeg',
+    image: '/images/Cover_fashion.webp',
     placeholder: '#2a2520',
     to: '/work/fashion-campaign',
   },
   {
     title: 'LIFESTYLE & SPATIAL IDENTITY',
     description: 'Visual narratives connecting interiors, atmosphere, and brand perception.',
-    image: '/images/lifestyle-spatial.jpeg',
+    image: '/images/lifestyle-spatial.webp',
     placeholder: '#252018',
     to: '/work/lifestyle-spatial',
   },
   {
     title: 'F&B STORYTELLING',
     description: 'Cinematic beverage visuals shaped through texture, light, and sensory atmosphere.',
-    image: '/images/fb-storytelling.jpeg',
+    image: '/images/fb-storytelling.webp',
     placeholder: '#1e1a17',
     to: '/work/fb-storytelling',
   },

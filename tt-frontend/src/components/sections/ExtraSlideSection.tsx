@@ -1,9 +1,6 @@
 import { ImageParticles } from './ImageParticles'
 
-const SLIDE_IMAGE = '/images/Extra slide.jpeg'
-/* TODO: compress /images/Extra slide.jpeg — currently 624 KB (full-bleed).
- * Re-export as WebP at 1920px wide, quality 80 → target ≤ 400 KB.
- * (The 11.9 MB /images/Extra slide.png source is unused — safe to delete.) */
+const SLIDE_IMAGE = '/images/Extra slide.webp'
 
 export function ExtraSlideSection() {
   return (

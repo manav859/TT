@@ -6,9 +6,9 @@
     "page": 1,
     "per_page": 12,
     "items": [
-      { "title": "Shooting in Difficult Light",   "slug": "shooting-in-difficult-light",   "featured_image": { "url": "/portfolio/journal/difficult-light.jpg", "alt": "Shooting in Difficult Light" },   "excerpt": "How to work with challenging natural light and turn it into your greatest asset on set.",  "category": "Technique",   "author": "Tusk Tales", "date": "2025-03-20", "reading_time": 5 },
-      { "title": "Building a Brand Story",        "slug": "building-a-brand-story",        "featured_image": { "url": "/portfolio/journal/brand-story.jpg", "alt": "Building a Brand Story" },        "excerpt": "A campaign is more than a collection of images. It is a sequence of feelings carefully composed.", "category": "Creative",    "author": "Tusk Tales", "date": "2025-02-14", "reading_time": 4 },
-      { "title": "The Art of the Still Life",     "slug": "art-of-the-still-life",         "featured_image": { "url": "/portfolio/journal/still-life.jpg", "alt": "The Art of the Still Life" },     "excerpt": "Product photography that communicates craft before a single word is read.",                    "category": "Product",     "author": "Tusk Tales", "date": "2025-01-08", "reading_time": 6 }
+      { "title": "Shooting in Difficult Light",   "slug": "shooting-in-difficult-light",   "featured_image": { "url": "/portfolio/journal/difficult-light.webp", "alt": "Shooting in Difficult Light" },   "excerpt": "How to work with challenging natural light and turn it into your greatest asset on set.",  "category": "Technique",   "author": "Tusk Tales", "date": "2025-03-20", "reading_time": 5 },
+      { "title": "Building a Brand Story",        "slug": "building-a-brand-story",        "featured_image": { "url": "/portfolio/journal/brand-story.webp", "alt": "Building a Brand Story" },        "excerpt": "A campaign is more than a collection of images. It is a sequence of feelings carefully composed.", "category": "Creative",    "author": "Tusk Tales", "date": "2025-02-14", "reading_time": 4 },
+      { "title": "The Art of the Still Life",     "slug": "art-of-the-still-life",         "featured_image": { "url": "/portfolio/journal/still-life.webp", "alt": "The Art of the Still Life" },     "excerpt": "Product photography that communicates craft before a single word is read.",                    "category": "Product",     "author": "Tusk Tales", "date": "2025-01-08", "reading_time": 6 }
     ]
   },
   "meta": { "cached": false, "version": "1.0" }

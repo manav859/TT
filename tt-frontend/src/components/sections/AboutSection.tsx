@@ -3,10 +3,8 @@ import { motion } from 'framer-motion'
 import { useReducedMotionPreference } from '@/hooks/useReducedMotionPreference'
 import SmoothImage from '@/components/SmoothImage'
 
-const ABOUT_IMAGE = '/images/2-_DSC1083.jpg.jpeg'
+const ABOUT_IMAGE = '/images/2-_DSC1083.jpg.webp'
 const ABOUT_TAGLINE = '/logo/Tagline.png'
-/* TODO: compress /images/2-_DSC1083.jpg.jpeg — currently 1.3 MB.
- * Re-export at 1600px wide, quality 82 → target ≤ 300 KB. */
 
 export function AboutSection() {
   const reduced = useReducedMotionPreference()

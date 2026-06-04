@@ -1,27 +1,20 @@
 import SmoothImage from '@/components/SmoothImage'
 
-/* TODO: compress these cover JPGs — way over the 300 KB target for a
- * 1600px-wide card. Re-export at quality 82 in any image editor (or run
- * through TinyPNG / squoosh.app):
- *   - Cover_CAMPAIGN SHOOTS.jpg.jpeg     6.2 MB → target ≤ 300 KB
- *   - Cover_CREATIVE DIRECTION.JPG.jpeg  2.0 MB → target ≤ 300 KB
- *   - Cover_BRAND STORYTELLING.jpg.jpeg  6.3 MB → target ≤ 300 KB
- */
 const SERVICES = [
   {
     title: 'Campaign Shoots',
     description: 'Editorial campaigns shaped through mood and storytelling.',
-    image: '/images/Cover_CAMPAIGN%20SHOOTS.jpg.jpeg',
+    image: '/images/Cover_CAMPAIGN%20SHOOTS.jpg.webp',
   },
   {
     title: 'Creative Direction',
     description: 'Visual language, styling, and narrative thinking.',
-    image: '/images/Cover_CREATIVE%20DIRECTION.JPG.jpeg',
+    image: '/images/Cover_CREATIVE%20DIRECTION.JPG.webp',
   },
   {
     title: 'Brand Storytelling',
     description: 'Atmospheric visuals designed for recognition and recall.',
-    image: '/images/Cover_BRAND%20STORYTELLING.jpg.jpeg',
+    image: '/images/Cover_BRAND%20STORYTELLING.jpg.webp',
   },
 ] as const
 

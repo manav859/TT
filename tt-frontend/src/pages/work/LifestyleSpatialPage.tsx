@@ -1,15 +1,9 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 import SmoothImage from '@/components/SmoothImage'
 
-const PURPOSE_IN_SPACE_IMAGE = '/images/Tusk tales (21).jpg.jpeg'
-const LIGHT_PERCEPTION_IMAGE = '/images/lifestyle-spatial.jpeg'
-const SPATIAL_NARRATIVE_IMAGE = '/images/Tusk tales (15).jpg.jpeg'
-
-/* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
- *   - /images/Tusk tales (21).jpg.jpeg   2.5 MB
- *   - /images/lifestyle-spatial.jpeg     1.2 MB
- *   - /images/Tusk tales (15).jpg.jpeg   6.1 MB
- */
+const PURPOSE_IN_SPACE_IMAGE = '/images/Tusk tales (21).jpg.webp'
+const LIGHT_PERCEPTION_IMAGE = '/images/lifestyle-spatial.webp'
+const SPATIAL_NARRATIVE_IMAGE = '/images/Tusk tales (15).jpg.webp'
 
 const headingStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',

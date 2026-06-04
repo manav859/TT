@@ -3,10 +3,10 @@
   "data": {
     "heading": "Services",
     "items": [
-      { "id": 1, "title": "Campaign Shoots & Creative Direction", "slug": "campaign-shoots",   "image": { "url": "/portfolio/services/campaign-shoots.jpg",   "alt": "Campaign Shoots" },   "short_desc": "Concept-led shoots built around a brand idea. Not just beautiful images." },
-      { "id": 2, "title": "Cinematic & Product Content",         "slug": "cinematic-content", "image": { "url": "/portfolio/services/cinematic-content.jpg", "alt": "Cinematic Content" }, "short_desc": "Motion-inspired photography that uses technique to create images that feel like frames from a film." },
-      { "id": 3, "title": "Social Media Management",             "slug": "social-media",      "image": { "url": "/portfolio/services/social-media.jpg",      "alt": "Social Media" },      "short_desc": "Content built for the scroll — immediate, emotional, and unmistakably on-brand." },
-      { "id": 4, "title": "Meta Ads",                            "slug": "meta-ads",          "image": { "url": "/portfolio/services/meta-ads.jpg",          "alt": "Meta Ads" },          "short_desc": "Performance creative that doesn't feel like an ad. Visual assets engineered to convert." }
+      { "id": 1, "title": "Campaign Shoots & Creative Direction", "slug": "campaign-shoots",   "image": { "url": "/portfolio/services/campaign-shoots.webp",   "alt": "Campaign Shoots" },   "short_desc": "Concept-led shoots built around a brand idea. Not just beautiful images." },
+      { "id": 2, "title": "Cinematic & Product Content",         "slug": "cinematic-content", "image": { "url": "/portfolio/services/cinematic-content.webp", "alt": "Cinematic Content" }, "short_desc": "Motion-inspired photography that uses technique to create images that feel like frames from a film." },
+      { "id": 3, "title": "Social Media Management",             "slug": "social-media",      "image": { "url": "/portfolio/services/social-media.webp",      "alt": "Social Media" },      "short_desc": "Content built for the scroll — immediate, emotional, and unmistakably on-brand." },
+      { "id": 4, "title": "Meta Ads",                            "slug": "meta-ads",          "image": { "url": "/portfolio/services/meta-ads.webp",          "alt": "Meta Ads" },          "short_desc": "Performance creative that doesn't feel like an ad. Visual assets engineered to convert." }
     ]
   },
   "meta": { "cached": false, "version": "1.0" }

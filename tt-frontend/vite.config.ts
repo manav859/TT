@@ -1,12 +1,28 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import path from 'path'
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
+    /* Re-encodes images in the build output (incl. public/) at the qualities
+       below. NOTE: this does NOT resize — the heavy lifting (downscaling the
+       multi-thousand-px source art + WebP conversion) is done ahead of time by
+       `npm run optimize:images` (scripts/optimize-public.mjs). This plugin is
+       the ongoing safety net so any new/un-optimized image still gets squeezed
+       at build time. */
+    ViteImageOptimizer({
+      /* Raster only — we don't ship SVGs through here, and enabling SVG would
+         pull in an optional `svgo` dependency. */
+      test: /\.(jpe?g|png|webp)$/i,
+      jpg: { quality: 72 },
+      jpeg: { quality: 72 },
+      png: { quality: 75 },
+      webp: { quality: 72 },
+    }),
   ],
   resolve: {
     alias: {

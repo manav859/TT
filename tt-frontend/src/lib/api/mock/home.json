@@ -4,37 +4,37 @@
     "hero": {
       "title": "Tusk Tales",
       "subtitle": "Purpose in every frame",
-      "image": { "url": "/portfolio/hero.jpg", "alt": "Tusk Tales hero image" }
+      "image": { "url": "/portfolio/hero.webp", "alt": "Tusk Tales hero image" }
     },
     "selected_works": {
       "heading": "Select Works",
       "link_label": "View Work",
       "items": [
-        { "title": "Sisters",       "slug": "sisters",       "featured_image": { "url": "/portfolio/works/sisters.jpg",     "alt": "Sisters" },     "caption": "Campaign" },
-        { "title": "Golden Hour",   "slug": "golden-hour",   "featured_image": { "url": "/portfolio/works/golden-hour.jpg", "alt": "Golden Hour" }, "caption": "Editorial" },
-        { "title": "The Pour",      "slug": "the-pour",      "featured_image": { "url": "/portfolio/works/the-pour.jpg",    "alt": "The Pour" },    "caption": "Cinematic" }
+        { "title": "Sisters",       "slug": "sisters",       "featured_image": { "url": "/portfolio/works/sisters.webp",     "alt": "Sisters" },     "caption": "Campaign" },
+        { "title": "Golden Hour",   "slug": "golden-hour",   "featured_image": { "url": "/portfolio/works/golden-hour.webp", "alt": "Golden Hour" }, "caption": "Editorial" },
+        { "title": "The Pour",      "slug": "the-pour",      "featured_image": { "url": "/portfolio/works/the-pour.webp",    "alt": "The Pour" },    "caption": "Cinematic" }
       ]
     },
     "services_preview": {
       "heading": "Services",
       "link_label": "View Packages",
       "items": [
-        { "title": "Campaign Shoots & Creative Direction", "slug": "campaign-shoots",   "image": { "url": "/portfolio/services/campaign-shoots.jpg",   "alt": "Campaign Shoots" },   "short_desc": "Concept-led shoots built around a brand idea. Not just beautiful images." },
-        { "title": "Cinematic & Product Content",          "slug": "cinematic-content", "image": { "url": "/portfolio/services/cinematic-content.jpg", "alt": "Cinematic Content" }, "short_desc": "Motion-inspired photography that uses technique to create images that feel like frames from a film." }
+        { "title": "Campaign Shoots & Creative Direction", "slug": "campaign-shoots",   "image": { "url": "/portfolio/services/campaign-shoots.webp",   "alt": "Campaign Shoots" },   "short_desc": "Concept-led shoots built around a brand idea. Not just beautiful images." },
+        { "title": "Cinematic & Product Content",          "slug": "cinematic-content", "image": { "url": "/portfolio/services/cinematic-content.webp", "alt": "Cinematic Content" }, "short_desc": "Motion-inspired photography that uses technique to create images that feel like frames from a film." }
       ]
     },
     "journal_preview": {
       "heading": "Blog",
       "link_label": "Read More",
       "items": [
-        { "title": "Shooting in Difficult Light", "slug": "shooting-in-difficult-light", "featured_image": { "url": "/portfolio/journal/difficult-light.jpg", "alt": "Shooting in Difficult Light" }, "excerpt": "How to work with challenging natural light and turn it into your greatest asset." },
-        { "title": "Building a Brand Story",      "slug": "building-a-brand-story",      "featured_image": { "url": "/portfolio/journal/brand-story.jpg",      "alt": "Building a Brand Story" },      "excerpt": "A campaign is more than a collection of images. It is a sequence of feelings." },
-        { "title": "The Art of the Still Life",   "slug": "art-of-the-still-life",       "featured_image": { "url": "/portfolio/journal/still-life.jpg",       "alt": "The Art of the Still Life" },   "excerpt": "Product photography that communicates craft before a single word is read." }
+        { "title": "Shooting in Difficult Light", "slug": "shooting-in-difficult-light", "featured_image": { "url": "/portfolio/journal/difficult-light.webp", "alt": "Shooting in Difficult Light" }, "excerpt": "How to work with challenging natural light and turn it into your greatest asset." },
+        { "title": "Building a Brand Story",      "slug": "building-a-brand-story",      "featured_image": { "url": "/portfolio/journal/brand-story.webp",      "alt": "Building a Brand Story" },      "excerpt": "A campaign is more than a collection of images. It is a sequence of feelings." },
+        { "title": "The Art of the Still Life",   "slug": "art-of-the-still-life",       "featured_image": { "url": "/portfolio/journal/still-life.webp",       "alt": "The Art of the Still Life" },   "excerpt": "Product photography that communicates craft before a single word is read." }
       ]
     },
     "cta_banner": {
       "title": "Let's Build Something Worth Feeling.",
-      "image": { "url": "/portfolio/cta.jpg", "alt": "Studio space" },
+      "image": { "url": "/portfolio/cta.webp", "alt": "Studio space" },
       "button_label": "Get In Touch",
       "button_url": "/contact"
     },

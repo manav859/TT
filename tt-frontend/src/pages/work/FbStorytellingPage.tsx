@@ -1,15 +1,9 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
 import SmoothImage from '@/components/SmoothImage'
 
-const LIGHT_SHADOW_PRODUCT_IMAGE = '/images/tusk-tales-4.jpg'
-const VISUAL_FLAVOR_IMAGE        = '/images/7.jpeg'
-const CINEMATIC_IMAGE            = '/images/fb-storytelling.jpeg'
-
-/* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
- *   - /images/7.jpeg                 1.3 MB
- *   - /images/fb-storytelling.jpeg   1.6 MB
- *   - /images/tusk-tales-4.jpg       176 KB (already OK)
- */
+const LIGHT_SHADOW_PRODUCT_IMAGE = '/images/tusk-tales-4.webp'
+const VISUAL_FLAVOR_IMAGE        = '/images/7.webp'
+const CINEMATIC_IMAGE            = '/images/fb-storytelling.webp'
 
 const headingStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',

@@ -9,7 +9,7 @@ import { InquiryForm } from '@/components/forms/InquiryForm'
 import SmoothImage from '@/components/SmoothImage'
 import type { AboutData } from '@/types/api'
 
-const ABOUT_IMAGE = '/images/Tusk tales (79).jpg.jpeg'
+const ABOUT_IMAGE = '/images/Tusk tales (79).jpg.webp'
 
 export function AboutPage() {
   const { data, isLoading, isError, error, refetch } = useQuery<AboutData>({
