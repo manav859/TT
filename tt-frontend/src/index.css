@@ -1109,7 +1109,9 @@ textarea.tt-input {
 
 .tt-home-hero-logo {
   display: block;
-  width: min(23rem, 48vw);
+  /* Wordmark is a wide ~4:1 lockup — keep it compact so it reads as a mark,
+     not a banner stretched across the band. */
+  width: min(20rem, 40vw);
   height: auto;
   margin-top: 15px;
 }
@@ -1471,7 +1473,7 @@ textarea.tt-input {
   }
 
   .tt-home-hero-logo {
-    width: min(16rem, 62vw);
+    width: min(13.5rem, 52vw);
   }
 
   .tt-home-hero-image-wrap {
