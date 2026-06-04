@@ -1,14 +1,15 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
+import SmoothImage from '@/components/SmoothImage'
 
 const STILL_IMAGE = '/images/Cover_fashion.jpeg'
 const SHAPED_BY_LIGHT_IMAGE = '/images/DSC00056.jpg.jpeg'
 const DUAL_PERSPECTIVE_IMAGE = '/images/DSC09941.jpg'
 
-/* TODO: compress these oversized assets — current sizes are extreme.
- * Recommended max sizes (preserve visual quality):
- *   - /images/IMG_0122 - Trim.mp4   27 MB → target  ≤ 5 MB (HandBrake H.264 web-optimized)
- *   - /images/Cover_fashion.jpeg   1.1 MB → target ≤ 300 KB (export at 1600px wide, quality 80)
- *   - /images/DSC09941.jpg         2.9 MB → target ≤ 300 KB
+/* TODO: compress these oversized assets — target ≤ 300 KB each
+ * (export at 1600px wide, quality 80):
+ *   - /images/Cover_fashion.jpeg     924 KB
+ *   - /images/DSC00056.jpg.jpeg      6.7 MB
+ *   - /images/DSC09941.jpg           2.9 MB
  */
 
 const headingStyle: React.CSSProperties = {
@@ -48,8 +49,10 @@ const bodyBlockStyle: React.CSSProperties = {
 const mediaStyle: React.CSSProperties = {
   display: 'block',
   width: '100%',
+  height: 'auto',
   aspectRatio: '3 / 4',
   objectFit: 'cover',
+  background: '#e5ddd0',
 }
 
 export function FashionCampaignPage() {
@@ -97,16 +100,12 @@ export function FashionCampaignPage() {
           </div>
         </div>
 
-        <img
+        <SmoothImage
           className="work-split-media"
           src={STILL_IMAGE}
           alt="Fashion campaign still"
-          loading="eager"
-          decoding="async"
-          style={{
-            ...mediaStyle,
-            backgroundColor: '#1a1a1a',
-          }}
+          eager
+          style={mediaStyle}
         />
       </section>
 
@@ -116,12 +115,10 @@ export function FashionCampaignPage() {
         style={{ marginTop: '6rem', padding: '0 6%' }}
         aria-labelledby="fc-light"
       >
-        <img
+        <SmoothImage
           className="work-split-media"
           src={SHAPED_BY_LIGHT_IMAGE}
           alt="Modern heritage"
-          loading="lazy"
-          decoding="async"
           style={mediaStyle}
         />
 
@@ -169,12 +166,10 @@ export function FashionCampaignPage() {
           </div>
         </div>
 
-        <img
+        <SmoothImage
           className="work-split-media"
           src={DUAL_PERSPECTIVE_IMAGE}
           alt="Dual perspective"
-          loading="lazy"
-          decoding="async"
           style={mediaStyle}
         />
       </section>

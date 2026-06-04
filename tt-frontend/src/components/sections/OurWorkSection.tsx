@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
+import SmoothImage from '@/components/SmoothImage'
 
+/* TODO: compress these cover JPEGs — target ≤ 300 KB each (1600px wide, q82):
+ *   - Cover_fashion.jpeg        924 KB
+ *   - lifestyle-spatial.jpeg    1.2 MB
+ *   - fb-storytelling.jpeg      1.6 MB
+ */
 const WORKS = [
   {
     title: 'FASHION CAMPAIGN',
@@ -59,13 +65,13 @@ export function OurWorkSection() {
             style={{ background: work.placeholder }}
             aria-label={work.title}
           >
-            <img
+            <SmoothImage
               src={work.image}
               alt={work.title}
-              loading="lazy"
-              decoding="async"
               draggable={false}
               className="our-work-image"
+              /* Keep the CSS hover-zoom transition alongside the fade. */
+              style={{ transition: 'opacity 0.6s ease, transform 0.8s ease' }}
             />
 
             <div className="our-work-overlay">

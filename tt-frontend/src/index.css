@@ -1117,15 +1117,20 @@ textarea.tt-input {
 .tt-home-hero-image-wrap {
   position: relative;
   width: 100%;
+  /* Reserve the hero's exact ratio (2464×1475) so the section doesn't
+     collapse-then-jump while this large above-the-fold image decodes. */
+  aspect-ratio: 2464 / 1475;
+  overflow: hidden;
   flex: 0 0 auto;
-  background: #ffffff;
+  background: #e5ddd0;
   margin-top: 15px;
 }
 
 .tt-home-hero-image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tt-lets-talk-footer {
@@ -1267,12 +1272,18 @@ textarea.tt-input {
 
 .tt-about-page-image-wrap {
   width: 100%;
+  /* Same source image as the hero — reserve its ratio so the dark image
+     stage holds its height instead of jumping in once decoded. */
+  aspect-ratio: 2464 / 1475;
+  overflow: hidden;
+  background: #1a1a1a;
 }
 
 .tt-about-page-image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tt-home-about {
@@ -1366,6 +1377,7 @@ textarea.tt-input {
   max-width: none;
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  background: #e5ddd0;
 }
 
 .tt-home-about-image {

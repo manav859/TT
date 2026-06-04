@@ -6,6 +6,7 @@ import { ErrorState } from '@/components/ui/ErrorState'
 import { RevealText } from '@/lib/animations/RevealText'
 import { StaggerGrid, StaggerItem } from '@/lib/animations/StaggerGrid'
 import { InquiryForm } from '@/components/forms/InquiryForm'
+import SmoothImage from '@/components/SmoothImage'
 import type { AboutData } from '@/types/api'
 
 const ABOUT_IMAGE = '/images/Tusk tales (79).jpg.jpeg'
@@ -50,11 +51,9 @@ export function AboutPage() {
         <div className="tt-about-page-image-stage">
           <p className="tt-about-page-image-heading">Purpose in every frame</p>
           <div className="tt-about-page-image-wrap">
-            <img
+            <SmoothImage
               src={ABOUT_IMAGE}
               alt="Purpose in every frame"
-              loading="lazy"
-              decoding="async"
               className="tt-about-page-image"
             />
           </div>

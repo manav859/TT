@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useReducedMotionPreference } from '@/hooks/useReducedMotionPreference'
+import SmoothImage from '@/components/SmoothImage'
 
 const ABOUT_IMAGE = '/images/2-_DSC1083.jpg.jpeg'
 const ABOUT_TAGLINE = '/logo/Tagline.png'
-/* TODO: compress /images/About_image.png — currently 7.8 MB.
- * Re-export as JPEG at 1600px wide, quality 82 → target ≤ 300 KB. */
+/* TODO: compress /images/2-_DSC1083.jpg.jpeg — currently 1.3 MB.
+ * Re-export at 1600px wide, quality 82 → target ≤ 300 KB. */
 
 export function AboutSection() {
   const reduced = useReducedMotionPreference()
@@ -79,11 +80,9 @@ export function AboutSection() {
               viewport={{ once: true, margin: '-10% 0px' }}
               className="tt-home-about-image-wrap"
             >
-              <img
+              <SmoothImage
                 src={ABOUT_IMAGE}
                 alt="Purpose in every frame"
-                loading="lazy"
-                decoding="async"
                 className="tt-home-about-image"
               />
             </motion.div>

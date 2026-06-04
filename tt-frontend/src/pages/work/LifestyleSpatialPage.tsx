@@ -1,13 +1,14 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
+import SmoothImage from '@/components/SmoothImage'
 
 const PURPOSE_IN_SPACE_IMAGE = '/images/Tusk tales (21).jpg.jpeg'
 const LIGHT_PERCEPTION_IMAGE = '/images/lifestyle-spatial.jpeg'
 const SPATIAL_NARRATIVE_IMAGE = '/images/Tusk tales (15).jpg.jpeg'
 
 /* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
- *   - /images/3.jpeg                 6.7 MB
- *   - /images/lifestyle-spatial.jpeg 6.3 MB
- *   - /images/2.jpeg                 296 KB (already OK)
+ *   - /images/Tusk tales (21).jpg.jpeg   2.5 MB
+ *   - /images/lifestyle-spatial.jpeg     1.2 MB
+ *   - /images/Tusk tales (15).jpg.jpeg   6.1 MB
  */
 
 const headingStyle: React.CSSProperties = {
@@ -47,8 +48,10 @@ const bodyBlockStyle: React.CSSProperties = {
 const mediaStyle: React.CSSProperties = {
   display: 'block',
   width: '100%',
+  height: 'auto',
   aspectRatio: '3 / 4',
   objectFit: 'cover',
+  background: '#e5ddd0',
 }
 
 export function LifestyleSpatialPage() {
@@ -96,12 +99,11 @@ export function LifestyleSpatialPage() {
           </div>
         </div>
 
-        <img
+        <SmoothImage
           className="work-split-media"
           src={PURPOSE_IN_SPACE_IMAGE}
           alt="Brand in motion"
-          loading="lazy"
-          decoding="async"
+          eager
           style={mediaStyle}
         />
       </section>
@@ -112,12 +114,10 @@ export function LifestyleSpatialPage() {
         style={{ marginTop: '6rem', padding: '0 6%' }}
         aria-labelledby="ls-light"
       >
-        <img
+        <SmoothImage
           className="work-split-media"
           src={LIGHT_PERCEPTION_IMAGE}
           alt="Intimacy in experience"
-          loading="lazy"
-          decoding="async"
           style={mediaStyle}
         />
 
@@ -161,12 +161,10 @@ export function LifestyleSpatialPage() {
           </div>
         </div>
 
-        <img
+        <SmoothImage
           className="work-split-media"
           src={SPATIAL_NARRATIVE_IMAGE}
           alt="The art of preparation"
-          loading="lazy"
-          decoding="async"
           style={mediaStyle}
         />
       </section>

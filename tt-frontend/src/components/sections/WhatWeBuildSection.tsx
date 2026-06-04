@@ -1,9 +1,11 @@
-/* TODO: compress these cover JPGs — each is 6-8 MB, way over the 300 KB
- * target for a 1600px-wide hero card. Re-export at quality 82 in any image
- * editor (or run through TinyPNG / squoosh.app):
- *   - Cover_CAMPAIGN SHOOTS.jpg.jpeg     6.4 MB
- *   - Cover_CREATIVE DIRECTION.JPG.jpeg  8.3 MB
- *   - Cover_BRAND STORYTELLING.jpg.jpeg  6.6 MB
+import SmoothImage from '@/components/SmoothImage'
+
+/* TODO: compress these cover JPGs — way over the 300 KB target for a
+ * 1600px-wide card. Re-export at quality 82 in any image editor (or run
+ * through TinyPNG / squoosh.app):
+ *   - Cover_CAMPAIGN SHOOTS.jpg.jpeg     6.2 MB → target ≤ 300 KB
+ *   - Cover_CREATIVE DIRECTION.JPG.jpeg  2.0 MB → target ≤ 300 KB
+ *   - Cover_BRAND STORYTELLING.jpg.jpeg  6.3 MB → target ≤ 300 KB
  */
 const SERVICES = [
   {
@@ -88,18 +90,7 @@ export function WhatWeBuildSection() {
                   overflow: 'hidden',
                 }}
               >
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  loading="lazy"
-                  decoding="async"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                  }}
-                />
+                <SmoothImage src={service.image} alt={service.title} />
               </div>
 
               <h3

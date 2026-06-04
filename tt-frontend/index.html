@@ -6,8 +6,10 @@
     <title>Tusk Tales</title>
     <meta name="description" content="Tusk Tales — Purpose in every frame. A creative studio for brands that deserve to be felt." />
 
-    <!-- Above-the-fold hero asset preload (loads in parallel with the main bundle) -->
-    <link rel="preload" as="image" href="/images/Tusk%20tales%20(7).JPG.jpeg" fetchpriority="high" />
+    <!-- Above-the-fold hero asset preload (loads in parallel with the main bundle).
+         Must match HERO_IMAGE in HeroSection.tsx — otherwise we pay to fetch an
+         image that is never shown and the real hero still loads late. -->
+    <link rel="preload" as="image" href="/images/Tusk%20tales%20(79).jpg.jpeg" fetchpriority="high" />
 
     <!-- Favicon — theme-aware: black mark on light theme, white mark on dark theme -->
     <link rel="icon" type="image/png" href="/favicon.png" media="(prefers-color-scheme: light)" />

@@ -1,13 +1,14 @@
 import { WorkPageLayout } from '@/components/layout/WorkPageLayout'
+import SmoothImage from '@/components/SmoothImage'
 
 const LIGHT_SHADOW_PRODUCT_IMAGE = '/images/tusk-tales-4.jpg'
 const VISUAL_FLAVOR_IMAGE        = '/images/7.jpeg'
 const CINEMATIC_IMAGE            = '/images/fb-storytelling.jpeg'
 
 /* TODO: compress oversized images — target ≤ 300 KB each (1600px wide, q82):
+ *   - /images/7.jpeg                 1.3 MB
  *   - /images/fb-storytelling.jpeg   1.6 MB
- *   - /images/tusk-tales-4.jpg       179 KB (already OK)
- *   - /images/5.png                  123 KB (already OK)
+ *   - /images/tusk-tales-4.jpg       176 KB (already OK)
  */
 
 const headingStyle: React.CSSProperties = {
@@ -47,8 +48,10 @@ const bodyBlockStyle: React.CSSProperties = {
 const mediaStyle: React.CSSProperties = {
   display: 'block',
   width: '100%',
+  height: 'auto',
   aspectRatio: '3 / 4',
   objectFit: 'cover',
+  background: '#e5ddd0',
 }
 
 export function FbStorytellingPage() {
@@ -92,12 +95,11 @@ export function FbStorytellingPage() {
           </div>
         </div>
 
-        <img
+        <SmoothImage
           className="work-split-media"
           src={LIGHT_SHADOW_PRODUCT_IMAGE}
           alt="Light, shadow and product"
-          loading="lazy"
-          decoding="async"
+          eager
           style={mediaStyle}
         />
       </section>
@@ -108,12 +110,10 @@ export function FbStorytellingPage() {
         style={{ marginTop: '6rem', padding: '0 6%' }}
         aria-labelledby="fb-flavor"
       >
-        <img
+        <SmoothImage
           className="work-split-media"
           src={VISUAL_FLAVOR_IMAGE}
           alt="Visual flavor"
-          loading="lazy"
-          decoding="async"
           style={mediaStyle}
         />
 
@@ -158,12 +158,10 @@ export function FbStorytellingPage() {
           </div>
         </div>
 
-        <img
+        <SmoothImage
           className="work-split-media"
           src={CINEMATIC_IMAGE}
           alt="Designed to feel cinematic"
-          loading="lazy"
-          decoding="async"
           style={mediaStyle}
         />
       </section>
