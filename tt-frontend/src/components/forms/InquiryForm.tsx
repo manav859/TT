@@ -127,7 +127,7 @@ export function InquiryForm() {
               required
               value={form.first_name}
               onChange={handleChange}
-              className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+              className="w-full bg-white border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
             />
           </div>
           <div className="flex-1 flex flex-col gap-1.5">
@@ -141,7 +141,7 @@ export function InquiryForm() {
               required
               value={form.last_name}
               onChange={handleChange}
-              className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+              className="w-full bg-white border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
             />
           </div>
         </div>
@@ -158,7 +158,7 @@ export function InquiryForm() {
           required
           value={form.email}
           onChange={handleChange}
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+          className="w-full bg-white border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
         />
       </div>
 
@@ -174,7 +174,7 @@ export function InquiryForm() {
           value={form.phone}
           onChange={handleChange}
           autoComplete="tel"
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+          className="w-full bg-white border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
         />
       </div>
 
@@ -203,7 +203,7 @@ export function InquiryForm() {
           required
           value={form.subject}
           onChange={handleChange}
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
+          className="w-full bg-white border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent"
         />
       </div>
 
@@ -217,7 +217,7 @@ export function InquiryForm() {
           rows={2}
           value={form.message}
           onChange={handleChange}
-          className="w-full bg-[#e0d5be] border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent resize-y"
+          className="w-full bg-white border border-[#cabea2] rounded-md px-3 py-2 text-[14px] text-[#3e3c38] focus:outline-none focus:ring-2 focus:ring-[#c4a993] focus:border-transparent resize-y"
         />
       </div>
 

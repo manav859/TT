@@ -25,6 +25,7 @@ export function ContactPage() {
       <div
         className="tt-wide"
         style={{
+          background: '#ffffff',
           height: 'calc(100vh - var(--height-nav))',
           minHeight: '0',
           overflow: 'hidden',
